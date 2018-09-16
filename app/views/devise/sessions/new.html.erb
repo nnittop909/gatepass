@@ -1,0 +1,40 @@
+
+<div class="container">
+  <br>
+  <br>
+  <div class="col-md-8">
+    <h1><center>GatePass Student Monitoring</center></h1>
+  </div>
+  <div class="col-md-4">
+  <div class="card">
+    <div class="card-body">
+      <h4><center>Account Sign in</center></h4>
+      <br>
+      <%= simple_form_for(resource, as: resource_name, :url => session_path(resource_name),
+             wrapper_mappings: {boolean: :vertical_boolean }) do |f| %>
+
+        <%=image_tag("default.png", height: 100, width: 100, class: 'img-circle img-responsive center-block') %>
+        <br>
+        <%=render 'layouts/flash' %>
+        <%= f.input :email, placeholder: "Email", input_html:{class: "form-control input-lg"}, label: false, autofocus: true %>
+        <%= f.input :password, placeholder: "Password",  input_html:{class: "form-control input-lg"}, label: false %>
+        <hr>
+        <%= f.submit "Sign in", class: "btn btn-success btn-block btn-lg btn-flat" %>
+        <br>
+        <%= link_to 'Cancel', monitoring_index_path, class: 'btn btn-flat btn-block btn-default' %>
+      <% end %>
+      <br>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $("#tag_uid").on("blur", function (evt) {
+    $("#tag_uid").focus();
+  });
+</script>
+<!-- <script>
+  input.onblur = function() {
+      input.focus();
+  };
+</script> -->

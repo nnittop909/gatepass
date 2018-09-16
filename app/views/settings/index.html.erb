@@ -1,0 +1,67 @@
+<div class="row">
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+							<h4>Courses</h4>
+						</div>
+						<div class="col-md-6 col-sm-6">
+							<%=link_to "Add Course", new_course_path, class: 'btn btn-primary pull-right', title: 'New Course', remote: true %>
+						</div>
+					</div>
+	      </div>
+			</div>
+			<div class="card-body">
+				<table class="table">
+					<% @courses.each do |course| %>
+						<tr>
+							<td><%= course.abbreviation %> - <%= course.name %></td>
+							<td>
+								<%= link_to edit_course_path(course), remote: true do %>
+									<span class="fa fa-pencil-square-o"></span>
+								<% end %>
+							</td>
+						</tr>
+					<% end %>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-body">
+				Desktop shortcut to open chrome in full-screen mode.<br>
+				Set photo size in full-screen mode.<br>
+				Setup policies<br>
+				Setup storage<br>
+				Add a select Course and Year level input to photo uploading.<br>
+				axlsx merge cells.<br>
+				Add loading icon when page is loading<br>
+				Disable upload button if photos not selected.<br>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Import Profile Photos</h4>
+			</div>
+			<div class="card-body">
+				<%= form_for ProfilePhoto.new, url: :profile_photos, html: { multipart: true } do |f| %>
+          <div class="input-group stylish-input-group">
+            <%= f.file_field :photo_arrays, multiple: true, class: 'form-control' %>
+            <span class="input-group-btn">
+              <%= f.submit 'Import', class: 'form-control btn btn-primary' %>
+            </span>
+          </div>
+        <% end %>
+        <hr>
+        <p class="text-muted">
+        	*Before uploading, make sure the filenames must be the student's ID Number.
+        </p>
+			</div>
+		</div>
+	</div>
+</div>		 

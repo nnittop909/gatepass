@@ -1,0 +1,9 @@
+<div class="tab-pane <%='active' if current_page? info_user_path %>">
+  <div class="row">
+   
+   <br>
+  </div>
+  <% if @user == current_user %>
+    <%=link_to 'Update Info', edit_user_path(@user), class: 'btn btn-warning'%>
+  <% end %>
+</div>

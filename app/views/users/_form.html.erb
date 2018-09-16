@@ -1,0 +1,38 @@
+<%=simple_form_for @user, url: @user.new_record? ? :users : user_path(@user) do |f| %>
+  <%=f.error_notification %>
+  <div class="row">
+    <div class="col-md-4">
+      
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :first_name %>
+          <%= f.input :last_name %>
+          <%= f.input :mobile %>
+          <%= f.input :email %>
+          <% if current_user.admin? || current_user.developer? %>
+            <div class="row">
+              <h4>Account Settings </h4>
+              <%= f.input :role, collection: blacklisted_roles, default: User.roles.first, as: :radio_buttons, item_label_class: "radio-inline", item_wrapper_tag: false %>
+            </div>
+          <% end %>
+          <% if @user = current_user %>
+            <hr>
+            <p class="text-muted">*Please fill up the password and password confirmation to apply the changes.</p>
+            <%= f.input :password %>
+            <%= f.input :password_confirmation %>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="pull-left">
+      <%= link_to "Cancel", students_path, class: 'btn btn-default' %>
+    </div>
+    <%=f.submit 'Save', class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,26 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">
+        Update Address Details
+      </h4>
+    </div>
+    <%=simple_form_for @address, url: :student_addresses, remote: true do |f| %>
+    <%= f.error_notification %>
+      <div class="modal-body">
+        <ul class="errors text-danger">
+        </ul>
+        <%= f.input :user_id, input_html: { value: @student.id }, as: :hidden %>
+        <%= f.input :sitio %>
+        <%= f.input :barangay %>
+        <%= f.input :municipality %>
+        <%= f.input :province %>
+	      <div class="modal-footer">
+	        <%#= link_to 'Cancel', monitoring_project_path(@project), class: 'btn btn-default pull-left' %>
+	        <%= link_to "Cancel", "#", class: "btn btn-default pull-left", data: {dismiss: "modal"} %>
+	        <%=f.submit "Save", class: "btn btn-primary" %>
+	      </div>
+	    </div>
+    <% end %>
+  </div>
+</div>

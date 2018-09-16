@@ -1,0 +1,39 @@
+<div class="side-menu sidebar-inverse">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="side-menu-container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <div class="icon fa fa-paper-plane"></div>
+          <div class="title">GATEPASS</div>
+        </a>
+        <button type="button" class="navbar-expand-toggle pull-right visible-xs">
+          <i class="fa fa-times icon"></i>
+        </button>
+      </div>
+      <ul class="nav navbar-nav">
+  <li>
+    <a href="">
+      <span class="title">MAIN NAVIGATION</span>
+    </a>
+  </li>
+  <li>
+    <a href="/students">
+      <span class="icon fa fa-shopping-basket"></span><span class="title">Students</span>
+    </a>
+  </li>
+  <li>
+    <%= link_to reports_path do %>
+      <span class="icon fa fa-cart-plus"></span><span class="title">Reports</span>
+    <% end %>
+  </li>
+  <li>
+    <a href="/settings">
+      <span class="icon fa fa-cart-arrow-down text-danger"></span><span class="title">Settings</span>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    <!-- /.navbar-collapse -->
+  </nav>
+</div>

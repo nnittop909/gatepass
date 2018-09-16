@@ -1,0 +1,22 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">
+        Update Record Status
+      </h4>
+    </div>
+    <%=simple_form_for @student, url: student_status_path(@student), remote: true do |f| %>
+    <%= f.error_notification %>
+      <div class="modal-body">
+        <ul class="errors text-danger">
+        </ul>
+        <%= f.input :status, collection: User.statuses.keys.to_a.map{ |s| [s.titleize, s]}, label: false, as: :radio_buttons %>
+	      <div class="modal-footer">
+	        <%#= link_to 'Cancel', monitoring_project_path(@project), class: 'btn btn-default pull-left' %>
+	        <%= link_to "Cancel", "#", class: "btn btn-default pull-left", data: {dismiss: "modal"} %>
+	        <%=f.submit "Save", class: "btn btn-primary" %>
+	      </div>
+	    </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+
+<div class="tab-pane fade <%='in active' if current_page? info_student_path %>">
+  <div class="row">
+    <div class="col-md-5">
+      <h4 class="personal-details">
+        Personal Details
+        <%= link_to edit_student_path(@student), title: 'Update Personal Details' do %>
+          <span class="pull-right personal-link"><i class="fa fa-pencil-square-o"></i></span>
+        <% end %>
+      </h4>
+      <table class="table table-striped">
+        <tr>
+          <td style="width:120px">Gender: </td>
+          <td><b><%=@student.try(:gender).try(:capitalize) || "N/A" %></b></td>
+        </tr>
+        <tr>
+          <td style="width:120px">Birthdate: </td>
+          <td><b><%=@student.try(:birthdate).try(:strftime, "%B %e, %Y") || "N/A" %></b></td>
+        </tr>
+      </table>
+      <br>
+      <table class="table table-striped">
+        <tr>
+          <td style="width:120px">Contact Number: </td>
+          <td class="mobile-details">
+            <b><%=@student.mobile || "N/A"%></b>
+            <%= link_to edit_student_mobile_path(@student), title: 'Update Mobile Number', remote: true do %>
+              <span class="mobile-link">&nbsp&nbsp&nbsp&nbsp <i class="fa fa-pencil-square-o"></i></span>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width:120px">Email: </td>
+          <td class="email-details">
+            <b><%=@student.email || "N/A"%></b>
+            <%= link_to edit_student_email_path(@student), title: 'Update Email', remote: true do %>
+              <span class="email-link">&nbsp&nbsp&nbsp&nbsp <i class="fa fa-pencil-square-o"></i></span>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <h4 class="address-details">
+        Address Details
+        <% if @student.address.present? %>
+          <%= link_to edit_student_address_path(student_id: @student, id: @student.address.id), title: 'Update Address Details', remote: true do %>
+            <span class="pull-right address-link"><i class="fa fa-pencil-square-o"></i></span>
+          <% end %>
+        <% else %>
+          <%= link_to new_student_address_path(@student), title: 'Update Address Details', remote: true do %>
+            <span class="pull-right address-link"><i class="fa fa-pencil-square-o"></i></span>
+          <% end %>
+        <% end %>
+      </h4>
+      <table class="table table-striped">
+        <tr>
+          <td width="120"></td>
+          <td><b><%=@student.address_details || "N/A"%></b></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-5">
+      <h4 class="guardian-details">
+        Guardian Details
+        <% if @student.guardian.present? %>
+          <%= link_to update_options_student_path(@student), title: 'Update guardian', remote: true do %>
+            <span class="pull-right guardian-link"><i class="fa fa-pencil-square-o"></i></span>
+          <% end %>
+        <% else %>
+          <%= link_to new_student_guardian_path(@student), title: 'Update guardian details' do %>
+            <span class="pull-right guardian-link"><i class="fa fa-pencil-square-o"></i></span>
+          <% end %>
+        <% end %>
+      </h4>
+      <table class="table table-striped">
+        <tr>
+          <td style="width:120px">Name: </td>
+          <td><b><%=@student.guardian || "N/A"%></b></td>
+        </tr>
+        <tr>
+          <td style="width:120px">Relationship: </td>
+          <td><b><%=@student.relationship || "N/A"%></b></td>
+        </tr>
+      </table>
+      <br>
+      <table class="table table-striped">
+        <tr>
+          <td style="width:120px">Contact Number: </td>
+          <td><b><%=@student.guardian.try(:mobile) || "N/A"%></b></td>
+        </tr>
+        <tr>
+          <td style="width:120px">Address: </td>
+          <td><b><%=@student.guardian.try(:address_details) || "N/A"%></b></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

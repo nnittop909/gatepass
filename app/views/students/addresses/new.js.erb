@@ -1,0 +1,5 @@
+$("#address-modal").html("<%= escape_javascript(render 'new') %>")
+$("#address-modal").modal( {
+    backdrop: 'static',
+    keyboard: false
+});

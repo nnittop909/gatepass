@@ -1,0 +1,60 @@
+<!-- <meta http-equiv="refresh" content="3;url=http://localhost:3000/monitoring/index" /> -->
+<div class="send-to-back">
+	<%=form_tag monitoring_index_path, html: { autocomplete: 'off' }, method: :get do %>
+	  <div class="input-group stylish-input-group" id="product-prefetch">
+	    <%= number_field_tag "tag_uid", params[:tag_uid], class: 'unseen form-control', autofocus: true, autocomplete: 'off' %>
+	    <span class="input-group-btn">
+	      <%= button_tag(type: 'submit', name: nil, class: " unseen btn btn-flat") do %>
+	        <i class="fa fa-search"></i>
+	      <% end %>
+	    </span>
+	  </div>
+	<% end %>
+</div>
+<% if @user.blank? %>
+	<div class="col-md-12">
+		<div class="monitoring-profile-wrapper">
+	    <%=image_tag("unknown-user.gif", height: 650, width: 650, class: "img-rounded img-responsive") %>
+	    <div class="monitoring-status-overlay">
+        <h1 class="text-center text-red">
+          No record found!
+        </h1>
+      </div>
+    </div>
+	</div>
+<% else %>
+	<div class="col-md-12">
+  	<div class="monitoring-profile-wrapper">
+  		<% if !@user.record_status.nil? %>
+  			<div class="monitoring-status-overlay">
+  				<h1 class="text-center text-red">
+            <%= @user.record_status %>
+          </h1>
+        </div>
+      <% end %>
+    	<% if @user.profile_photo.blank? %>	
+    		<%=image_tag("default.png", height: 650, width: 650, class: "img-rounded img-responsive center-block", ) %>
+    	<% else %>
+      	<%= image_tag @user.profile_photo.avatar, height: 650, width: 650, class: "img-rounded img-responsive center-block"%>
+      <% end %>
+      <div class="monitoring-name-overlay">
+        <h1 class="text-center text-white no-bottom-margin"><b><%=@user.full_name.try(:upcase)%><b></h1>
+    		<h3 class="text-center text-white no-bottom-margin" style="margin-top: 10px"><%=@user.course.abbreviation%></h3>
+      </div>
+    </div>
+	</div>
+<% end %>
+
+<script type="text/javascript">
+  $().ready(function() {
+  	$(window).on("load", function() {
+	    $("#tag_uid").val("");
+      $("#tag_uid").focus();
+	  });
+	});
+</script>
+<script type="text/javascript">
+  $("#tag_uid").on("blur", function (evt) {
+    $("#tag_uid").focus();
+  });
+</script>

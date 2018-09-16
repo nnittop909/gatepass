@@ -1,0 +1,23 @@
+<small>
+	<p class="no-bottom-margin">
+    1. Please follow these format (YYYY-MM-DD) when filling birthdate.
+  </p>
+  <p class="no-top-margin text-indent text-muted">
+    e.g. 2000-01-30
+  </p>
+	<center>
+    <%=link_to "Download Template-1", full_template_students_path(format: :xlsx), class: 'btn btn-success' %><br>
+    OR<br>
+    <%=link_to "Download Template-2", initial_template_students_path(format: :xlsx), class: 'btn btn-success' %><br>
+    <span class="text-muted">
+      to start filling data.
+    </span>
+  </center>
+  <br>
+  <p>
+    Template-1 contains personal details & address details.
+  </p>
+  <p class="no-bottom-margin">
+    Template-2 only contains personal details.
+  </p>
+</small>

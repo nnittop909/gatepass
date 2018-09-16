@@ -1,0 +1,24 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">
+        Update Card Unique-ID
+      </h4>
+    </div>
+    <%=simple_form_for @student, url: student_id_card_path(@student), remote: true do |f| %>
+    <%= f.error_notification %>
+      <div class="modal-body">
+        <ul class="errors text-danger">
+        </ul>
+        <h4 class="no-bottom-margin">Card ID</h4>
+        <hr class="no-top-margin">
+        <%= f.input :tag_uid, hint: 'Please tap student ID on the RFID scanner', label: false %>
+	      <div class="modal-footer">
+	        <%#= link_to 'Cancel', monitoring_project_path(@project), class: 'btn btn-default pull-left' %>
+	        <%= link_to "Cancel", "#", class: "btn btn-default pull-left", data: {dismiss: "modal"} %>
+	        <%=f.submit "Save", class: "btn btn-primary" %>
+	      </div>
+	    </div>
+    <% end %>
+  </div>
+</div>
