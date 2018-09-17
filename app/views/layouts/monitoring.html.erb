@@ -10,28 +10,59 @@
     <%= csrf_meta_tags %>
   </head>
   <body class="flat-blue monitoring-bg" id="monitoring-body">
-    <div class="monitoring-header">
+    <div class="app-container">
+      <div class="row content-container">
+        <div class="side-menu sidebar-inverse">
+          <nav class="navbar navbar-default" role="navigation">
+            <div class="side-menu-container">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                  <div class="icon fa fa-desktop"></div>
+                  <div class="title">GatePass</div>
+                </a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li>
+                  <% if user_signed_in? %>
+                    <%= link_to students_path, title: 'Home' do %>
+                      <span class="icon fa fa-home"></span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to new_user_session_path,title: 'Sign-in' do %>
+                      <span class="icon fa fa-sign-in"></span>
+                    <% end %>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+
+    <!-- <div class="monitoring-header">
       <h1 class="text-white"><span class="fa fa-desktop"></span> GatePass Monitoring
         <div class="pull-right">
-          <% if user_signed_in? %>
-            <%= link_to students_path, title: 'Home' do %>
-              <span class="fa fa-home text-white"></span>
-            <% end %>
-          <% else %>
-            <%= link_to new_user_session_path, title: 'Sign-in' do %>
+          <a href="" id="fullscreen-mode" style="margin-right: 20px", title="Fullscreen Mode">
+            <span class="fa fa-arrows-alt text-white"></span>
+          </a>
+          <%# if user_signed_in? %>
+            <%#= link_to students_path, title: 'Home' do %>
               <span class="fa fa-sign-in text-white"></span>
-            <% end %>
-          <% end %>
+            <%# end %>
+          <%# else %>
+            <%#= link_to new_user_session_path, title: 'Sign-in' do %>
+              <span class="fa fa-sign-in text-white"></span>
+            <%# end %>
+          <%# end %>
         </div>
       </h1>
+    </div> -->
+        <%= yield %>
+      </div>
     </div>
-    <%= yield %>
   </body>
   <script type="text/javascript">
-    $(function() {
-      return $(".monitoring-header").on('show.bs.collapse', function() {
-        return $(".monitoring-header .collapse").collapse('hide');
-      });
+    $("#fullscreen-mode").on("click", function (evt) {
+      $("#monitoring-body").fullScreen(true);
     });
   </script>
 </html>

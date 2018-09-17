@@ -82,4 +82,4 @@ production:
   <<: *default
   database: gatepass_production
   username: gatepass
-  password: <%= ENV['GATEPASS_DATABASE_PASSWORD'] %>
+  password: <%= ENV['GATEPASS_PRODUCTION_DATABASE_PASSWORD'] %>

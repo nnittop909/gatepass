@@ -211,7 +211,7 @@ label.collection_radio_buttons {
 
 .monitoring-profile-wrapper {
   margin: auto;
-  width: 650px;    
+  width: 600px;    
   margin-top: 20px;
 }
 
@@ -246,7 +246,7 @@ label.collection_radio_buttons {
   margin: auto;
   height: 80px;
   margin-top: 20px;
-  width: 650px;
+  width: 600px;
   transition: .3s ease;
   background-color: rgba(0,0,0,0.1);
   border-radius: 6px 6px 0px 0px;
@@ -259,7 +259,7 @@ label.collection_radio_buttons {
   right: 0;
   margin: auto;
   height: 110px;
-  width: 650px;
+  width: 600px;
   transition: .3s ease;
   background-color: rgba(0,0,0,0.8);
   border-radius: 0px 0px 6px 6px;
@@ -278,9 +278,15 @@ label.collection_radio_buttons {
 
 @media only screen and (max-width: 991px) {
   .monitoring-status-overlay {
-    width: 650px;
+    width: 600px;
     margin: auto;
     margin-bottom: 0px;
+  }
+
+  .monitoring-profile-wrapper {
+    margin: auto;
+    width: 600px;    
+    margin-top: 20px;
   }
 
   .option-overlay {
@@ -294,12 +300,6 @@ label.collection_radio_buttons {
     width: 160px;
     margin: auto;
     margin-top: 0px;
-  }
-
-  .monitoring-profile-wrapper {
-    margin: auto;
-    width: 650px;    
-    margin-top: 20px;
   }
 
   .profile-wrapper {

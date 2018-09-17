@@ -34,14 +34,13 @@
 	<div class="col-md-6">
 		<div class="card">
 			<div class="card-body">
-				Desktop shortcut to open chrome in full-screen mode.<br>
+				*Desktop shortcut to open chrome in full-screen mode.<br>
 				Set photo size in full-screen mode.<br>
 				Setup policies<br>
 				Setup storage<br>
-				Add a select Course and Year level input to photo uploading.<br>
-				axlsx merge cells.<br>
+				*axlsx merge cells.<br>
 				Add loading icon when page is loading<br>
-				Disable upload button if photos not selected.<br>
+				*Disable upload button if photos not selected.<br>
 			</div>
 		</div>
 		<div class="card">
@@ -51,9 +50,9 @@
 			<div class="card-body">
 				<%= form_for ProfilePhoto.new, url: :profile_photos, html: { multipart: true } do |f| %>
           <div class="input-group stylish-input-group">
-            <%= f.file_field :photo_arrays, multiple: true, class: 'form-control' %>
+            <%= f.file_field :photo_arrays, multiple: true, id: "photo-arrays", class: 'form-control' %>
             <span class="input-group-btn">
-              <%= f.submit 'Import', class: 'form-control btn btn-primary' %>
+              <%= f.submit 'Import', id: 'submit-button', class: 'form-control btn btn-primary' %>
             </span>
           </div>
         <% end %>
@@ -64,4 +63,12 @@
 			</div>
 		</div>
 	</div>
-</div>		 
+</div>	
+<script type="text/javascript">
+	$(document).ready(function(){
+    $('#submit-button').prop('disabled',true);
+    $('#photo-arrays').change(function(){
+        $('#submit-button').prop('disabled', this.value == "" ? true : false);     
+    })
+	});
+</script>	 
