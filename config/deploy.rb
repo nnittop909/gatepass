@@ -4,7 +4,7 @@ require 'mina/git'
 require 'mina/rbenv'
 require 'mina/deploy'
 
-set :domain, '192.168.254.108'
+set :domain, '192.168.254.105'
 set :deploy_to, '/var/www/gatepass'
 set :repository, "https://gitlab.com/tophiepumihic/gatepass.git"
 set :branch, 'master'
