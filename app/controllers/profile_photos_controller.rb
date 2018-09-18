@@ -1,5 +1,6 @@
 class ProfilePhotosController < ApplicationController
-
+	before_action :authenticate_user!
+	
 	def create
 		if params[:profile_photo].nil?
 			redirect_to settings_url, notice: 'No choosen photos to upload.'

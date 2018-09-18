@@ -83,19 +83,21 @@ class User < ApplicationRecord
   private
 
   def set_email_password
-    generated_password = Devise.friendly_token.first(8)
-    if self.email.blank? and self.password.blank?
-      if self.last_name.present? and self.first_name.present?
-        rand_num = 3.times.map{ SecureRandom.random_number(9)}.join.to_s
-        fname_down = self.last_name.downcase
-        lname_down = self.first_name.downcase.first
-        self.email = "#{fname_down}.#{lname_down}#{rand_num}@ifsu.com"
-    		self.password = generated_password
-    		self.password_confirmation = generated_password
-    	end
-    elsif self.email.present? and self.password.blank?
-      self.password = generated_password
-      self.password_confirmation = generated_password
+    if self.student?
+      generated_password = Devise.friendly_token.first(8)
+      if self.email.blank? and self.password.blank?
+        if self.last_name.present? and self.first_name.present?
+          rand_num = 3.times.map{ SecureRandom.random_number(9)}.join.to_s
+          fname_down = self.last_name.downcase
+          lname_down = self.first_name.downcase.first
+          self.email = "#{fname_down}.#{lname_down}#{rand_num}@ifsu.com"
+      		self.password = generated_password
+      		self.password_confirmation = generated_password
+      	end
+      elsif self.email.present? and self.password.blank?
+        self.password = generated_password
+        self.password_confirmation = generated_password
+      end
     end
   end
 

@@ -42,7 +42,6 @@ gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: '776037c0fc799bb09
 gem 'axlsx_rails'
 gem 'bootstrap-popover-rails'
 gem 'jquery_fullscreen-rails', '~> 1.1'
-gem 'dropzonejs-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

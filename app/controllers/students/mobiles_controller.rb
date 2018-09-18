@@ -1,5 +1,6 @@
 module Students
 	class MobilesController < ApplicationController
+		before_action :authenticate_user!
 
 		def edit
 			@student = Student.find(params[:student_id])

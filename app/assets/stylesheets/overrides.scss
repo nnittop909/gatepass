@@ -438,3 +438,45 @@ td.email-details:hover .email-link {
   padding-left: 15px;
   padding-right: 15px;
 }
+
+.spinner-modal {
+    display:    none;
+    position:   fixed;
+    z-index:    100000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+                url(/assets/ajax-loader.gif)
+                50% 50%
+                no-repeat;
+}
+
+.right-side-menu {
+  position: fixed;
+  height: 100%;
+  width: 60px;
+  right: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 100000;
+}
+
+.right-side-menu .nav-link {
+  display: block;
+  position: relative;
+  height: 60px;
+  list-style: none;
+  width: 60px;
+  padding: 0;
+}
+
+.right-side-menu .nav-link li {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  padding: 20px 0px;
+}

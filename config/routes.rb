@@ -41,7 +41,8 @@ Rails.application.routes.draw do
       root 'monitoring#index', as: :unauthenticated_root
     end
   end
-  resources :users do 
+  resources :users do
+    resources :passwords, only: [:edit, :update], module: 'users'
   	get :autocomplete_user_full_name, on: :collection
     match "/info" => "users#info", as: :info, via: [:get], on: :member
     match "/activities" => "users#activities", as: :activities, via: [:get], on: :member

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   autocomplete :user, :full_name, full: true
 
   def autocomplete
@@ -27,7 +28,11 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      redirect_to info_user_path(@user), notice: 'User updated successfully.'
+      if @user.admin?
+        redirect_to destroy_user_session_path, notice: 'User updated successfully. Please relogin.'
+      else
+        redirect_to info_user_path(@user), notice: 'User updated successfully.'
+      end
     else
       render :edit
     end
@@ -44,6 +49,5 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :mobile, :role, :email, :password, :password_confirmation)
-    
   end
 end

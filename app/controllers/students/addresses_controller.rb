@@ -1,5 +1,6 @@
 module Students
 	class AddressesController < ApplicationController
+		before_action :authenticate_user!
 
 		def new
 			@student = Student.find(params[:student_id])

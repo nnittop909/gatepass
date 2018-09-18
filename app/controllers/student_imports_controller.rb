@@ -1,4 +1,6 @@
 class StudentImportsController < ApplicationController
+  before_action :authenticate_user!
+  
   def new
     @student_import = StudentImport.new
   end

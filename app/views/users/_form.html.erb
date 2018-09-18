@@ -11,18 +11,14 @@
           <%= f.input :last_name %>
           <%= f.input :mobile %>
           <%= f.input :email %>
-          <% if current_user.admin? || current_user.developer? %>
-            <div class="row">
-              <h4>Account Settings </h4>
-              <%= f.input :role, collection: blacklisted_roles, default: User.roles.first, as: :radio_buttons, item_label_class: "radio-inline", item_wrapper_tag: false %>
-            </div>
+          <%= f.input :role, input_html: { value: "admin" }, as: :hidden %>
+          <hr>
+          <% unless @user.new_record? %>
+            <p class="text-muted">*Please enter your current password and password confirmation to apply the changes.</p>
+            <p class="text-muted">- If you want to change password, type a new one.</p>
           <% end %>
-          <% if @user = current_user %>
-            <hr>
-            <p class="text-muted">*Please fill up the password and password confirmation to apply the changes.</p>
-            <%= f.input :password %>
-            <%= f.input :password_confirmation %>
-          <% end %>
+          <%= f.input :password %>
+          <%= f.input :password_confirmation %>
         </div>
         <div class="col-md-6">
         </div>
