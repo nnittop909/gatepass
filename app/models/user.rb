@@ -25,7 +25,7 @@ class User < ApplicationRecord
   enum gender:[:male, :female]
   
   
-  validates :first_name, :last_name, :role
+  validates :first_name, :last_name, :role, presence: true
   validates :course_id, :year_level_id, presence: true, if: :user_is_a_student?
   validates :id_number, :tag_uid, presence: true, uniqueness: true, if: :user_is_a_student?
   validates_length_of :mobile, :is => 10, if: :user_is_a_student?
