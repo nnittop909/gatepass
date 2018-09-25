@@ -1,5 +1,6 @@
 class StudentForm
 	include ActiveModel::Model
+  include ActiveModel::Validations
 	attr_accessor :id_number, :course_id,
                 :first_name, :middle_name, :last_name,
                 :birthdate, :gender, :mobile, 
@@ -8,7 +9,7 @@ class StudentForm
                 :full_name, :g_mobile, :relation, 
                 :g_sitio, :g_barangay, :g_municipality, :g_province
   validates :id_number, :tag_uid, :role, :course_id, :first_name, :last_name, :full_name, :mobile, :g_mobile, :relation, :municipality, :province, :g_municipality, :g_province, presence: true
-  validates :id_number, uniqueness: true
+  validates :id_number, :tag_uid, uniqueness: true
 
   def save 
     if valid?

@@ -26,8 +26,9 @@ class User < ApplicationRecord
   
   
   validates_presence_of :first_name, :last_name, :role
-  validates_presence_of :course_id, :year_level_id, if: :user_is_a_student?
-  validates_length_of :mobile, :is => 10, :allow_blank => true, if: :user_is_a_student?
+  validates_presence_of :id_number, :tag_uid, :course_id, :year_level_id, if: :user_is_a_student?
+  validates_uniqueness_of :id_number, :tag_uid, if: :user_is_a_student?
+  validates_length_of :mobile, :is => 10, if: :user_is_a_student?
   
   before_save :set_full_name, :set_join_date
   before_validation :set_role, :set_email_password
