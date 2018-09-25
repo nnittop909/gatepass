@@ -7,8 +7,7 @@ class StudentForm
                 :tag_uid, :role, :status,
                 :full_name, :g_mobile, :relation, 
                 :g_sitio, :g_barangay, :g_municipality, :g_province
-  validates :role, :course_id, :first_name, :last_name, :full_name, :mobile, :g_mobile, :relation, :municipality, :province, :g_municipality, :g_province, presence: true
-  validates :id_number, :tag_uid, presence: true, uniqueness: true
+  validates :id_number, :tag_uid, :role, :course_id, :first_name, :last_name, :full_name, :mobile, :g_mobile, :relation, :municipality, :province, :g_municipality, :g_province, presence: true
 
   def save 
     if valid?
