@@ -4,9 +4,6 @@ class Student < User
 
   belongs_to :course
   belongs_to :year_level
-	validates :id_number, :tag_uid, :course_id, :year_level_id, presence: true
-	validates :id_number, :tag_uid, uniqueness: true
-  validates_length_of :mobile, :is => 10
 
   scope :by_course, -> (course_id) { where course_id: course_id }
   scope :by_year_level, -> (year_level_id) { where year_level_id: year_level_id }

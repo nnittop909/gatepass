@@ -26,11 +26,18 @@ class User < ApplicationRecord
   
   
   validates :first_name, :last_name, :role, presence: true
+  validates_presence_of :id_number, :tag_uid, :course_id, :year_level_id, if: :student?
+  validates_uniqueness_of :id_number, :tag_uid, if: :student?
+  validates_length_of :mobile, :is => 10, if: :student?
   
   before_save :set_full_name, :set_join_date
   before_validation :set_role, :set_email_password
 
   delegate :details, to: :address, prefix: true, allow_nil: true
+
+  def student?
+    self.class.name == "Student"
+  end
 
   def self.whitelisted_roles
     roles.keys - BLACKLISTED_ROLES
