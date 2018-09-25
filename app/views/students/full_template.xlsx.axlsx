@@ -1,8 +1,11 @@
 wb = xlsx_package.workbook
 wb.styles do |style|
-  header_style = style.add_style(b: true)
-  title_style = style.add_style(:bg_color => "004586", b: true)
+  header_style = style.add_style(:bg_color => "ded4d3", b: true, alignment: {horizontal: :center}, :border => { :style => :thin, :color =>"000000", :edges => [:left, :right, :top, :bottom] })
+  title_style = style.add_style(:bg_color => "ded4d3", :sz => 14, b: true, alignment: {horizontal: :center}, :border => { :style => :thin, :color =>"000000", :edges => [:left, :right, :top, :bottom] })
 	wb.add_worksheet(name: "Student Template") do |sheet|
+		title_row = sheet.add_row ["BASIC INFORMATION", nil, nil, nil, nil, nil, nil, nil, nil, nil, "ADDRESS DETAILS", nil, nil, nil], :height => 20, style: title_style
 	  sheet.add_row ["ID NUMBER", "COURSE", "YEAR LEVEL", "FIRST NAME", "MIDDLE NAME", "LAST NAME", "GENDER", "BIRTHDATE", "MOBILE", "CARD UID", "SITIO", "BARANGAY", "MUNICIPALITY", "PROVINCE"], :style => header_style
+	  sheet.merge_cells title_row.cells[(0..9)]
+	  sheet.merge_cells title_row.cells[(10..14)]
 	end
 end

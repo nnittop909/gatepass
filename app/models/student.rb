@@ -44,27 +44,10 @@ class Student < User
   #   end
   # end
 
-  # def open_spreadsheet
-  #   case File.extname(file.original_filename)
-  #   when ".csv" then Csv.new(file.path, nil, :ignore)
-  #   when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
-  #   when ".xlsx" then Roo::Excelx.new(file.path)
-  #   else 
-  #     raise "Unknown file type: #{file.original_filename}"
-  #   end
-  # end
-
   def self.import(file)
-    # case File.extname(file.original_filename)
-    # when ".csv" then spreadsheet = Roo::CSV.new(file.path, nil, :ignore)
-    # when ".xls" then spreadsheet = Roo::Excel.new(file.path, nil, :ignore)
-    # when ".xlsx" then 
     spreadsheet = Roo::Spreadsheet.open(file.path)
-    # else 
-      # raise "Unknown file type: #{file.original_filename}"
-    # end
-    header = spreadsheet.row(1)
-    (2..spreadsheet.last_row).each do |i|
+    header = spreadsheet.row(2)
+    (3..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       Student.where(id_number: row['ID NUMBER'], first_name: row['FIRST NAME'].upcase, last_name: row['LAST NAME'].upcase).first_or_create! do |s|
       
