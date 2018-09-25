@@ -97,7 +97,9 @@ ActiveRecord::Schema.define(version: 2018_09_07_134013) do
     t.integer "status", default: 0
     t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["id_number"], name: "index_users_on_id_number", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["tag_uid"], name: "index_users_on_tag_uid", unique: true
     t.index ["type"], name: "index_users_on_type"
     t.index ["year_level_id"], name: "index_users_on_year_level_id"
   end
