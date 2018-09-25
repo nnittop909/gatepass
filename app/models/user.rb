@@ -26,8 +26,9 @@ class User < ApplicationRecord
   
   
   validates :first_name, :last_name, :role, presence: true
-  validates :id_number, :tag_uid, :course_id, :year_level_id, presence: true, if: :user_is_a_student?
-  validates_length_of :mobile, :is => 10, if: :user_is_a_student?
+  validates :course_id, :year_level_id, presence: true, if: :user_is_a_student?
+  validates :id_number, :tag_uid, presence: true, uniqueness: true
+  validates_length_of :mobile, :is => 10, :wrong_length => "Number should be 11 characters.", allow_blank: true, if: :user_is_a_student?
   
   before_save :set_full_name, :set_join_date
   before_validation :set_role, :set_email_password
