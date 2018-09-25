@@ -41,8 +41,8 @@
           </a>
         </li> -->
         <li>
-          <% if @student.present? %>
-            <% if current_page? info_student_path(@student) %>
+          <% if @student_id.present? %>
+            <% if current_page? info_student_path(@student_id) %>
               <a tabindex="0" id="details" class="pull-right" data-toggle="popover" data-placement="bottom" data-html="true" data-trigger="focus" title="Student Information Update Tips" data-content='<%= render "/students/dropdowns/student_update_tips" %>'>
                 <span class="fa-stack">
                   <i class="fa fa-circle-thin fa-stack-2x"></i>

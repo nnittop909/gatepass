@@ -4,7 +4,7 @@ $(document).ready(function() {
   	showClose: true,
       widgetPositioning: {
             horizontal: 'auto',
-            vertical: 'auto'
+            vertical: 'bottom'
       }
   });
 });

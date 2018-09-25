@@ -1,10 +1,10 @@
-User.create(email: 'admin@ifsu.com', 
+User.create!(email: 'admin@ifsu.com', 
 						password: 'admin@ifsu', 
 						password_confirmation: 'admin@ifsu', 
 						first_name: 'Administrator', 
 						last_name: 'User', 
 						role: 'admin')
-User.create(email: 'developer@ifsu.com', 
+User.create!(email: 'developer@ifsu.com', 
 						password: 'developer@ifsu', 
 						password_confirmation: 'developer@ifsu', 
 						first_name: 'Developer', 

@@ -1,11 +1,12 @@
 class Student < User
 	
   include Filterable
-  require 'roo'
+
   belongs_to :course
   belongs_to :year_level
 	validates :id_number, :tag_uid, :course_id, :year_level_id, presence: true
 	validates :id_number, :tag_uid, uniqueness: true
+  validates_length_of :mobile, :is => 10
 
   scope :by_course, -> (course_id) { where course_id: course_id }
   scope :by_year_level, -> (year_level_id) { where year_level_id: year_level_id }
@@ -16,6 +17,14 @@ class Student < User
       "#{course} - #{year_level}"
     else
       "#{course}"
+    end
+  end
+
+  def age
+    if self.birthdate.present?
+      ((Date.today - self.birthdate.to_date) / 365).floor
+    else
+      "N/A"
     end
   end
 
@@ -49,33 +58,35 @@ class Student < User
   # end
 
   def self.import(file)
-    case File.extname(file.original_filename)
-    when ".csv" then spreadsheet = Csv.new(file.path, nil, :ignore)
-    when ".xls" then spreadsheet = Roo::Excel.new(file.path, nil, :ignore)
-    when ".xlsx" then spreadsheet = Roo::Excelx.new(file.path)
-    else 
-      raise "Unknown file type: #{file.original_filename}"
-    end
+    # case File.extname(file.original_filename)
+    # when ".csv" then spreadsheet = Roo::CSV.new(file.path, nil, :ignore)
+    # when ".xls" then spreadsheet = Roo::Excel.new(file.path, nil, :ignore)
+    # when ".xlsx" then 
+    spreadsheet = Roo::Spreadsheet.open(file.path)
+    # else 
+      # raise "Unknown file type: #{file.original_filename}"
+    # end
     header = spreadsheet.row(1)
-    ((spreadsheet.first_row + 1)..spreadsheet.last_row).each do |i|
+    (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      complete_address = (row['SITIO'] || row['BARANGAY'] || row['BARANGAY'] || row['MUNICIPALITY'])
-      Student.where(id_number: row['ID NUMBER'], first_name: row['FIRST NAME'], last_name: row['LAST NAME']).first_or_create do |s|
+      Student.where(id_number: row['ID NUMBER'], first_name: row['FIRST NAME'].upcase, last_name: row['LAST NAME'].upcase).first_or_create! do |s|
       
+        s.tag_uid = row['CARD UID']
         s.course_id = Course.find_by(abbreviation: row['COURSE']).id
         s.year_level_id = YearLevel.find_by(name: row['YEAR LEVEL']).id
-        s.first_name = row['FIRST NAME']
         s.middle_name = row['MIDDLE NAME']
-        s.last_name = row['LAST NAME']
         s.gender = row['GENDER'].to_s.downcase
         s.birthdate = row['BIRTHDATE']
         s.mobile = row['MOBILE']
-        s.tag_uid = row['CARD UID']
-        if complete_address.present?
-          s.create_address(sitio: row['SITIO'], 
-            barangay: row['BARANGAY'], 
-            municipality: row['MUNICIPALITY'], 
-            province: row['PROVINCE'])
+        if spreadsheet.last_column > 10
+          if (row['MUNICIPALITY'] and row['PROVINCE']).present? 
+            Address.create(
+              user_id: s.id,
+              sitio: row['SITIO'], 
+              barangay: row['BARANGAY'], 
+              municipality: row['MUNICIPALITY'], 
+              province: row['PROVINCE'])
+          end
         end
       end
     end

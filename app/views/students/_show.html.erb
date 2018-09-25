@@ -15,7 +15,7 @@
               <% if @student.profile_photo.blank? %>
                   <%=image_tag("default.png", height: 160, width: 160, :class=>"img-square -img-rounded center-block image") %>
               <% else %>
-                  <%= image_tag @student.profile_photo.avatar, height: 160, width: 160, class: 'img-square img-rounded center-block image'%>
+                  <%= image_tag @student.profile_photo.avatar.url, height: 160, width: 160, class: 'img-square img-rounded center-block image'%>
               <% end %>
               <%= simple_form_for ProfilePhoto.new, url: student_profile_photos_path(@student) do |f| %>
                 <%= f.input :user_id, input_html: {value: @student.id}, as: :hidden %>

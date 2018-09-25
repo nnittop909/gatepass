@@ -2,6 +2,8 @@ class User < ApplicationRecord
 
   include PgSearch
   require 'csv'
+  require 'roo'
+
   pg_search_scope :search_by_name, :against => [:full_name, :first_name, :last_name]
 
   devise :database_authenticatable, :registerable,
@@ -25,8 +27,8 @@ class User < ApplicationRecord
   
   validates :first_name, :last_name, :role, presence: true
   
-  before_save :set_full_name
-  before_validation :set_email_password, :set_role
+  before_save :set_full_name, :set_join_date
+  before_validation :set_role, :set_email_password
 
   delegate :details, to: :address, prefix: true, allow_nil: true
 
@@ -82,6 +84,18 @@ class User < ApplicationRecord
 
   private
 
+  def set_role
+    if self.role.nil?
+      if self.class.name == "User"
+        self.role = "admin"
+      elsif self.class.name == "Student"
+        self.role = "student"
+      elsif self.role == "Employee"
+        self.role = "employee"
+      end
+    end
+  end
+
   def set_email_password
     if self.student?
       generated_password = Devise.friendly_token.first(8)
@@ -101,15 +115,10 @@ class User < ApplicationRecord
     end
   end
 
-  def set_role
-    if self.role.nil?
-      if self.class.name == "User"
-        self.role = "admin"
-      elsif self.class.name == "Student"
-        self.role = "student"
-      elsif self.role == "Employee"
-        self.role = "employee"
-      end
+  def set_join_date
+    if self.join_date.nil?
+      openning = Openning.first.openning_date
+      self.join_date = openning
     end
   end
 

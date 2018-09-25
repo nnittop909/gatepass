@@ -105,6 +105,7 @@ class StudentsController < ApplicationController
 
 	def info
 		@student = Student.find(params[:id])
+    @student_id = Student.find(params[:id])
 	end
 
 	private
@@ -123,19 +124,5 @@ class StudentsController < ApplicationController
       params.require(:student).permit(:id_number, :course_id, :year_level_id,
                 :first_name, :middle_name, :last_name,
                 :birthdate, :gender, :mobile, :email, :tag_uid)
-    end
-
-		# def create_params
-  #     params.require(:student_form).permit(:id_number, :course_id,
-  #               :first_name, :middle_name, :last_name,
-  #               :birthdate, :gender, :mobile, 
-  #               :sitio, :barangay, :municipality, :province,
-  #               :tag_uid, :role, :status,
-  #               :full_name, :g_mobile, :relation, 
-  #               :g_sitio, :g_barangay, :g_municipality, :g_province)
-  # 	end
-
-    def status_update_params
-      params.require(:student).permit(:status)
     end
 end

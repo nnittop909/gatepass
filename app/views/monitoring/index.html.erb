@@ -15,11 +15,13 @@
 	<div class="col-md-12">
 		<div class="monitoring-profile-wrapper">
 	    <%=image_tag("unknown-user.gif", height: 650, width: 650, class: "img-rounded img-responsive") %>
-	    <div class="monitoring-status-overlay">
-        <h1 class="text-center text-red">
-          No record found!
-        </h1>
-      </div>
+      <% if params[:tag_uid].present? %>
+  	    <div class="monitoring-status-overlay">
+          <h1 class="text-center text-red">
+            No record found!
+          </h1>
+        </div>
+      <% end %>
     </div>
 	</div>
 <% else %>
@@ -35,10 +37,10 @@
     	<% if @user.profile_photo.blank? %>	
     		<%=image_tag("default.png", height: 650, width: 650, class: "img-rounded img-responsive center-block", ) %>
     	<% else %>
-      	<%= image_tag @user.profile_photo.avatar, height: 650, width: 650, class: "img-rounded img-responsive center-block"%>
+      	<%= image_tag @user.profile_photo.avatar.url, height: 650, width: 650, class: "img-rounded img-responsive center-block"%>
       <% end %>
       <div class="monitoring-name-overlay">
-        <h1 class="text-center text-white no-bottom-margin"><b><%=@user.full_name.try(:upcase)%><b></h1>
+        <h1 class="text-center text-white no-bottom-margin"><b><%=@user.full_name.try(:upcase)%></b></h1>
     		<h3 class="text-center text-white no-bottom-margin" style="margin-top: 10px"><%=@user.course.abbreviation%></h3>
       </div>
     </div>

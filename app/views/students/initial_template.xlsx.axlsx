@@ -3,6 +3,6 @@ wb.styles do |style|
   header_style = style.add_style(b: true)
   title_style = style.add_style(:bg_color => "004586", b: true)
 	wb.add_worksheet(name: "Student Template") do |sheet|
-	  sheet.add_row ["FIRST NAME", "MIDDLE NAME", "LAST NAME", "COURSE", "YEAR LEVEL", "ID NUMBER", "CARD UID",  "MOBILE"], :style => header_style
+	  sheet.add_row ["ID NUMBER", "COURSE", "YEAR LEVEL", "FIRST NAME", "MIDDLE NAME", "LAST NAME", "GENDER", "BIRTHDATE", "MOBILE", "CARD UID"], :style => header_style
 	end
 end

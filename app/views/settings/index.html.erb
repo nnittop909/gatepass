@@ -33,17 +33,6 @@
 
 	<div class="col-md-6">
 		<div class="card">
-			<div class="card-body">
-				*Desktop shortcut to open chrome in full-screen mode.<br>
-				Set photo size in full-screen mode.<br>
-				Setup policies<br>
-				Setup storage<br>
-				*axlsx merge cells.<br>
-				Add loading icon when page is loading<br>
-				*Disable upload button if photos not selected.<br>
-			</div>
-		</div>
-		<div class="card">
 			<div class="card-header">
 				<h4 class="card-title">Import Profile Photos</h4>
 			</div>
@@ -56,10 +45,6 @@
             </span>
           </div>
         <% end %>
-        <hr>
-        <p class="text-muted">
-        	*Before uploading, make sure the filenames must be the student's ID Number.
-        </p>
 			</div>
 		</div>
 	</div>
@@ -68,7 +53,7 @@
 	$(document).ready(function(){
     $('#submit-button').prop('disabled',true);
     $('#photo-arrays').change(function(){
-        $('#submit-button').prop('disabled', this.value == "" ? true : false);     
+      $('#submit-button').prop('disabled', this.value == "" ? true : false);     
     })
 	});
 </script>	 

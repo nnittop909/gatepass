@@ -8,7 +8,7 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-10">
-          <%= f.input :id_number, label: "ID Number" %>
+          <%= f.input :id_number, label: "ID Number", as: :numeric %>
           <div class="row">
             <div class="col-md-6 col-xs-6">
               <%= f.input :course_id, collection: Course.all.map {|c| [c.abbreviation, c.id]}, prompt: '-- Choose Course --' %>
@@ -44,7 +44,7 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-10">
-          <%= f.input :mobile, label: 'Mobile Number', placeholder: 'Enter 11-digit mobile number' %>
+          <%= f.input :mobile, label: 'Mobile Number', placeholder: 'Enter 11-digit mobile number', as: :numeric %>
           <%= f.input :email, as: :email %>
           <br>
         </div>

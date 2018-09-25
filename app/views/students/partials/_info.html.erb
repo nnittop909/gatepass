@@ -14,6 +14,10 @@
           <td><b><%=@student.try(:gender).try(:capitalize) || "N/A" %></b></td>
         </tr>
         <tr>
+          <td style="width:120px">Age: </td>
+          <td><b><%=@student.age %></b></td>
+        </tr>
+        <tr>
           <td style="width:120px">Birthdate: </td>
           <td><b><%=@student.try(:birthdate).try(:strftime, "%B %e, %Y") || "N/A" %></b></td>
         </tr>
