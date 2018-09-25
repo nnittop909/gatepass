@@ -6,7 +6,7 @@ require 'mina/deploy'
 
 set :domain, '192.168.254.115'
 set :deploy_to, '/var/www/gatepass'
-set :repository, "https://gitlab.com/tophiepumihic/gatepass.git"
+set :repository, "https://github.com/nnittop909/gatepass.git"
 set :branch, 'master'
 set :user, 'deploy'
 set :term_mode, nil
