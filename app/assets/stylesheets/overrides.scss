@@ -456,20 +456,6 @@ td.email-details:hover .email-link {
   padding-right: 15px;
 }
 
-.spinner-modal {
-    display:    none;
-    position:   fixed;
-    z-index:    100000;
-    top:        0;
-    left:       0;
-    height:     100%;
-    width:      100%;
-    background: rgba( 255, 255, 255, .8 )
-                url(/assets/ajax-loader.gif)
-                50% 50%
-                no-repeat;
-}
-
 .right-side-menu {
   position: fixed;
   height: 50%;
@@ -506,17 +492,8 @@ td.email-details:hover .email-link {
   margin: 5px 5px 5px 5px;
 }
 
-body.sign-in-bg {
-  background: asset_url("sign-in.jpg") no-repeat fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  opacity: 0.8;
-}
-
-body.monitoring-bg {
-  background: asset_url("monitoring.jpg") no-repeat fixed;
+body.abstract {
+  background: asset_url("abstract-bg.jpg") no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

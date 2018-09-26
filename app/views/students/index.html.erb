@@ -71,6 +71,7 @@
   			<th>Name</th>
   			<th>Course</th>
         <th>Mobile</th>
+        <th>Address</th>
   			<th></th>
   		</tr>
   		<% @students.each do |student| %>
@@ -84,6 +85,7 @@
           </td>
   				<td><%= student.try(:course).try(:abbreviation) %></td>
           <td><%= student.try(:mobile) || "N/A" %></td>
+          <td><%= student.try(:address_details) || "N/A" %></td>
   				<td>
             <%=link_to "Details", info_student_path(student), class: "btn btn-xs btn-info" %>
             <%#= render '/students/dropdowns/student_options', student: student %>    

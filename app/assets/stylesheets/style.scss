@@ -1025,7 +1025,7 @@ body.login-page {
     padding: 0 15px; }
   .landing-page .app-header {
     padding-top: 100px;
-    background-image: url("/assets/sign-in.jpg");
+    background-image: asset_url("abstract-bg.jpg");
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
