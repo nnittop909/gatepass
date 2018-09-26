@@ -1,4 +1,4 @@
-<%=simple_form_for @student do |f| %>
+<%=simple_form_for @student, html: { autocomplete: 'off' } do |f| %>
   <%=f.error_notification %>
   <%= f.input :role, input_html: { value: User.roles.keys.to_a.first }, as: :hidden %>
   <%= f.input :status, input_html: { value: User.statuses.keys.to_a.first }, as: :hidden %>

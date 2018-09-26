@@ -5,7 +5,7 @@
         Update Address Details
       </h4>
     </div>
-    <%=simple_form_for @address, url: :student_addresses, remote: true do |f| %>
+    <%=simple_form_for @address, url: :student_addresses, html: { autocomplete: 'off' }, remote: true do |f| %>
     <%= f.error_notification %>
       <div class="modal-body">
         <ul class="errors text-danger">

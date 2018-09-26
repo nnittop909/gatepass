@@ -1,4 +1,4 @@
-<%=simple_form_for @guardian, url: @guardian.persisted? ? student_guardian_path(@guardian.id) : :student_guardians do |f| %>
+<%=simple_form_for @guardian, url: @guardian.persisted? ? student_guardian_path(@guardian.id) : :student_guardians, html: { autocomplete: 'off' } do |f| %>
 <%= f.error_notification %>
   <div class="row">
     <div class="col-md-7">

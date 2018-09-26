@@ -5,7 +5,7 @@
         Update ID Number
       </h4>
     </div>
-    <%=simple_form_for @student, url: student_id_number_path(@student), remote: true do |f| %>
+    <%=simple_form_for @student, url: student_id_number_path(@student), html: { autocomplete: 'off' }, remote: true do |f| %>
     <%= f.error_notification %>
       <div class="modal-body">
         <ul class="errors text-danger">
