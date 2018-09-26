@@ -49,7 +49,7 @@ class Student < User
     header = spreadsheet.row(2)
     (3..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      Student.where(id_number: row['ID NUMBER'], first_name: row['FIRST NAME'].upcase, last_name: row['LAST NAME'].upcase).first_or_create! do |s|
+      student = Student.where(id_number: row['ID NUMBER'], first_name: row['FIRST NAME'].upcase, last_name: row['LAST NAME'].upcase).first_or_create! do |s|
       
         s.tag_uid = row['CARD UID']
         s.course_id = Course.find_by(abbreviation: row['COURSE']).id
@@ -58,13 +58,13 @@ class Student < User
         s.gender = row['GENDER'].to_s.downcase
         s.birthdate = row['BIRTHDATE']
         s.mobile = row['MOBILE'] 
-        Address.create(
-          user_id: s.id,
-          sitio: row['SITIO'], 
-          barangay: row['BARANGAY'], 
-          municipality: row['MUNICIPALITY'], 
-          province: row['PROVINCE'])
       end
+      Address.create(
+        user_id: student.id,
+        sitio: row['SITIO'], 
+        barangay: row['BARANGAY'], 
+        municipality: row['MUNICIPALITY'], 
+        province: row['PROVINCE'])
     end
   end
 end
