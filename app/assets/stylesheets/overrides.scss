@@ -267,20 +267,12 @@ label.collection_radio_buttons {
   text-decoration: none;
 }
 
-.head-wrapper {
-  top: 0;
-  display: block;
-  max-width: 100%;
-  height: auto;
-  position: absolute;
-}
-
 .card-wrapper {
   width: 100%;
   height: 50%;
   bottom: 0;
   position: fixed;
-  background-color: #FFF;
+  background-color: rgba(0,0,0,0.8);
   z-index: 1000;
 }
 
@@ -320,11 +312,6 @@ label.collection_radio_buttons {
     width: 160px;
   }
 
-  .head-wrapper {
-    width: 100%;
-    height: auto;
-    position: absolute;
-  }
   .card-wrapper {
     width: 100%;
     height: 50%;
@@ -485,7 +472,7 @@ td.email-details:hover .email-link {
 
 .right-side-menu {
   position: fixed;
-  height: 100%;
+  height: 50%;
   width: 60px;
   right: 0;
   top: 0;
@@ -527,3 +514,13 @@ body.sign-in-bg {
   background-size: cover;
   opacity: 0.8;
 }
+
+body.monitoring-bg {
+  background: asset_url("monitoring.jpg") no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  opacity: 1;
+}
+

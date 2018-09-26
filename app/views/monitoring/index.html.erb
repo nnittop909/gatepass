@@ -14,23 +14,20 @@
 	<% end %>
 </div>
 
-<div class="head-wrapper">
-  <%=image_tag("monitoring.jpg", class: "img-responsive") %>
-</div>
 <div class="card-wrapper">
   <div class="card-content">
-    <table class="table">
+    <table class="">
       <tr>
-        <td style="width:180px"><h3>ID Number:</h3></td>
-        <td><h3><%= @user.try(:id_number) || "N/A" %></h3></td>
+        <td style="width:180px"><h3 class="text-white">ID Number:</h3></td>
+        <td><h3 class="text-white"><%= @user.try(:id_number) || "N/A" %></h3></td>
       </tr>
       <tr>
-        <td style="width:180px"><h3>Mobile:</h3></td>
-        <td><h3><%= @user.try(:mobile) || "N/A" %></h3></td>
+        <td style="width:180px"><h3 class="text-white">Mobile:</h3></td>
+        <td><h3 class="text-white"><%= @user.try(:mobile) || "N/A" %></h3></td>
       </tr>
       <tr>
-        <td style="width:180px"><h3>Address:</h3></td>
-        <td><h3><%= @user.try(:address_details) || "N/A" %></h3></td>
+        <td style="width:180px"><h3 class="text-white">Address:</h3></td>
+        <td><h3 class="text-white"><%= @user.try(:address_details) || "N/A" %></h3></td>
       </tr>
     </table>
   </div>
