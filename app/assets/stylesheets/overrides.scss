@@ -195,11 +195,17 @@ label.collection_radio_buttons {
 .monitoring-profile-wrapper {
   left: 0;
   margin-left: 20px;
-  width: 610px;    
+  width: 610px;
+  height: 610px;
   margin-top: 20px;
   z-index: 10000;
   position: fixed;
-  background-color: #FFF;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.monitoring-profile-wrapper img {
+  object-fit: cover;
+  margin: 5px 5px 5px 5px;
 }
 
 .profile-wrapper:hover .option-overlay {
@@ -252,8 +258,6 @@ label.collection_radio_buttons {
   border-radius: 0px 0px 6px 6px;
   border-color: #66afe9;
   outline: 0;
-  -webkit-box-shadow: inset 0 3px 3px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-  box-shadow: inset 0 3px 3px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
 
 .status-overlay {
@@ -277,7 +281,7 @@ label.collection_radio_buttons {
 }
 
 .card-content {
-  margin-left: 640px;
+  margin-left: 650px;
   display: block;
 }
 
@@ -290,7 +294,7 @@ label.collection_radio_buttons {
 
   .monitoring-profile-wrapper {
     margin: auto;
-    width: 600px;    
+    top: 20px;
     position: relative;
   }
 
@@ -482,14 +486,6 @@ td.email-details:hover .email-link {
   overflow: hidden;
   text-align: center;
   padding: 20px 0px;
-}
-
-.img-glowing {
-  border-color: #66afe9;
-  outline: 0;
-  -webkit-box-shadow: inset 0 3px 3px rgba(0, 0, 0, 0.075), 0 5px 8px rgba(102, 175, 233, 0.6);
-  box-shadow: inset 0 3px 3px rgba(0, 0, 0, 0.075), 0 5 8px rgba(102, 175, 233, 0.6);
-  margin: 5px 5px 5px 5px;
 }
 
 body.abstract {
