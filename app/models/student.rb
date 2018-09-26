@@ -57,15 +57,13 @@ class Student < User
         s.middle_name = row['MIDDLE NAME']
         s.gender = row['GENDER'].to_s.downcase
         s.birthdate = row['BIRTHDATE']
-        s.mobile = row['MOBILE']
-        if (row['MUNICIPALITY'] and row['PROVINCE']).present? 
-          Address.create(
-            user_id: s.id,
-            sitio: row['SITIO'], 
-            barangay: row['BARANGAY'], 
-            municipality: row['MUNICIPALITY'], 
-            province: row['PROVINCE'])
-        end
+        s.mobile = row['MOBILE'] 
+        Address.create(
+          user_id: s.id,
+          sitio: row['SITIO'], 
+          barangay: row['BARANGAY'], 
+          municipality: row['MUNICIPALITY'], 
+          province: row['PROVINCE'])
       end
     end
   end
