@@ -1,13 +1,14 @@
 class FilteredStudentsPdf < Prawn::Document
   TABLE_WIDTHS = [300, 272]
-  TABLE_COLUMNS = [200, 100, 272]
+  TABLE_COLUMNS = [100, 100, 100, 272]
+  WITH_STATUS_COLUMNS = [100, 100, 100, 100, 172]
   def initialize(students, status, course, year_level, view_context)
     super(margin: 20, page_size: [612, 1008], page_layout: :portrait)
     @students = students
-    @course_id = course if course.present?
-    @year_level_id = year_level if year_level.present?
-    @course = Course.find(@course_id) if course.present?
-    @year_level = YearLevel.find(@year_level) if year_level.present?
+    @course_id = course 
+    @year_level_id = year_level
+    @course = Course.find(course) if course.present?
+    @year_level = YearLevel.find(year_level) if year_level.present?
     @status = status if status.present?
     @view_context = view_context
     heading
@@ -25,9 +26,29 @@ class FilteredStudentsPdf < Prawn::Document
     YearLevel.order(:name).select {|y| y.students.filter(by_year_level: @year_level_id, by_status: @status).present?}
   end
 
+  def year_level_title
+    if @year_level.name == "I"
+      "FIRST YEAR"
+    elsif @year_level.name == "II"
+      "SECOND YEAR"
+    elsif @year_level.name == "III"
+      "THIRD YEAR"
+    elsif @year_level.name == "IV"
+      "FOURTH YEAR"
+    elsif @year_level.name == "V"
+      "FIFTH YEAR"
+    end
+  end
+
   def title
     if @status.blank?
-      "LIST OF STUDENTS"
+      if @course.present? and @year_level.blank?
+        "LIST OF #{@course.abbreviation} STUDENTS"
+      elsif @course.present? and @year_level.present?
+        "LIST OF #{@course.abbreviation} #{@year_level.name} STUDENTS"
+      elsif @course.blank? and @year_level.present?
+        "LIST OF #{year_level_title} STUDENTS"
+      end
     else
       if @status == "suspended"
         "LIST OF #{@status.upcase} STUDENTS"
@@ -55,25 +76,42 @@ class FilteredStudentsPdf < Prawn::Document
       text "No Records found.", align: :center
     else
       move_down 10
-      students_table_data
+      if @status.present?
+        students_with_record_status_table_data
+      else
+        students_table_data
+      end
     end
   end
 
   def students_table_data
-    header = ["NAME", "ID NUMBER", "ADDRESS"]
-    footer = ["", "", ""]
+    header = ["NAME", "ID NUMBER", "GENDER", "ADDRESS"]
+    footer = ["", "", "", ""]
     filtered_by_courses.each do |course|
       filtered_by_year_levels.each do |year_level|
         text "#{course.abbreviation} - #{year_level}", size: 9, align: :center, style: :bold
-        students_data = Student.filter(by_course: course.id, by_year_level: year_level.id, by_status: @status).sort_by(&:reversed_name).map { |e| [e.reversed_name, e.id_number, e.address_details || "N/A"]}
+        students_data = Student.filter(by_course: course.id, by_year_level: year_level.id, by_status: @status).sort_by(&:reversed_name).map { |e| [e.reversed_name, e.id_number, e.gender.titleize, e.address_details || "N/A"]}
         table_data = [header, *students_data, footer]
         table(table_data, cell_style: { size: 9, font: "Helvetica", inline_format: true, :padding => [2, 4, 2, 4]}, column_widths: TABLE_COLUMNS) do
           cells.borders = [:top]
           row(0).font_style = :bold
-          column(2).align = :center
+          column(3).align = :center
         end
         move_down 20
       end
     end
+  end
+
+  def students_with_record_status_table_data
+    header = ["NAME", "ID NUMBER", "COURSE/YEAR LEVEL", "GENDER", "ADDRESS"]
+    footer = ["", "", "", "", ""]
+    students_data = Student.filter(by_status: @status).sort_by(&:reversed_name).map { |e| [e.reversed_name, e.id_number, e.course_and_year, e.gender.titleize, e.address_details || "N/A"]}
+        table_data = [header, *students_data, footer]
+        table(table_data, cell_style: { size: 9, font: "Helvetica", inline_format: true, :padding => [2, 4, 2, 4]}, column_widths: WITH_STATUS_COLUMNS) do
+          cells.borders = [:top]
+          row(0).font_style = :bold
+          column(4).align = :center
+        end
+        move_down 20
   end
 end

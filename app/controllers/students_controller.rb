@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
-	autocomplete :students, :full_name, full: true
+	autocomplete :student, :full_name, full: true
 
   def autocomplete
     @students = Student.all
@@ -14,9 +14,9 @@ class StudentsController < ApplicationController
 		@course = params[:course_id] if params[:course_id].present?
 		@year_level = params[:year_level_id] if params[:year_level_id].present?
     @status = params[:status] if params[:status].present?
-		@full_name = params[:full_name]
-		if @full_name.present?
-      @filtered = Student.sort_by(&:reversed_name).search_by_name(params[:full_name])
+		@search_param = params[:search_param]
+		if @search_param.present?
+      @filtered = Student.search_by_name(params[:search_param]).sort_by(&:reversed_name)
       @students = Kaminari.paginate_array(@filtered).page(params[:page]).per(30)
     else
 			@filtered = Student.filter(by_course: @course, by_year_level: @year_level, by_status: @status).sort_by(&:reversed_name)
@@ -63,12 +63,6 @@ class StudentsController < ApplicationController
   def full_template
     respond_to do |format|
       format.xlsx { render xlsx: "full_template", disposition: 'inline', filename: "Student Import Template-1" }
-    end
-  end
-
-  def initial_template
-    respond_to do |format|
-      format.xlsx { render xlsx: "initial_template", disposition: 'inline', filename: "Student Import Template-2" }
     end
   end
 

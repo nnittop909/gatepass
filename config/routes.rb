@@ -17,7 +17,6 @@ Rails.application.routes.draw do
     match "/update_options" => "students#update_options", as: :update_options, via: [:get], on: :member
     match "/report" => "students#report", via: [:get], on: :collection
     match "/full_template" => "students#full_template", as: :full_template, via: [:get], on: :collection
-    match "/initial_template" => "students#initial_template", as: :initial_template, via: [:get], on: :collection
     match "/export" => "students#export", as: :export, via: [:get], on: :collection
     collection { post :import}
 	end

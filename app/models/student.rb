@@ -1,6 +1,28 @@
 class Student < User
 	
   include Filterable
+  include PgSearch
+
+  pg_search_scope :search_by_name, 
+                  :against => 
+                      [
+                        :full_name, 
+                        :first_name, 
+                        :middle_name, 
+                        :last_name,
+                        :id_number,
+                        :tag_uid,
+                        :mobile
+                      ],
+                  :associated_against => 
+                        {:address => 
+                            [
+                              :sitio,
+                              :barangay,
+                              :municipality,
+                              :province
+                            ]
+                        }
 
   belongs_to :course
   belongs_to :year_level
@@ -58,12 +80,14 @@ class Student < User
         s.birthdate = row['BIRTHDATE']
         s.mobile = row['MOBILE']
       end
-      Address.create(
-        user_id: student.id,
-        sitio: row['SITIO'], 
-        barangay: row['BARANGAY'], 
-        municipality: row['MUNICIPALITY'], 
-        province: row['PROVINCE'])
+      if student.address.blank?
+        Address.create(
+          user_id: student.id,
+          sitio: row['SITIO'], 
+          barangay: row['BARANGAY'], 
+          municipality: row['MUNICIPALITY'], 
+          province: row['PROVINCE'])
+      end
     end
   end
 end
