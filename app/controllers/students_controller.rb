@@ -72,7 +72,7 @@ class StudentsController < ApplicationController
   end
   
   def create
-    @student = Student.new(create_params)
+    @student = Student.create(create_params)
     if @student.save
       redirect_to info_student_path(@student), notice: 'Student registered successfully.'
     else
@@ -110,13 +110,13 @@ class StudentsController < ApplicationController
     def create_params
       params.require(:student).permit(:id_number, :course_id, :year_level_id,
                 :first_name, :middle_name, :last_name, :role, :status,
-                :birthdate, :gender, :mobile, :email, :tag_uid,
+                :birthdate, :gender, :mobile, :tag_uid,
                 address_attributes: [:sitio, :barangay, :municipality, :province])
     end
 
     def update_params
       params.require(:student).permit(:id_number, :course_id, :year_level_id,
                 :first_name, :middle_name, :last_name,
-                :birthdate, :gender, :mobile, :email, :tag_uid)
+                :birthdate, :gender, :mobile, :tag_uid)
     end
 end

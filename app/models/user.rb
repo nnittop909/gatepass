@@ -24,9 +24,14 @@ class User < ApplicationRecord
   
   
   validates :first_name, :last_name, :role, presence: true
-  validates :course_id, :year_level_id, presence: true, if: :user_is_a_student?
-  validates :id_number, :tag_uid, presence: true, uniqueness: true, if: :user_is_a_student?
-  validates_length_of :mobile, :is => 11, :wrong_length => "Number should be 11 characters.", allow_blank: true, if: :user_is_a_student?
+  validates :course_id, :year_level_id, :gender, :birthdate, presence: true, if: :user_is_a_student?
+  validates :id_number, :tag_uid, presence: true, if: :user_is_a_student?
+  validates :id_number, uniqueness: true, if: :id_number_is_present?
+  validates :tag_uid, uniqueness: true, if: :tag_uid_is_present?
+  validates :mobile, format: { with: /\A[0-9]+\z/, message: "number is invalid" }, 
+                      length: { is: 11, wrong_length: "number should be 11 characters." }, 
+                      allow_blank: true, if: :user_is_a_student?
+    
   
   before_save :set_full_name, :set_join_date
   before_validation :set_role, :set_email_password
@@ -35,6 +40,14 @@ class User < ApplicationRecord
 
   def user_is_a_student?
     self.class.name == "Student"
+  end
+
+  def id_number_is_present?
+    self.id_number.present?
+  end
+
+  def tag_uid_is_present?
+    self.tag_uid.present?
   end
 
   def self.whitelisted_roles
@@ -107,9 +120,9 @@ class User < ApplicationRecord
       if self.email.blank? and self.password.blank?
         if self.last_name.present? and self.first_name.present?
           rand_num = 3.times.map{ SecureRandom.random_number(9)}.join.to_s
-          fname_down = self.last_name.downcase
-          lname_down = self.first_name.downcase.first
-          self.email = "#{fname_down}.#{lname_down}#{rand_num}@ifsu.com"
+          fname_down = self.last_name.gsub(" ","").downcase
+          lname_down = self.first_name.gsub(" ","").downcase
+          self.email = "#{fname_down}#{lname_down}#{rand_num}@#{generated_password}_gatepass.com"
       		self.password = generated_password
       		self.password_confirmation = generated_password
       	end
