@@ -1,5 +1,5 @@
 <% if @user.present? %>
-  <meta http-equiv="refresh" content="60;url=http://localhost:8080" />
+  <meta http-equiv="refresh" content="60;url=<%= monitoring_index_path %>" />
 <% end %>
 <div class="send-to-back">
 	<%=form_tag monitoring_index_path, html: { autocomplete: 'off' }, method: :get do %>
