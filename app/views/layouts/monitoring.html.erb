@@ -9,27 +9,41 @@
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
-  <body class="flat-blue abstract" id="monitoring-body">
-    <div class="right-side-menu">
-      <ul class="nav-link">
-        <li>
-          <% if user_signed_in? %>
-            <%= link_to students_path, title: 'Home' do %>
-              <span class="fa fa-home fa-2x"></span>
-            <% end %>
-          <% else %>
-            <%= link_to new_user_session_path,title: 'Sign-in' do %>
-              <span class="fa fa-sign-in fa-2x"></span>
-            <% end %>
+  <body class="flat-blue abstract">
+    <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation" data-offset-top="60">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <%= link_to monitoring_index_path, class: 'navbar-brand' do %>
+            <div class="icon"><span class="fa fa-desktop"></span> GatePass v.1.2.0</div>
           <% end %>
-        </li>
-      </ul>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="true">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <% if user_signed_in? %>
+                <%= link_to students_path, class: 'pull-right', title: 'Home' do %>
+                  <span class="fa fa-sign-in fa-lg"></span>
+                <% end %>
+              <% else %>
+                <%= link_to new_user_session_path, class: 'pull-right', title: 'Administrator Sign-in' do %>
+                  <span class="fa fa-sign-in fa-lg"></span>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="margin-top-20 container-fluid app-content-a">
+      <br>
+      <br>
+      <%= yield %>
     </div>
-    <%= yield %>
   </body>
-  <script type="text/javascript">
-    $("#fullscreen-mode").on("click", function (evt) {
-      $("#monitoring-body").fullScreen(true);
-    });
-  </script>
 </html>

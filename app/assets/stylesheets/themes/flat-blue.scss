@@ -221,6 +221,9 @@
     background-color: #1ABC9C; }
     .flat-blue .card.card-success .card-header .title {
       color: #FFF; }
+  .flat-blue .card.card-danger .card-header {
+    background-color: #ff0700;
+  }
   .flat-blue .card.card-info .card-header {
     background-color: #22A7F0; }
     .flat-blue .card.card-info .card-header .title {
@@ -655,7 +658,7 @@
     background-color: #333; }
   .flat-blue.landing-page .navbar .navbar-right {
     background-color: transparent;
-    color: #FFF; }
+    color: #353D48; }
   .flat-blue.landing-page .navbar.affix .navbar-nav > li > a {
     color: #FFF; } }
 

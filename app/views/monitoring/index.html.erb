@@ -1,9 +1,10 @@
+
 <% if @user.present? %>
   <meta http-equiv="refresh" content="60;url=<%= monitoring_index_path %>" />
 <% end %>
 <div class="send-to-back">
-	<%=form_tag monitoring_index_path, html: { autocomplete: 'off' }, method: :get do %>
-	  <div class="input-group stylish-input-group" id="product-prefetch">
+	<%=form_tag monitoring_index_path, autocomplete: 'off', method: :get do %>
+	  <div class="input-group stylish-input-group">
 	    <%= number_field_tag "tag_uid", params[:tag_uid], class: 'unseen form-control', autofocus: true, autocomplete: 'off' %>
 	    <span class="input-group-btn">
 	      <%= button_tag(type: 'submit', name: nil, class: " unseen btn btn-flat") do %>
@@ -14,52 +15,81 @@
 	<% end %>
 </div>
 
-<div class="card-wrapper">
-  <div class="card-content">
-    <table class="">
-      <tr>
-        <td style="width:180px"><h3 class="text-white">ID Number:</h3></td>
-        <td><h3 class="text-white"><%= @user.try(:id_number) || "N/A" %></h3></td>
-      </tr>
-      <tr>
-        <td style="width:180px"><h3 class="text-white">Mobile:</h3></td>
-        <td><h3 class="text-white"><%= @user.try(:mobile) || "N/A" %></h3></td>
-      </tr>
-      <tr>
-        <td style="width:180px"><h3 class="text-white">Address:</h3></td>
-        <td><h3 class="text-white"><%= @user.try(:address_details) || "N/A" %></h3></td>
-      </tr>
-    </table>
+
+<div class="row">
+  <br>
+  <div class="col-md-5">
+      <% if @user.blank? %>
+        <%=image_tag("unknown-user.gif", class: "img-rounded img-responsive img-monitoring") %>
+        <!-- <div class="monitoring-name-overlay">
+          <h1 class="text-center text-red">
+            No record found!
+          </h1>
+        </div> -->
+      <% else %>
+        <% if !@user.record_status.nil? %>
+          <!-- <div class="monitoring-status-overlay">
+            <h1 class="text-center text-red">
+              <%#= @user.record_status %>
+            </h1>
+          </div> -->
+        <% end %>
+        <% if @user.profile_photo.blank? %> 
+          <%=image_tag("default.png", class: "img-rounded img-responsive img-monitoring", ) %>
+        <% else %>
+          <%= image_tag @user.profile_photo.avatar.url, class: "img-rounded img-responsive img-monitoring"%>
+        <% end %>
+        <!-- <div class="monitoring-name-overlay">
+          <h1 class="text-center text-white">
+            <b><%#=@user.full_name.try(:upcase)%></b>
+          </h1>
+        </div> -->
+      <% end %>
+  </div>
+  <div class="col-md-7">
+    <br>
+    <div class="card-glass">
+      <% if @user.present? %>
+        <div class="card-header">
+          <h3 class="card-title bottom-margin-zero text-red">
+            <b><%= @user.record_status.nil? ? '' : @user.record_status %></b>
+          </h3>
+        </div>
+        <hr class="zero-margin">
+      <% end %>
+      <div class="card-body">
+        <% if @user.present? %>
+          <table class="">
+            <tr>
+              <td style="width:180px"><h3 class="card-title text-white">ID Number:</h3></td>
+              <td><h3 class="card-title text-white"><b><%= @user.try(:id_number) || "N/A" %></b></h3></td>
+            </tr>
+            <tr>
+              <td style="width:180px"><h3 class="card-title text-white">Name:</h3></td>
+              <td><h3 class="card-title text-white"><b><%= @user.full_name || "N/A" %></b></h3></td>
+            </tr>
+            <tr>
+              <td style="width:180px"><h3 class="card-title text-white">Course:</h3></td>
+              <td><h3 class="card-title text-white"><b><%= @user.course.abbreviation || "N/A" %></b></h3></td>
+            </tr>
+            <tr>
+              <td style="width:180px"><h3 class="card-title text-white">Date of Birth:</h3></td>
+              <td><h3 class="card-title text-white"><b><%= @user.birthdate.strftime("%B %e, %Y") || "N/A" %></b></h3></td>
+            </tr>
+            <tr>
+              <td style="width:180px"><h3 class="card-title text-white">Address:</h3></td>
+              <td><h3 class="card-title text-white"><b><%= @user.try(:address_details) || "N/A" %></b></h3></td>
+            </tr>
+          </table>
+        <% else %>
+          <h1 class="text-red">
+            No record found!
+          </h1>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
-<div class="monitoring-profile-wrapper">
-  <% if @user.blank? %>
-    <%=image_tag("unknown-user.gif", height: 600, width: 600, class: "img-rounded") %>
-    <div class="monitoring-name-overlay">
-      <h1 class="text-center text-red">
-        No record found!
-      </h1>
-    </div>
-  <% else %>
-    <% if !@user.record_status.nil? %>
-      <div class="monitoring-status-overlay">
-        <h1 class="text-center text-red">
-          <%= @user.record_status %>
-        </h1>
-      </div>
-    <% end %>
-    <% if @user.profile_photo.blank? %> 
-      <%=image_tag("default.png", height: 600, width: 600, class: "img-rounded", ) %>
-    <% else %>
-      <%= image_tag @user.profile_photo.avatar.url, height: 600, width: 600, class: "img-rounded"%>
-    <% end %>
-    <div class="monitoring-name-overlay">
-      <h1 class="text-center text-white no-bottom-margin"><b><%=@user.full_name.try(:upcase)%></b></h1>
-      <h3 class="text-center text-white no-bottom-margin" style="margin-top: 10px"><%=@user.course.abbreviation%></h3>
-    </div>
-  <% end %>
-</div>
-
 <script type="text/javascript">
   $().ready(function() {
   	$(window).on("load", function() {
