@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><%= full_title(yield(:title)) %></title>
@@ -11,15 +10,15 @@
   <%= csrf_meta_tags %>
   </head>
   <body id="application-body" class="flat-blue landing-page abstract">
-    <%= render 'layouts/header' %>
+    <%= render 'layouts/shared/header' %>
     <div class="margin-top-20 container-fluid app-content-a">
       <div class="container">
-        <%=render 'layouts/flash' %>      
-        <%= render 'layouts/modal' %>
+        <%=render 'layouts/shared/flash' %>      
+        <%= render 'layouts/shared/modal' %>
         <%= yield %>
       </div>
     </div>
-    <%= render 'layouts/footer' %>
+    <%= render 'layouts/shared/footer' %>
   </body>
 
   <script type="text/javascript">

@@ -77,7 +77,7 @@ class Student < User
         s.year_level_id = YearLevel.find_by(name: row['YEAR LEVEL']).id
         s.middle_name = row['MIDDLE NAME']
         s.gender = row['GENDER'].to_s.downcase
-        s.birthdate = row['BIRTHDATE']
+        s.birthdate = Date.parse(row['BIRTHDATE'].to_s) if row['BIRTHDATE'].present?
         s.mobile = row['MOBILE']
       end
       if student.address.blank?

@@ -2,47 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><%= full_title(yield(:title)) %></title>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
-  <body class="flat-blue abstract">
-    <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation" data-offset-top="60">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <%= link_to monitoring_index_path, class: 'navbar-brand' do %>
-            <div class="icon"><span class="fa fa-desktop"></span> GatePass v.1.2.0</div>
-          <% end %>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse" aria-expanded="true">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <% if user_signed_in? %>
-                <%= link_to students_path, class: 'pull-right', title: 'Home' do %>
-                  <span class="fa fa-sign-in fa-lg"></span>
-                <% end %>
-              <% else %>
-                <%= link_to new_user_session_path, class: 'pull-right', title: 'Administrator Sign-in' do %>
-                  <span class="fa fa-sign-in fa-lg"></span>
-                <% end %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="margin-top-20 container-fluid app-content-a">
-      <br>
-      <br>
+  <body class="flat-blue landing-page abstract">
+    <%= render "layouts/shared/monitoring_header" %>
+    <div class="container-fluid app-content-a">
       <%= yield %>
     </div>
   </body>

@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-3 col-sm-4">
             <div class="profile-wrapper">
               <% if !@student.record_status.nil? %>
                 <div class="overlay status-overlay">
@@ -33,7 +33,7 @@
               <% end %>
             </div>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-5 col-sm-8">
             <div class="name-wrapper">
               <h4><%=@student.fullname.try(:upcase) %>
                 <span>
@@ -60,7 +60,7 @@
               </h5>
             </div>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-4">
             
           </div>
         </div>
