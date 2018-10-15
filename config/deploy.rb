@@ -22,7 +22,7 @@ set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
-task :environment do
+task :remote_environment do
   # If you're using rbenv, use this to load the rbenv environment.
   # Be sure to commit your .ruby-version or .rbenv-version to your repository.
   invoke :'rbenv:load'
@@ -34,7 +34,7 @@ end
 # Put any custom mkdir's in here for when `mina setup` is ran.
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
-task :setup => :environment do
+task :setup => :remote_environment do
   command %[mkdir -p "#{fetch(:shared_path)}/log"]
   command %[chmod g+rx,u+rwx "#{fetch(:shared_path)}/log"]
 
@@ -75,7 +75,7 @@ task :setup => :environment do
 end
 #########################################
 desc "Deploys the current version to the server."
-task :deploy => :environment do
+task :deploy => :remote_environment do
   deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.

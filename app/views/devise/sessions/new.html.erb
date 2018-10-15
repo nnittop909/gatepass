@@ -15,7 +15,7 @@
 
         <%=image_tag("default.png", height: 100, width: 100, class: 'img-circle img-responsive center-block') %>
         <br>
-        <%=render 'layouts/flash' %>
+        <%=render 'layouts/shared/flash' %>
         <%= f.input :email, placeholder: "Email", input_html:{class: "form-control input-lg"}, label: false, autofocus: true %>
         <%= f.input :password, placeholder: "Password",  input_html:{class: "form-control input-lg"}, label: false %>
         <hr>
