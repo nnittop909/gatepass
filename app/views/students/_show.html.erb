@@ -70,23 +70,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <div role="tabpanel">
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="<%='active' if current_page? info_student_path %>">
-              <%= link_to 'Info', info_student_path %>
-            </li>
-            <li class="pull-right <%#='active' if current_page? options_student_path %>">
-              <%#= link_to 'Options', options_student_path %>
-            </li>
-          </ul>
-        </div>
-        
-        <div class="tab-content">
-          <div id="my-tab-content" class="tab-content">
-            <%= render '/students/partials/info' if current_page? info_student_path %>
-            <%#= render '/students/partials/options' if current_page? options_student_path %>
-          </div>
-        </div>
+        <%= render '/students/partials/info' if current_page? info_student_path %>
       </div>
     </div>
   </div>
