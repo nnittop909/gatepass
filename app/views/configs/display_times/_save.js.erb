@@ -1,0 +1,9 @@
+$("ul.errors").html("")
+<% if @display_time.errors.any? %>
+  <% @display_time.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+  $("#display-time-modal").modal("hide")
+  window.location.reload();
+<% end %>

@@ -69,8 +69,8 @@
               <td><h3 class="card-title text-white"><b><%= @user.full_name || "N/A" %></b></h3></td>
             </tr>
             <tr>
-              <td style="width:180px"><h3 class="card-title text-white">Course:</h3></td>
-              <td><h3 class="card-title text-white"><b><%= @user.course.abbreviation || "N/A" %></b></h3></td>
+              <td style="width:180px"><h3 class="card-title text-white">Course/Yr.:</h3></td>
+              <td><h3 class="card-title text-white"><b><%= @user.course_and_year || "N/A" %></b></h3></td>
             </tr>
             <tr>
               <td style="width:180px"><h3 class="card-title text-white">Date of Birth:</h3></td>
@@ -82,9 +82,23 @@
             </tr>
           </table>
         <% else %>
-          <h1 class="text-red">
-            No record found!
-          </h1>
+          <% if @tag_uid.blank? %>
+            <h1 class="text-white">
+              Monitor Mode
+            </h1>
+            <h4 class="text-white">
+              Scan Student ID Card for identification.
+            </h4>
+          <% end %>
+          <% if @user.blank? && @tag_uid.present? %>
+            <hr class="text-white">
+            <h1 class="text-red">
+              Student Identification Failed!
+            </h1>
+            <h4 class="text-white">
+              Student Card UID is not yet registered.
+            </h4>
+          <% end %>
         <% end %>
       </div>
     </div>

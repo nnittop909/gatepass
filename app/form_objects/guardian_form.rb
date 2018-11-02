@@ -1,7 +1,21 @@
 class GuardianForm
 	include ActiveModel::Model
-	attr_accessor :student_id, :first_name, :middle_name, :last_name, :mobile, :relation, :sitio, :barangay, :municipality, :province
-  validates :first_name, :last_name, :relation, :municipality, :province, presence: true
+	attr_accessor :student_id, 
+                :first_name, 
+                :middle_name, 
+                :last_name, 
+                :mobile, 
+                :relation, 
+                :sitio, 
+                :barangay, 
+                :municipality, 
+                :province
+  validates :first_name, 
+            :last_name, 
+            :relation, 
+            :municipality, 
+            :province, 
+             presence: true
   
   def initialize(attr = {})
     if !attr["id"].nil?
@@ -58,13 +72,25 @@ class GuardianForm
           student.relationship.destroy
         elsif student.guardian.users.count == 1
           student.guardian.destroy
-          guardian = Guardian.find_by(first_name: first_name.upcase, last_name: last_name.upcase, mobile: mobile)
+          guardian = Guardian.find_by(first_name: first_name.upcase, 
+                                      last_name: last_name.upcase, 
+                                      mobile: mobile)
           if guardian.present?
-            Relationship.create!(relation: relation, user_id: student_id, guardian_id: guardian.id)
+            Relationship.create!(relation: relation, 
+                                  user_id: student_id, 
+                                  guardian_id: guardian.id)
           else
-            new_guardian = Guardian.create!(first_name: first_name, middle_name: middle_name, last_name: last_name, mobile: mobile)
-            new_guardian.build_address(sitio: sitio, barangay: barangay, municipality: municipality, province: province).save!
-            Relationship.create!(relation: relation, user_id: student_id, guardian_id: new_guardian.id)
+            new_guardian = Guardian.create!(first_name: first_name, 
+                                            middle_name: middle_name, 
+                                            last_name: last_name, 
+                                            mobile: mobile)
+            new_guardian.build_address(sitio: sitio, 
+                                      barangay: barangay, 
+                                      municipality: municipality, 
+                                      province: province).save!
+            Relationship.create!(relation: relation, 
+                                  user_id: student_id, 
+                                  guardian_id: new_guardian.id)
           end
         end
       else

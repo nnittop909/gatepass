@@ -1,0 +1,21 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">
+        Update Display Time
+      </h4>
+    </div>
+    <%=simple_form_for @display_time, url: configs_display_time_path, remote: true do |f| %>
+    <%= f.error_notification %>
+      <div class="modal-body">
+        <ul class="errors text-danger">
+        </ul>
+        <%= f.input :number_of_seconds, label: 'Number in Seconds' %>
+	      <div class="modal-footer">
+	        <%= link_to "Cancel", "#", class: "btn btn-default pull-left", data: {dismiss: "modal"} %>
+	        <%=f.submit "Save", class: "btn btn-primary" %>
+	      </div>
+	    </div>
+    <% end %>
+  </div>
+</div>

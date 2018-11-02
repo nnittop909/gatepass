@@ -65,7 +65,7 @@
         <li class="dropdown" style="padding: 0;border-left: 1px solid #484848;">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             <% if current_user.profile_photo.present? %>
-              <%=image_tag(current_user.profile_photo, width: 30, height: 30, class: 'img-circle') %>
+              <%=image_tag(current_user.profile_photo.avatar.url, width: 30, height: 30, class: 'img-circle') %>
             <% else %>
               <%=image_tag("default.png", width: 30, height: 30, class: 'img-circle') %>
             <% end %>

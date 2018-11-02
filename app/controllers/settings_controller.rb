@@ -4,5 +4,7 @@ class SettingsController < ApplicationController
 	def index
 		@courses = Course.all
 		@users = User.admin.all
+		@students = Student.all
+		@display_time = DisplayTime.last
 	end
 end

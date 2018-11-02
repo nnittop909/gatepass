@@ -6,9 +6,9 @@ class StudentImportsController < ApplicationController
   end
 
   def create
-    @student_import = StudentImport.new(params[:student_import])
+    @student_import = StudentImport.new(params[:student_import][:file])
     if @student_import.save
-      redirect_to students_url, notice: "Student records imported successfully."
+      redirect_to settings_url, notice: "Student records migrated successfully."
     else
       render :new
     end

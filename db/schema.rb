@@ -10,33 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_07_134013) do
+ActiveRecord::Schema.define(version: 2018_11_02_044816) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
-  create_table "addresses", force: :cascade do |t|
+  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "house_number"
     t.string "sitio"
     t.string "barangay"
     t.string "municipality"
     t.string "province"
-    t.bigint "user_id"
-    t.bigint "guardian_id"
+    t.uuid "user_id"
+    t.uuid "guardian_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["guardian_id"], name: "index_addresses_on_guardian_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
-  create_table "courses", force: :cascade do |t|
+  create_table "courses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "guardians", force: :cascade do |t|
+  create_table "display_times", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "number_of_seconds"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "guardians", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
@@ -45,14 +53,14 @@ ActiveRecord::Schema.define(version: 2018_09_07_134013) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "opennings", force: :cascade do |t|
+  create_table "opennings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "openning_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "profile_photos", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "profile_photos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar_file_name"
@@ -63,8 +71,8 @@ ActiveRecord::Schema.define(version: 2018_09_07_134013) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.bigint "guardian_id"
-    t.bigint "user_id"
+    t.uuid "guardian_id"
+    t.uuid "user_id"
     t.string "relation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -72,10 +80,10 @@ ActiveRecord::Schema.define(version: 2018_09_07_134013) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "id_number"
-    t.bigint "course_id"
-    t.bigint "year_level_id"
+    t.uuid "course_id"
+    t.uuid "year_level_id"
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
@@ -83,7 +91,7 @@ ActiveRecord::Schema.define(version: 2018_09_07_134013) do
     t.integer "gender"
     t.datetime "birthdate"
     t.string "mobile"
-    t.integer "tag_uid"
+    t.string "tag_uid"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -104,7 +112,7 @@ ActiveRecord::Schema.define(version: 2018_09_07_134013) do
     t.index ["year_level_id"], name: "index_users_on_year_level_id"
   end
 
-  create_table "year_levels", force: :cascade do |t|
+  create_table "year_levels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

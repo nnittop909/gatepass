@@ -27,7 +27,11 @@ Rails.application.routes.draw do
 	resources :reports
   resources :student_imports, only: [:new, :create]
   resources :profile_photos
-  resources :courses
+  
+  namespace :configs do
+    resources :courses
+    resources :display_times
+  end
 
   devise_for :users, :controllers => { :registrations => "users", sessions: "users/sessions" }
   

@@ -54,9 +54,9 @@ class StudentsController < ApplicationController
   def import
     begin
       Student.import(params[:file])
-      redirect_to students_url, notice: 'Students Imported'
+      redirect_to settings_url, notice: 'Students Imported'
     rescue
-      redirect_to students_url, notice: 'Invalid Excel File.'
+      redirect_to settings_url, notice: 'Invalid Excel File.'
     end
   end
 

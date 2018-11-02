@@ -2,12 +2,12 @@
 
 class DeviseCreateUsers < ActiveRecord::Migration[5.1]
   def change
-    create_table :users do |t|
+    create_table :users, id: :uuid do |t|
       ## Database authenticatable
 
       t.string :id_number, unique: true
-      t.belongs_to :course, index: true, foreign_key: true
-      t.belongs_to :year_level, index: true, foreign_key: true
+      t.belongs_to :course, index: true, foreign_key: true, type: :uuid
+      t.belongs_to :year_level, index: true, foreign_key: true, type: :uuid
       t.string :first_name
       t.string :middle_name
       t.string :last_name
@@ -15,7 +15,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.integer :gender
       t.datetime :birthdate
       t.string :mobile
-      t.integer :tag_uid, unique: true
+      t.string :tag_uid, unique: true
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable

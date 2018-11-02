@@ -17,6 +17,11 @@ class ProfilePhotosController < ApplicationController
 							redirect_to settings_url, notice: "Unable to upload #{photo.original_filename}. Only accepts jpg, jpeg, png, and gif images."
 							return false
 						end
+					else
+						if !@student.profile_photo.update(avatar: photo)
+							redirect_to settings_url, notice: "Unable to upload #{photo.original_filename}. Only accepts jpg, jpeg, png, and gif images."
+							return false
+						end
 					end
 				end
 			end

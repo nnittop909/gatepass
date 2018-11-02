@@ -1,5 +1,6 @@
 <div class="row">
 	<div class="col-md-6">
+		<h1 class="text-muted">Configurations</h1>
 		<div class="card">
 			<div class="card-header">
 				<div class="card-title">
@@ -8,7 +9,7 @@
 							<h4>Courses</h4>
 						</div>
 						<div class="col-md-6 col-sm-6">
-							<%=link_to "Add Course", new_course_path, class: 'btn btn-primary pull-right', title: 'New Course', remote: true %>
+							<%=link_to "Add Course", new_configs_course_path, class: 'btn btn-primary pull-right', title: 'New Course', remote: true %>
 						</div>
 					</div>
 	      </div>
@@ -19,7 +20,7 @@
 						<tr>
 							<td><%= course.abbreviation %> - <%= course.name %></td>
 							<td>
-								<%= link_to edit_course_path(course), remote: true do %>
+								<%= link_to edit_configs_course_path(course), remote: true do %>
 									<span class="fa fa-pencil-square-o"></span>
 								<% end %>
 							</td>
@@ -28,32 +29,91 @@
 				</table>
 			</div>
 		</div>
-		
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">
+					<div class="title">Display Time</div>
+					<div class="description">Configure the time to display Student Profile in Monitor Mode.</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-8 col-sm-8">
+						<h4 class="card-title no-top-margin"><%= @display_time.time.to_s + " Seconds" if @display_time.present? %></h4>
+					</div>
+					<div class="col-md-4 col-sm-4">
+						<%=link_to "Set", @display_time.nil? ? new_configs_display_time_path : edit_configs_display_time_path(@display_time), class: 'btn btn-primary pull-right', title: 'Set Display Time', remote: true %>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="col-md-6">
+		<h1 class="text-muted">Data Migration</h1>
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Import Profile Photos</h4>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="card-title">
+							<div class="title">Import Student Records</div>
+							<div class="description">Migrate student records from Excel File (xlsx).</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="pull-right card-action">
+							<%=link_to "Download Template", full_template_students_path(format: :xlsx), class: 'btn btn-success' %>	
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="card-body">
-				<%= form_for ProfilePhoto.new, url: :profile_photos, html: { multipart: true } do |f| %>
-          <div class="input-group stylish-input-group">
-            <%= f.file_field :photo_arrays, multiple: true, id: "photo-arrays", class: 'form-control' %>
-            <span class="input-group-btn">
-              <%= f.submit 'Import', id: 'submit-button', class: 'form-control btn btn-primary' %>
-            </span>
-          </div>
+				<%= form_tag import_students_path, multipart: true do %>
+					<div class="input-group stylish-input-group">
+          	<%= file_field_tag :file, label: false, class: 'form-control' %>
+          	<span class="input-group-btn">
+	            <%= button_tag 'Import', id: 'import-students', class: 'form-control btn btn-primary' %>
+	          </span>
+	        </div>
         <% end %>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">
+					<div class="title">Import Profile Photos</div>
+					<div class="description">Upload multiple photos</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<% if @students.present? %>
+					<%= form_for ProfilePhoto.new, url: :profile_photos, html: { multipart: true } do |f| %>
+	          <div class="input-group stylish-input-group">
+	            <%= f.file_field :photo_arrays, multiple: true, id: "photo-arrays", class: 'form-control' %>
+	            <span class="input-group-btn">
+	              <%= f.submit 'Import', id: 'import-photos', class: 'form-control btn btn-primary' %>
+	            </span>
+	          </div>
+	        <% end %>
+	      <% end %>
 			</div>
 		</div>
 	</div>
 </div>	
 <script type="text/javascript">
 	$(document).ready(function(){
-    $('#submit-button').prop('disabled',true);
+    $('#import-photos').prop('disabled',true);
     $('#photo-arrays').change(function(){
-      $('#submit-button').prop('disabled', this.value == "" ? true : false);     
+      $('#import-photos').prop('disabled', this.value == "" ? true : false);     
+    })
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+    $('#import-students').prop('disabled',true);
+    $('#file').change(function(){
+      $('#import-students').prop('disabled', this.value == "" ? true : false);     
     })
 	});
 </script>	 
