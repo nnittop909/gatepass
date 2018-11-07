@@ -1,0 +1,13 @@
+<%=simple_form_for @address, remote: request.xhr?, html: { autocomplete: "off", data: { modal: true } }, url: @address.persisted? ? student_address_path : student_addresses_path do |f| %>
+  <div class="modal-body">
+    <%= f.error_notification %>
+    <%= f.input :user_id, input_html: { value: @student.id }, as: :hidden %>
+    <%= f.input :sitio %>
+    <%= f.input :barangay %>
+    <%= f.input :municipality %>
+    <%= f.input :province %>
+  </div>
+  <div class="modal-footer">
+    <%=f.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

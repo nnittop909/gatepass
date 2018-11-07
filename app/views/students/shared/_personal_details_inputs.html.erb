@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-11">
+    <%= f.input :id_number, label: "ID Number" %>
+    <div class="row">
+      <div class="col-md-6 col-xs-6">
+        <%= f.input :course_id, collection: Course.all.map {|c| [c.abbreviation, c.id]}, prompt: '-- Choose Course --' %>
+      </div>
+      <div class="col-md-6 col-xs-6">
+        <%= f.input :year_level_id, collection: YearLevel.all.map {|c| [c.name, c.id]}, prompt: '-- Choose Year Level --' %>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>
+<h4 class="no-bottom-margin">Personal Details</h4>
+<hr class="no-top-margin">
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-11">
+    <%= f.input :first_name %>
+    <%= f.input :middle_name %>
+    <%= f.input :last_name %>
+    <%= f.input :birthdate, as: :string, input_html: {class: 'datepicker'} %>
+    <%= f.input :gender, collection: User.genders.keys.to_a.map{ |g| [g.titleize, g]}, as: :radio_buttons, item_label_class: "radio-inline", item_wrapper_tag: false %>
+    <br>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h4 class="no-bottom-margin">Contact Details </h4>
+    <hr class="no-top-margin">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-11">
+    <%= f.input :mobile, label: 'Mobile Number', placeholder: 'Enter 11-digit mobile number' %>
+    <br>
+  </div>
+</div>

@@ -1,6 +1,5 @@
 <div class="row">
 	<div class="col-md-6">
-		<h1 class="text-muted">Configurations</h1>
 		<div class="card">
 			<div class="card-header">
 				<div class="card-title">
@@ -9,7 +8,7 @@
 							<h4>Courses</h4>
 						</div>
 						<div class="col-md-6 col-sm-6">
-							<%=link_to "Add Course", new_configs_course_path, class: 'btn btn-primary pull-right', title: 'New Course', remote: true %>
+							<%=link_to "Add Course", new_configs_course_path, class: 'btn btn-primary pull-right', title: 'New Course', data: {modal: true} %>
 						</div>
 					</div>
 	      </div>
@@ -20,7 +19,7 @@
 						<tr>
 							<td><%= course.abbreviation %> - <%= course.name %></td>
 							<td>
-								<%= link_to edit_configs_course_path(course), remote: true do %>
+								<%= link_to edit_configs_course_path(course), data: {modal: true} do %>
 									<span class="fa fa-pencil-square-o"></span>
 								<% end %>
 							</td>
@@ -42,7 +41,7 @@
 						<h4 class="card-title no-top-margin"><%= @display_time.time.to_s + " Seconds" if @display_time.present? %></h4>
 					</div>
 					<div class="col-md-4 col-sm-4">
-						<%=link_to "Set", @display_time.nil? ? new_configs_display_time_path : edit_configs_display_time_path(@display_time), class: 'btn btn-primary pull-right', title: 'Set Display Time', remote: true %>
+						<%=link_to "Set", @display_time.nil? ? new_configs_display_time_path : edit_configs_display_time_path(@display_time), class: 'btn btn-primary pull-right', title: 'Set Display Time', data: {modal: true} %>
 					</div>
 				</div>
 			</div>
@@ -50,25 +49,24 @@
 	</div>
 
 	<div class="col-md-6">
-		<h1 class="text-muted">Data Migration</h1>
 		<div class="card">
 			<div class="card-header">
 				<div class="row">
 					<div class="col-md-8">
 						<div class="card-title">
-							<div class="title">Import Student Records</div>
+							<div class="title">Upload Student Records</div>
 							<div class="description">Migrate student records from Excel File (xlsx).</div>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="pull-right card-action">
-							<%=link_to "Download Template", full_template_students_path(format: :xlsx), class: 'btn btn-success' %>	
+							<%=link_to "Download Template", student_template_reports_path(format: :xlsx), class: 'btn btn-success' %>	
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="card-body">
-				<%= form_tag import_students_path, multipart: true do %>
+				<%= form_tag upload_student_records_path, multipart: true do %>
 					<div class="input-group stylish-input-group">
           	<%= file_field_tag :file, label: false, class: 'form-control' %>
           	<span class="input-group-btn">
@@ -81,13 +79,13 @@
 		<div class="card">
 			<div class="card-header">
 				<div class="card-title">
-					<div class="title">Import Profile Photos</div>
-					<div class="description">Upload multiple photos</div>
+					<div class="title">Upload Profile Photos</div>
+					<div class="description">Student profile photo can be updated using ID Number as filename for a photo. It also accepts multiple uploads.</div>
 				</div>
 			</div>
 			<div class="card-body">
 				<% if @students.present? %>
-					<%= form_for ProfilePhoto.new, url: :profile_photos, html: { multipart: true } do |f| %>
+					<%= form_for ProfilePhoto.new, url: :upload_student_photos, html: { multipart: true } do |f| %>
 	          <div class="input-group stylish-input-group">
 	            <%= f.file_field :photo_arrays, multiple: true, id: "photo-arrays", class: 'form-control' %>
 	            <span class="input-group-btn">

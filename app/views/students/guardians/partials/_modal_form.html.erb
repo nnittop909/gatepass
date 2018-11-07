@@ -1,0 +1,33 @@
+<%=simple_form_for @guardian, remote: request.xhr?, html: { autocomplete: "off", data: { modal: true } }, url: @guardian.persisted? ? student_guardian_path(@guardian.id) : :student_guardians do |f| %>
+  <div class="modal-body">
+    <%= f.error_notification %>
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-11">
+        <%= f.input :student_id, input_html: { value: @student.id }, as: :hidden %>
+        <%= f.input :first_name, autofocus: true, required: true %>
+        <%= f.input :middle_name %>
+        <%= f.input :last_name %>
+        <%= f.input :relation, label: "Relationship", required: true %>
+        <%= f.input :mobile, label: 'Mobile Number' %>
+      </div>
+    </div>
+    <br>
+    <h4 class="no-bottom-margin">Address Details</h4>
+    <hr class="no-top-margin">
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-11">
+        <%= f.input :sitio %>
+        <%= f.input :barangay %>
+        <%= f.input :municipality, input_html: { value: "Lagawe" }, required: true %>
+        <%= f.input :province, input_html: { value: "Ifugao" }, required: true %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <%=f.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

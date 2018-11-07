@@ -3,7 +3,7 @@
     <div class="col-md-5">
       <h4 class="personal-details">
         Personal Details
-        <%= link_to edit_student_path(@student), title: 'Update Personal Details' do %>
+        <%= link_to edit_student_path(@student), title: 'Update Personal Details', data: {modal: true} do %>
           <span class="pull-right personal-link"><i class="fa fa-pencil-square-o"></i></span>
         <% end %>
       </h4>
@@ -27,7 +27,7 @@
           <td style="width:120px">Contact Number: </td>
           <td class="mobile-details">
             <b><%=@student.mobile || "N/A"%></b>
-            <%= link_to edit_student_mobile_path(@student), title: 'Update Mobile Number', remote: true do %>
+            <%= link_to edit_student_mobile_path(@student), title: 'Update Mobile Number', data: {modal: true} do %>
               <span class="mobile-link">&nbsp&nbsp&nbsp&nbsp <i class="fa fa-pencil-square-o"></i></span>
             <% end %>
           </td>
@@ -36,7 +36,7 @@
           <td style="width:120px">Email: </td>
           <td class="email-details">
             <b><%#=@student.email || "N/A"%></b>
-            <%#= link_to edit_student_email_path(@student), title: 'Update Email', remote: true do %>
+            <%#= link_to edit_student_email_path(@student), title: 'Update Email', data: {modal: true} do %>
               <span class="email-link">&nbsp&nbsp&nbsp&nbsp <i class="fa fa-pencil-square-o"></i></span>
             <%# end %>
           </td>
@@ -46,11 +46,11 @@
       <h4 class="address-details">
         Address Details
         <% if @student.address.present? %>
-          <%= link_to edit_student_address_path(student_id: @student, id: @student.address.id), title: 'Update Address Details', remote: true do %>
+          <%= link_to edit_student_address_path(student_id: @student, id: @student.address.id), title: 'Update Address Details', data: {modal: true} do %>
             <span class="pull-right address-link"><i class="fa fa-pencil-square-o"></i></span>
           <% end %>
         <% else %>
-          <%= link_to new_student_address_path(@student), title: 'Update Address Details', remote: true do %>
+          <%= link_to new_student_address_path(@student), title: 'Update Address Details', data: {modal: true} do %>
             <span class="pull-right address-link"><i class="fa fa-pencil-square-o"></i></span>
           <% end %>
         <% end %>
@@ -68,11 +68,11 @@
       <h4 class="guardian-details">
         Guardian Details
         <% if @student.guardian.present? %>
-          <%= link_to update_options_student_path(@student), title: 'Update guardian', remote: true do %>
+          <%= link_to update_options_student_guardian_path(@student), title: 'Update guardian', data: {modal: true} do %>
             <span class="pull-right guardian-link"><i class="fa fa-pencil-square-o"></i></span>
           <% end %>
         <% else %>
-          <%= link_to new_student_guardian_path(@student), title: 'Update guardian details' do %>
+          <%= link_to new_student_guardian_path(@student), title: 'Update guardian details', data: {modal: true} do %>
             <span class="pull-right guardian-link"><i class="fa fa-pencil-square-o"></i></span>
           <% end %>
         <% end %>

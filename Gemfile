@@ -42,8 +42,8 @@ gem 'rubyzip', '>= 1.2.1'
 gem 'axlsx'
 gem 'axlsx_rails'
 gem 'bootstrap-popover-rails'
-gem 'jquery_fullscreen-rails', '~> 1.1'
 gem 'roo-xls'
+gem "responders"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

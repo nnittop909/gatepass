@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
+  respond_to :html, :json
 	autocomplete :student, :full_name, full: true
 
   def autocomplete
@@ -24,48 +25,6 @@ class StudentsController < ApplicationController
 		end
 	end
 
-  def report
-    @course = params[:course_id] if params[:course_id].present?
-    @year_level = params[:year_level_id] if params[:year_level_id].present?
-    @status = params[:status] if params[:status].present?
-    @students = Student.filter(by_course: @course, by_year_level: @year_level, by_status: @status).sort_by(&:reversed_name)
-    respond_to do |format|
-      format.html
-      format.pdf do
-        pdf = FilteredStudentsPdf.new(@students, @status, @course, @year_level, view_context)
-        send_data pdf.render, type: "application/pdf", disposition: 'inline', file_name: "Students.pdf"
-      end
-    end
-  end
-
-  def export
-    @course = params[:course_id] if params[:course_id].present?
-    @year_level = params[:year_level_id] if params[:year_level_id].present?
-    @status = params[:status] if params[:status].present?
-    @title = @status.present? ? "List of #{@status} students" : "List of students"
-    @filtered_courses = Course.order(:name).select {|c| c.students.filter(by_course: @course, by_status: @status).present?}
-    @filtered_year_levels = YearLevel.order(:name).select {|y| y.students.filter(by_year_level: @year_level, by_status: @status).present?}
-    @students = Student.filter(by_course: @course, by_year_level: @year_level, by_status: @status).sort_by(&:reversed_name)
-    respond_to do |format|
-      format.xlsx { render xlsx: "export", disposition: 'inline', filename: @title }
-    end
-  end
-
-  def import
-    begin
-      Student.import(params[:file])
-      redirect_to settings_url, notice: 'Students Imported'
-    rescue
-      redirect_to settings_url, notice: 'Invalid Excel File.'
-    end
-  end
-
-  def full_template
-    respond_to do |format|
-      format.xlsx { render xlsx: "full_template", disposition: 'inline', filename: "Student Import Template-1" }
-    end
-  end
-
 	def new
     @student = Student.new
     @student.build_address
@@ -82,19 +41,14 @@ class StudentsController < ApplicationController
 
   def edit
     @student = Student.find(params[:id])
+    respond_modal_with @student
   end
 
   def update
     @student = Student.find(params[:id])
-    if @student.update_attributes(update_params)
-      redirect_to info_student_path(@student), notice: 'Student updated successfully.'
-    else
-      render :edit
-    end
-  end
-
-  def update_options
-    @student = Student.find(params[:id])
+    @student.update_attributes(update_params)
+    respond_modal_with @student,
+      location: info_student_path(@student)
   end
 
 	def info

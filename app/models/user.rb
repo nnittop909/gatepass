@@ -28,6 +28,7 @@ class User < ApplicationRecord
   validates :id_number, :tag_uid, presence: true, if: :user_is_a_student?
   validates :id_number, uniqueness: true, if: :id_number_is_present?
   validates :tag_uid, format: { with: /\A[0-9]+\z/, message: "is invalid." },
+                      length: { maximum: 10, wrong_length: "should be 10 characters max." },
                       uniqueness: true, if: :tag_uid_is_present?
   validates :mobile, format: { with: /\A[0-9]+\z/, message: "number is invalid" }, 
                       length: { is: 11, wrong_length: "number should be 11 characters." }, 

@@ -11,17 +11,14 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.fullscreen
-//= require jquery-ui
-//= require jquery_ujs
+//= require rails-ujs
 //= require bootstrap-sprockets
-//= require bootstrap/bootstrap-rails-tooltip
-//= require bootstrap/bootstrap-rails-popover
 //= require autocomplete-rails
 //= require app
 //= require theming
 //= require moment
 //= require bootstrap-datetimepicker
 //= require pickers
+//= require bootstrap/bootstrap-rails-popover
 //= require select2
 //= require_tree .

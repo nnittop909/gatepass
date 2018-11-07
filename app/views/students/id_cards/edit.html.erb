@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h4 class="modal-title" id="mainModalLabel">
+    Update Card Unique ID
+  </h4>
+</div>
+<%=simple_form_for @student, remote: request.xhr?, html: { autocomplete: "off", data: { modal: true } }, url: student_id_card_path(@student) do |f| %>
+  <div class="modal-body">
+    <%= f.error_notification %>
+    <h4 class="no-bottom-margin">Card UID</h4>
+    <hr class="no-top-margin">
+    <%= f.input :tag_uid, hint: 'Please tap student ID on the RFID scanner', label: false, autofocus: true %>
+  </div>
+  <div class="modal-footer">
+    <%=f.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

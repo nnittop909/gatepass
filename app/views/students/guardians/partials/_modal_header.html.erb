@@ -1,0 +1,8 @@
+<div class="modal-header">
+	<%= link_to info_student_path(@student), html: {type: "button"}, class: "close" do %>
+		<span>&times;</span>
+	<% end %>
+  <h4 class="modal-title" id="mainModalLabel">
+    <%= @guardian.persisted? ? "Update Guardian" : "New Guardian" %>
+  </h4>
+</div>

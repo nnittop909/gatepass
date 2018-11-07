@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><%= full_title(yield(:title)) %></title>
@@ -10,21 +10,14 @@
   <%= csrf_meta_tags %>
   </head>
   <body id="application-body" class="flat-blue landing-page abstract">
+    <div id="modal-holder"></div>
     <%= render 'layouts/shared/header' %>
     <div class="margin-top-20 container-fluid app-content-a">
       <div class="container">
-        <%=render 'layouts/shared/flash' %>      
-        <%= render 'layouts/shared/modal' %>
+        <%=render 'layouts/shared/flash' %>
         <%= yield %>
       </div>
     </div>
     <%= render 'layouts/shared/footer' %>
-  </body>
-
-  <script type="text/javascript">
-    $("#fullscreen-mode").on("click", function () {
-      $(document).fullScreen(true);
-      preventDefault();
-    });
-  </script>
+  </body>]
 </html>

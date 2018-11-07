@@ -1,36 +1,40 @@
 module Students
 	class GuardiansController < ApplicationController
 		before_action :authenticate_user!
+  	respond_to :html, :json
 
 		def new
 			@student = Student.find(params[:student_id])
 			@guardian = GuardianForm.new
+			respond_modal_with @guardian
 		end
 
 		def create
 			@student = Student.find(params[:student_id])
 			@guardian = GuardianForm.new(guardian_params)
-			if @guardian.save
-				redirect_to info_student_path(@student), notice: 'Guardian details updated.'
-			else
-				render :new
-			end
+			@guardian.save
+			respond_modal_with @guardian,
+				location: info_student_path(@student)
 		end
 
 		def edit
 			@student = Student.find(params[:student_id])
 			@guardian = GuardianForm.new("id" => @student.id)
+			respond_modal_with @guardian
 		end
 
 		def update
 			@student = Student.find(params[:student_id])
 			@guardian = GuardianForm.new(guardian_params.merge("id" => @student.id))
-			if @guardian.update
-				redirect_to info_student_path(@student), notice: 'Guardian details updated.'
-			else
-				render :new
-			end
+			@guardian.update
+			respond_modal_with @guardian,
+				location: info_student_path(@student)
 		end
+
+		def update_options
+	    @student = Student.find(params[:id])
+	    respond_modal_with @student
+	  end
 
 		private
 			def guardian_params

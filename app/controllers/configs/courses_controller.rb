@@ -1,22 +1,30 @@
 module Configs
 	class CoursesController < ApplicationController
 		before_action :authenticate_user!
+		respond_to :html, :json
 
 		def new
 			@course = Course.new
+			respond_modal_with @course
 		end
 
 		def create
-			@course = Course.create!(course_params)
+			@course = Course.create(course_params)
+			respond_modal_with @course,
+				location: settings_url
 		end
 
 		def edit
 			@course = Course.find(params[:id])
+			respond_modal_with @course
 		end
 
 		def update
 			@course = Course.find(params[:id])
-			@course.update!(course_params)
+			@course.update(course_params)
+			respond_modal_with @course,
+				location: settings_url,
+				notice: "Course Updated Successfully"
 		end
 
 		private

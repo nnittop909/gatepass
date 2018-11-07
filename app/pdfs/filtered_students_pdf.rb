@@ -45,7 +45,7 @@ class FilteredStudentsPdf < Prawn::Document
       if @course.present? and @year_level.blank?
         "LIST OF #{@course.abbreviation} STUDENTS"
       elsif @course.present? and @year_level.present?
-        "LIST OF #{@course.abbreviation} #{@year_level.name} STUDENTS"
+        "LIST OF #{@course.abbreviation} - #{@year_level.name} STUDENTS"
       elsif @course.blank? and @year_level.present?
         "LIST OF #{year_level_title} STUDENTS"
       end

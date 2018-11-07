@@ -41,8 +41,8 @@
             <br>
             <div class="row">
               <div class="col-md-12">
-                <%=link_to "Print (PDF)", report_students_path(format: 'pdf', course_id: @course, year_level_id: @year_level, status: @status), class: "btn btn-info active" if @students.present? and (params[:course_id].present? or params[:year_level_id].present? or params[:status].present?)%>
-                <%=link_to "Export (Excel)", export_students_path(format: :xlsx, course_id: @course, year_level_id: @year_level, status: @status), class: "btn btn-info active" if @students.present? and (params[:course_id].present? or params[:year_level_id].present? or params[:status].present?) %>
+                <%=link_to "Print (PDF)", render_pdf_reports_path(format: 'pdf', course_id: @course, year_level_id: @year_level, status: @status), class: "btn btn-info active" if @students.present? and (params[:course_id].present? or params[:year_level_id].present? or params[:status].present?)%>
+                <%=link_to "Export (Excel)", render_excel_reports_path(format: :xlsx, course_id: @course, year_level_id: @year_level, status: @status), class: "btn btn-info active" if @students.present? and (params[:course_id].present? or params[:year_level_id].present? or params[:status].present?) %>
                 <%= link_to "Reset Filters", students_path, class: 'btn btn-warning pull-right' if (params[:course_id].present? or params[:year_level_id].present? or params[:status].present?) %>
               </div>
             </div>

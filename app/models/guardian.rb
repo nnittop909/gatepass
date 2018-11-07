@@ -2,7 +2,7 @@ class Guardian < ApplicationRecord
 
 	has_one :address, dependent: :destroy
 	has_many :relationships, dependent: :destroy
-	has_many :users, through: :relationships
+	has_many :students, through: :relationships, class_name: "User"
 
 	accepts_nested_attributes_for :address
 

@@ -1,14 +1,18 @@
 module Students
 	class CoursesController < ApplicationController
 		before_action :authenticate_user!
+		respond_to :html, :json
 
 		def edit
 			@student = Student.find(params[:student_id])
+			respond_modal_with @student
 		end
 
 		def update
 			@student = Student.find(params[:student_id])
-			@student.update!(course_params)
+			@student.update(course_params)
+			respond_modal_with @student,
+				location: info_student_path(@student)
 		end
 
 		private
