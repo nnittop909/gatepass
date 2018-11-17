@@ -11,5 +11,9 @@ class ApplicationController < ActionController::Base
     options[:responder] = ModalResponder
     respond_with *args, options, &blk
   end
+
+  def current_log_remark(student)
+  	student.log.remark
+  end
   
 end

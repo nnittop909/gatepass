@@ -29,7 +29,7 @@ module Configs
 
 		private
 			def course_params
-				params.require(:course).permit(:name, :abbreviation)
+				params.require(:course).permit(:name, :abbreviation, :course_duration_id)
 			end
 	end
 end

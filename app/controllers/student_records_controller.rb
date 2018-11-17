@@ -9,4 +9,9 @@ class StudentRecordsController < ApplicationController
       redirect_to settings_url, notice: 'Invalid Excel File.'
     end
   end
+
+  def delete_all
+  	Student.destroy_all
+  	redirect_to settings_url, notice: 'Student Records cleared successfully.'
+  end
 end

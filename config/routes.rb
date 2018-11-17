@@ -25,8 +25,9 @@ Rails.application.routes.draw do
     match "/render_excel" => "reports#render_excel", via: [:get], on: :collection
   end
 
-  resources :student_records, only: [:upload] do
-    match "/upload" => "students_records#upload", via: [:get], on: :collection
+  resources :student_records, only: [:upload, :delete_all] do
+    match "/upload" => "student_records#upload", via: [:post], on: :collection
+    match "/delete_all" => "student_records#delete_all", via: [:get], on: :collection
   end
 
   resources :employees do

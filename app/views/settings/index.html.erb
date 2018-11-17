@@ -96,6 +96,25 @@
 	      <% end %>
 			</div>
 		</div>
+		<div class="card">
+			<div class="card-header">
+				<div class="row">
+					<div class="col-md-8 col-sm-8">
+						<div class="card-title">
+							<div class="title">Clear Student Records</div>
+							<div class="description">Delete all student records.</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4">
+						<div class="pull-right card-action">
+							<% if @students.present? %>
+								<%= link_to "Perform", delete_all_student_records_path, class: "btn btn-danger", data: {confirm: "These action cannot be undone! Are you sure to delete all student records?"} %>
+				      <% end %>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>	
 <script type="text/javascript">

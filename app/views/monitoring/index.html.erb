@@ -18,46 +18,37 @@
 <div class="row">
   <br>
   <div class="col-md-5">
-      <% if @user.blank? %>
-        <%=image_tag("unknown-user.gif", class: "img-rounded img-responsive img-monitoring") %>
-        <!-- <div class="monitoring-name-overlay">
-          <h1 class="text-center text-red">
-            No record found!
-          </h1>
-        </div> -->
+    <% if @user.blank? %>
+      <%=image_tag("unknown-user.gif", class: "img-rounded img-responsive img-monitoring") %>
+    <% else %>
+      <% if @user.profile_photo.blank? %> 
+        <%=image_tag("default.png", class: "img-rounded img-responsive img-monitoring", ) %>
       <% else %>
-        <% if !@user.record_status.nil? %>
-          <!-- <div class="monitoring-status-overlay">
-            <h1 class="text-center text-red">
-              <%#= @user.record_status %>
-            </h1>
-          </div> -->
-        <% end %>
-        <% if @user.profile_photo.blank? %> 
-          <%=image_tag("default.png", class: "img-rounded img-responsive img-monitoring", ) %>
-        <% else %>
-          <%= image_tag @user.profile_photo.avatar.url, class: "img-rounded img-responsive img-monitoring"%>
-        <% end %>
-        <!-- <div class="monitoring-name-overlay">
-          <h1 class="text-center text-white">
-            <b><%#=@user.full_name.try(:upcase)%></b>
-          </h1>
-        </div> -->
+        <%= image_tag @user.profile_photo.avatar.url, class: "img-rounded img-responsive img-monitoring"%>
       <% end %>
+    <% end %>
   </div>
   <div class="col-md-7">
     <br>
     <div class="card-glass">
       <% if @user.present? %>
-        <div class="card-header">
-          <h3 class="card-title bottom-margin-zero text-red">
-            <b><%= @user.record_status.nil? ? '' : @user.record_status %></b>
-          </h3>
+        <div class="card-body">
+          <p class="text-white bottom-margin-zero" style="font-size: 28px;">
+            <%= "You are #{@user.log_remark.titleize.downcase} @" %>
+            <span style="font-size: 32px;">
+              <%= "#{@user.log_time.strftime('%I:%M %p')}" %>
+            </span>
+          </p>
         </div>
         <hr class="zero-margin">
       <% end %>
       <div class="card-body">
         <% if @user.present? %>
+          <% if !@user.record_status.nil? %>
+            <h3 class="card-title bottom-margin-zero text-red">
+              <b><%= @user.record_status.nil? ? '' : @user.record_status %></b>
+            </h3>
+          <% end %>
           <table class="">
             <tr>
               <td style="width:180px"><h3 class="card-title text-white">ID Number:</h3></td>
@@ -72,10 +63,6 @@
               <td><h3 class="card-title text-white"><b><%= @user.course_and_year || "N/A" %></b></h3></td>
             </tr>
             <tr>
-              <td style="width:180px"><h3 class="card-title text-white">Date of Birth:</h3></td>
-              <td><h3 class="card-title text-white"><b><%= @user.birthdate.strftime("%B %e, %Y") || "N/A" %></b></h3></td>
-            </tr>
-            <tr>
               <td style="width:180px"><h3 class="card-title text-white">Address:</h3></td>
               <td><h3 class="card-title text-white"><b><%= @user.try(:address_details) || "N/A" %></b></h3></td>
             </tr>
@@ -86,7 +73,7 @@
               Monitor Mode
             </h1>
             <h4 class="text-white">
-              Scan Student ID Card for identification.
+              Scan Student ID Card.
             </h4>
           <% end %>
           <% if @user.blank? && @tag_uid.present? %>

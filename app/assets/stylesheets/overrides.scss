@@ -114,6 +114,10 @@
 .card-glass.profile .card-footer {
   padding: 0.5em 0.8em; }
 
+.card-footer {
+  padding: 0.5em 0.8em;
+}
+
 .input-group-addon {
   padding: 0;
   font-size: 14px;
@@ -136,6 +140,10 @@
 
 .no-bottom-margin {
   margin-bottom: 0;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
 }
 
 input[type="checkbox"] {

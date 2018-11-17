@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_02_044816) do
+ActiveRecord::Schema.define(version: 2018_11_16_111612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -31,11 +31,20 @@ ActiveRecord::Schema.define(version: 2018_11_02_044816) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "course_durations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.decimal "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "courses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
+    t.uuid "course_duration_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_duration_id"], name: "index_courses_on_course_duration_id"
   end
 
   create_table "display_times", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -51,6 +60,15 @@ ActiveRecord::Schema.define(version: 2018_11_02_044816) do
     t.string "mobile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "remark"
+    t.datetime "log_time"
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
   create_table "opennings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -98,7 +116,7 @@ ActiveRecord::Schema.define(version: 2018_11_02_044816) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "join_date"
+    t.date "date_enrolled"
     t.string "full_name"
     t.string "type"
     t.integer "role"
@@ -114,12 +132,15 @@ ActiveRecord::Schema.define(version: 2018_11_02_044816) do
 
   create_table "year_levels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
+    t.integer "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "addresses", "guardians"
   add_foreign_key "addresses", "users"
+  add_foreign_key "courses", "course_durations"
+  add_foreign_key "logs", "users"
   add_foreign_key "profile_photos", "users"
   add_foreign_key "relationships", "guardians"
   add_foreign_key "relationships", "users"

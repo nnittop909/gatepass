@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_one :relationship, dependent: :destroy
   has_one :guardian, through: :relationship
   has_one :profile_photo, dependent: :destroy
+  has_one :log, dependent: :destroy
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :profile_photo
@@ -35,11 +36,13 @@ class User < ApplicationRecord
                       allow_blank: true, if: :user_is_a_student?
     
   
-  before_save :set_full_name, :set_join_date
+  before_save :set_full_name
+  before_save :set_date_enrolled, on: :create
   after_save :set_profile_photo, on: :create
   before_validation :set_role, :set_email_password
 
   delegate :details, to: :address, prefix: true, allow_nil: true
+  delegate :time, :remark, to: :log, prefix: true, allow_nil: true
 
   def user_is_a_student?
     self.class.name == "Student"
@@ -103,6 +106,18 @@ class User < ApplicationRecord
     end
   end
 
+  def log_status
+    "You are #{log_remark.titleize.downcase} this #{log_time.strftime('%I:%M %p')}!" if log.present?
+  end
+
+  def logged_out?
+    log.signed_out? == true
+  end
+
+  def logged_in?
+    log.signed_out? == false
+  end
+
   private
 
   def set_role
@@ -136,10 +151,10 @@ class User < ApplicationRecord
     end
   end
 
-  def set_join_date
-    if self.join_date.nil?
+  def set_date_enrolled
+    if self.date_enrolled.nil?
       openning = Openning.first.openning_date
-      self.join_date = openning
+      self.date_enrolled = openning
     end
   end
 

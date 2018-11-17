@@ -3,6 +3,7 @@
 	  <%= f.error_notification %>
 	  <%= f.input :name %>
 	  <%= f.input :abbreviation %>
+	  <%= f.input :course_duration_id, collection: CourseDuration.all.map { |d| [d.name, d.id]} %>
 	</div>
 	<div class="modal-footer">
 	  <%=f.submit @course.persisted? ? "Update" : "Save", class: "btn btn-primary" %>
