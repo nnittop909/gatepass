@@ -28,15 +28,13 @@ class User < ApplicationRecord
   validates :course_id, :year_level_id, :gender, :birthdate, presence: true, if: :user_is_a_student?
   validates :id_number, :tag_uid, presence: true, if: :user_is_a_student?
   validates :id_number, uniqueness: true, if: :id_number_is_present?
-  validates :tag_uid, format: { with: /\A[0-9]+\z/, message: "is invalid." },
-                      length: { maximum: 10, wrong_length: "should be 10 characters max." },
-                      uniqueness: true, if: :tag_uid_is_present?
+  validates :tag_uid, numericality: true, if: :tag_uid_is_present?
   validates :mobile, format: { with: /\A[0-9]+\z/, message: "number is invalid" }, 
                       length: { is: 11, wrong_length: "number should be 11 characters." }, 
                       allow_blank: true, if: :user_is_a_student?
     
   
-  before_save :set_full_name
+  before_save :set_full_name, :set_tag_uid
   before_save :set_join_date, on: :create
   after_save :set_profile_photo, on: :create
   before_validation :set_role, :set_email_password, on: :create
@@ -148,6 +146,10 @@ class User < ApplicationRecord
     self.first_name = first_name.upcase
     self.middle_name = middle_name.upcase if middle_name.present?
     self.last_name = last_name.upcase
+  end
+
+  def set_tag_uid
+    self.tag_uid = tag_uid.to_i if user_is_a_student?
   end
 
   def set_profile_photo

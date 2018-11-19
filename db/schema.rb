@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
     t.integer "gender"
     t.datetime "birthdate"
     t.string "mobile"
-    t.string "tag_uid"
+    t.integer "tag_uid"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
