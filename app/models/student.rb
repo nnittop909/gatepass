@@ -46,49 +46,5 @@ class Student < User
       "N/A"
     end
   end
-
-  # def self.import(file)
-  #   CSV.foreach(file.path, headers: true) do |row|
-  #     Student.where(id_number: row['id_number'], first_name: row['first_name'], last_name: row['last_name']).first_or_create do |student|
-  #       student.course_id = Course.find_by(abbreviation: row['course']).id
-  #       student.year_level_id = YearLevel.find_by(name: row['year_level']).id
-  #       student.middle_name = row['middle_name']
-  #       student.gender = row['gender'].to_s.downcase
-  #       student.birthdate = row['birthdate']
-  #       student.mobile = row['mobile']
-  #       student.tag_uid = row['card_uid']
-
-  #       student.create_address(sitio: row['sitio'], 
-  #           barangay: row['barangay'], 
-  #           municipality: row['municipality'], 
-  #           province: row['province'])
-  #     end
-  #   end
-  # end
-
-  def self.import(file)
-    spreadsheet = Roo::Spreadsheet.open(file.path)
-    header = spreadsheet.row(2)
-    (3..spreadsheet.last_row).each do |i|
-      row = Hash[[header, spreadsheet.row(i)].transpose]
-      student = Student.where(id_number: row['ID NUMBER'], tag_uid: row['CARD UID'], first_name: row['FIRST NAME'].upcase, last_name: row['LAST NAME'].upcase).first_or_create! do |s|
-      
-        s.course_id = Course.find_by(abbreviation: row['COURSE']).id
-        s.year_level_id = YearLevel.find_by(name: row['YEAR LEVEL']).id
-        s.middle_name = row['MIDDLE NAME']
-        s.gender = row['GENDER'].to_s.downcase
-        s.birthdate = Date.parse(row['BIRTHDATE'].to_s) if row['BIRTHDATE'].present?
-        s.mobile = row['MOBILE']
-      end
-      if student.address.blank?
-        Address.create(
-          user_id: student.id,
-          sitio: row['SITIO'], 
-          barangay: row['BARANGAY'], 
-          municipality: row['MUNICIPALITY'], 
-          province: row['PROVINCE'])
-      end
-    end
-  end
   
 end

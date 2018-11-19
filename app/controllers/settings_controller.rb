@@ -5,6 +5,7 @@ class SettingsController < ApplicationController
 		@courses = Course.all
 		@users = User.admin.all
 		@students = Student.all
-		@display_time = DisplayTime.last
+		@config = SystemConfig.last
+		authorize :setting, :index?
 	end
 end

@@ -44,7 +44,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       # t.datetime :locked_at
 
       t.timestamps null: false
-      t.date :date_enrolled
+      t.date :join_date
       t.string :full_name
       t.string :type, index: true
       t.integer :role

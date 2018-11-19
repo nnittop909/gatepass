@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
 	get "monitoring/index"
-  get "dashboard/index"
 
 	resources :students do
     resources :guardians, module: 'students' do
@@ -30,17 +29,20 @@ Rails.application.routes.draw do
     match "/delete_all" => "student_records#delete_all", via: [:get], on: :collection
   end
 
+  resources :student_photos, only: [:upload] do
+    match "/upload" => "student_photos#upload", via: [:post], on: :collection
+  end
+
   resources :employees do
     get :autocomplete_employee_full_name, on: :collection
   end
 
-  resources :settings, only: [:index]
-  resources :upload_student_photos, only: [:create]
-  
-  namespace :configs do
-    resources :courses
-    resources :display_times
+  namespace :config do
+    resources :courses, only: [:new, :create, :edit, :update]
+    resources :system_configs, only: [:edit, :update]
   end
+
+  resources :settings, only: [:index]
 
   devise_for :users, :controllers => { :registrations => "users", sessions: "users/sessions" }
   

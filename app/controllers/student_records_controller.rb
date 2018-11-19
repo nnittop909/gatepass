@@ -3,15 +3,16 @@ class StudentRecordsController < ApplicationController
   
   def upload
     begin
-      Student.import(params[:file])
+      RecordUploader.new(params[:file]).import!
       redirect_to settings_url, notice: 'Students Imported'
     rescue
-      redirect_to settings_url, notice: 'Invalid Excel File.'
+      redirect_to settings_url, alert: 'Invalid Excel File.'
     end
   end
 
   def delete_all
-  	Student.destroy_all
-  	redirect_to settings_url, notice: 'Student Records cleared successfully.'
+  	@students = Student.destroy_all
+    authorize @students
+  	redirect_to settings_url, alert: 'Student Records cleared successfully.'
   end
 end

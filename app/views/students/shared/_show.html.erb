@@ -19,19 +19,21 @@
                   <% else %>
                       <%= image_tag @student.profile_photo.avatar.url, height: 160, width: 160, class: 'img-square img-rounded center-block image'%>
                   <% end %>
-                  <%= simple_form_for ProfilePhoto.new, url: student_profile_photos_path(@student) do |f| %>
-                    <%= f.input :user_id, input_html: {value: @student.id}, as: :hidden %>
-                    <%= f.input :avatar, as: :file, label: false, input_html: { class: 'choose-btn center-block' } %>
-                    <div class="overlay option-overlay">
-                      <div class="col-xs-6 text-center">
-                        <a href="" title="Update Photo"><span id="browse" class="text-white fa fa-photo fa-lg"></span></a>
+                  <% if !current_user.employee? %>
+                    <%= simple_form_for ProfilePhoto.new, url: student_profile_photos_path(@student) do |f| %>
+                      <%= f.input :user_id, input_html: {value: @student.id}, as: :hidden %>
+                      <%= f.input :avatar, as: :file, label: false, input_html: { class: 'choose-btn center-block' } %>
+                      <div class="overlay option-overlay">
+                        <div class="col-xs-6 text-center">
+                          <a href="" title="Update Photo"><span id="browse" class="text-white fa fa-photo fa-lg"></span></a>
+                        </div>
+                        <div class="col-xs-6 text-center">
+                          <%= link_to edit_student_status_path(@student), title: 'Update Status', data: {modal: true} do %>
+                            <span class="text-white fa fa-pencil-square-o fa-lg"></span>
+                          <% end %>
+                        </div>
                       </div>
-                      <div class="col-xs-6 text-center">
-                        <%= link_to edit_student_status_path(@student), title: 'Update Status', data: {modal: true} do %>
-                          <span class="text-white fa fa-pencil-square-o fa-lg"></span>
-                        <% end %>
-                      </div>
-                    </div>
+                    <% end %>
                   <% end %>
                 </div>
               </div>
@@ -44,20 +46,26 @@
                   </h4>
                   <h5 class="course-details">
                     Course: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= @student.course_and_year %>
-                    <%= link_to edit_student_course_path(@student), title: 'Update Course/Year level', data: {modal: true}, class: "pull-right" do %>
-                      <span class="course-link"><i class="fa fa-pencil-square-o"></i></span>
+                    <% if !current_user.employee? %>
+                      <%= link_to edit_student_course_path(@student), title: 'Update Course/Year level', data: {modal: true}, class: "pull-right" do %>
+                        <span class="course-link"><i class="fa fa-pencil-square-o"></i></span>
+                      <% end %>
                     <% end %>
                   </h5>
                   <h5 class="id-number-details">
                     ID Number: &nbsp&nbsp&nbsp&nbsp<%= @student.id_number %>
-                    <%= link_to edit_student_id_number_path(@student), title: 'Update ID Number', data: {modal: true}, class: "pull-right" do %>
-                      <span class="id-number-link"><i class="fa fa-pencil-square-o"></i></span>
+                    <% if !current_user.employee? %>
+                      <%= link_to edit_student_id_number_path(@student), title: 'Update ID Number', data: {modal: true}, class: "pull-right" do %>
+                        <span class="id-number-link"><i class="fa fa-pencil-square-o"></i></span>
+                      <% end %>
                     <% end %>
                   </h5>
                   <h5 class="id-card-details">
                     Card UID: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= @student.tag_uid %>
-                    <%= link_to edit_student_id_card_path(@student), title: 'Update Card Unique-ID', data: {modal: true}, class: "pull-right" do %>
-                      <span class="id-card-link"><i class="fa fa-pencil-square-o"></i></span>
+                    <% if !current_user.employee? %>
+                      <%= link_to edit_student_id_card_path(@student), title: 'Update Card Unique-ID', data: {modal: true}, class: "pull-right" do %>
+                        <span class="id-card-link"><i class="fa fa-pencil-square-o"></i></span>
+                      <% end %>
                     <% end %>
                   </h5>
                 </div>

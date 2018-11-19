@@ -4,6 +4,12 @@ User.create!(email: 'admin@ifsu.com',
 						first_name: 'Administrator', 
 						last_name: 'User', 
 						role: 'admin')
+User.create!(email: 'employee@ifsu.com', 
+						password: 'employee@ifsu', 
+						password_confirmation: 'employee@ifsu', 
+						first_name: 'Employee', 
+						last_name: 'User', 
+						role: 'employee')
 User.create!(email: 'developer@ifsu.com', 
 						password: 'developer@ifsu', 
 						password_confirmation: 'developer@ifsu', 

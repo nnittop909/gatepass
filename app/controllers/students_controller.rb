@@ -28,10 +28,12 @@ class StudentsController < ApplicationController
 	def new
     @student = Student.new
     @student.build_address
+    authorize @student
   end
   
   def create
     @student = Student.create(create_params)
+    authorize @student
     if @student.save
       redirect_to info_student_path(@student), notice: 'Student registered successfully.'
     else
@@ -41,11 +43,13 @@ class StudentsController < ApplicationController
 
   def edit
     @student = Student.find(params[:id])
+    authorize @student
     respond_modal_with @student
   end
 
   def update
     @student = Student.find(params[:id])
+    authorize @student
     @student.update_attributes(update_params)
     respond_modal_with @student,
       location: info_student_path(@student)

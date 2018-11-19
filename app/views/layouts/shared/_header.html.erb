@@ -27,13 +27,15 @@
             </span>
           <% end %>
         </li>
-        <li>
-          <%= link_to settings_path, title: 'Settings' do %>
-            <span class="fa-stack">
-              <i class="fa fa-gears fa-lg"></i>
-            </span>
-          <% end %>
-        </li>
+        <%# if current_user.admin? || current_user.developer? %>
+          <li>
+            <%= link_to settings_path, title: 'Settings' do %>
+              <span class="fa-stack">
+                <i class="fa fa-gears fa-lg"></i>
+              </span>
+            <% end %>
+          </li>
+        <%# end %>
         <li>
           <% if @student_id.present? %>
             <% if current_page? info_student_path(@student_id) %>

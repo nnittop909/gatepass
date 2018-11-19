@@ -1,6 +1,6 @@
 
 <% if @user.present? || @tag_uid.present? %>
-  <meta http-equiv="refresh" content="<%= @display_time.time %>;url=<%= monitoring_index_path %>" />
+  <meta http-equiv="refresh" content="<%= @config.display_time %>;url=<%= monitoring_index_path %>" />
 <% end %>
 <div class="send-to-back">
 	<%=form_tag monitoring_index_path, autocomplete: 'off', method: :get do %>

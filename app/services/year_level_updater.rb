@@ -6,7 +6,7 @@ class YearLevelUpdater
 
 	def perform!
     @students.each do |student|
-      if (student.date_enrolled...Time.now).count.days >= 1.year
+      if (student.join_date...Time.now).count.days >= 1.year
         if year_level(student) != duration(student)
           update(student)
         end
@@ -27,14 +27,14 @@ class YearLevelUpdater
 	  	YearLevel.find_by(level: year_level(student) + 1)
 	  end
 
-	  def set_date_enrolled(student)
-	  	student.date_enrolled + 1.year
+	  def set_join_date(student)
+	  	student.join_date + 1.year
 	  end
 
 	  def update(student)
 	  	student.update!(
       	year_level: find_year_level(student), 
-      	date_enrolled: set_date_enrolled(student)
+      	join_date: set_join_date(student)
       )
 	  end
 end

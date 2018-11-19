@@ -4,10 +4,14 @@ module Students
 
 		def create
 			@student = Student.find(params[:student_id])
-			if @student.profile_photo.update(profile_photo_params)
-				redirect_to info_student_path(@student), notice: 'Profile photo updated.'
+			authorize @student, policy_class: Students::ProfilePhotoPolicy
+			@profile_photo = @student.profile_photo.update(profile_photo_params)
+			if @profile_photo.save
+				redirect_to info_student_path(@student), 
+				notice: 'Profile photo updated.'
 			else
-				redirect_to info_student_path(@student), notice: @profile_photo.errors
+				redirect_to info_student_path(@student), 
+				alert: "Invalid photo. Make sure to only upload jpg, png, and gif images."
 			end
 		end
 

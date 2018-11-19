@@ -37,9 +37,9 @@ class User < ApplicationRecord
     
   
   before_save :set_full_name
-  before_save :set_date_enrolled, on: :create
+  before_save :set_join_date, on: :create
   after_save :set_profile_photo, on: :create
-  before_validation :set_role, :set_email_password
+  before_validation :set_role, :set_email_password, on: :create
 
   delegate :details, to: :address, prefix: true, allow_nil: true
   delegate :time, :remark, to: :log, prefix: true, allow_nil: true
@@ -133,28 +133,13 @@ class User < ApplicationRecord
   end
 
   def set_email_password
-    if self.student?
-      generated_password = Devise.friendly_token.first(8)
-      if self.email.blank? and self.password.blank?
-        if self.last_name.present? and self.first_name.present?
-          rand_num = 3.times.map{ SecureRandom.random_number(9)}.join.to_s
-          fname_down = self.last_name.gsub(" ","").downcase
-          lname_down = self.first_name.gsub(" ","").downcase
-          self.email = "#{fname_down}#{lname_down}#{rand_num}@#{generated_password}_gatepass.com"
-      		self.password = generated_password
-      		self.password_confirmation = generated_password
-      	end
-      elsif self.email.present? and self.password.blank?
-        self.password = generated_password
-        self.password_confirmation = generated_password
-      end
-    end
+    AccountGenerator.new(self).generate!
   end
 
-  def set_date_enrolled
-    if self.date_enrolled.nil?
-      openning = Openning.first.openning_date
-      self.date_enrolled = openning
+  def set_join_date
+    if self.join_date.nil?
+      deployment_date = SystemConfig.first.deployment_date
+      self.join_date = deployment_date
     end
   end
 
@@ -167,7 +152,7 @@ class User < ApplicationRecord
 
   def set_profile_photo
     if profile_photo.nil?
-      self.create_profile_photo(avatar: File.open(Rails.root.join('app', 'assets', 'images', 'default.png')))
+      self.create_profile_photo(avatar: File.open(Rails.root.join('app', 'assets', 'images', 'default.png')), avatar_file_name: 'default-image.png')
     end
   end
 

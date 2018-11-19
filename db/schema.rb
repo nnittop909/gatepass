@@ -47,12 +47,6 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
     t.index ["course_duration_id"], name: "index_courses_on_course_duration_id"
   end
 
-  create_table "display_times", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "number_of_seconds"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "guardians", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "middle_name"
@@ -69,12 +63,6 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_logs_on_user_id"
-  end
-
-  create_table "opennings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "openning_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "profile_photos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -98,6 +86,14 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
+  create_table "system_configs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.integer "display_time"
+    t.datetime "deployment_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "id_number"
     t.uuid "course_id"
@@ -116,7 +112,7 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "date_enrolled"
+    t.date "join_date"
     t.string "full_name"
     t.string "type"
     t.integer "role"

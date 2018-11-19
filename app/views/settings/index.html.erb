@@ -8,7 +8,7 @@
 							<h4>Courses</h4>
 						</div>
 						<div class="col-md-6 col-sm-6">
-							<%=link_to "Add Course", new_configs_course_path, class: 'btn btn-primary pull-right', title: 'New Course', data: {modal: true} %>
+							<%=link_to "Add Course", new_config_course_path, class: 'btn btn-primary pull-right', title: 'New Course', data: {modal: true} %>
 						</div>
 					</div>
 	      </div>
@@ -19,7 +19,7 @@
 						<tr>
 							<td><%= course.abbreviation %> - <%= course.name %></td>
 							<td>
-								<%= link_to edit_configs_course_path(course), data: {modal: true} do %>
+								<%= link_to edit_config_course_path(course), data: {modal: true} do %>
 									<span class="fa fa-pencil-square-o"></span>
 								<% end %>
 							</td>
@@ -38,10 +38,10 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-8 col-sm-8">
-						<h4 class="card-title no-top-margin"><%= @display_time.time.to_s + " Seconds" if @display_time.present? %></h4>
+						<h4 class="card-title no-top-margin"><%= @config.display_time.to_s + " Seconds" if @config.present? %></h4>
 					</div>
 					<div class="col-md-4 col-sm-4">
-						<%=link_to "Set", @display_time.nil? ? new_configs_display_time_path : edit_configs_display_time_path(@display_time), class: 'btn btn-primary pull-right', title: 'Set Display Time', data: {modal: true} %>
+						<%=link_to "Set", edit_config_system_config_path(@config), class: 'btn btn-primary pull-right', title: 'Set Display Time', data: {modal: true} %>
 					</div>
 				</div>
 			</div>
