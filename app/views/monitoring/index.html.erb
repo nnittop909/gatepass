@@ -34,7 +34,7 @@
       <% if @user.present? %>
         <div class="card-body">
           <p class="text-white bottom-margin-zero" style="font-size: 28px;">
-            <%= "You are #{@user.log_remark.titleize.downcase} @" %>
+            <%= "You've #{@user.log_remark.titleize.downcase} @" %>
             <span style="font-size: 32px;">
               <%= "#{@user.log_time.strftime('%I:%M %p')}" %>
             </span>
