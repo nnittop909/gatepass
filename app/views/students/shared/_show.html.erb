@@ -61,9 +61,9 @@
                     <% end %>
                   </h5>
                   <h5 class="id-card-details">
-                    Card UID: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= @student.tag_uid %>
+                    Card UID: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= @student.rfid_uid %>
                     <% if !current_user.employee? %>
-                      <%= link_to edit_student_id_card_path(@student), title: 'Update Card Unique-ID', data: {modal: true}, class: "pull-right" do %>
+                      <%= link_to edit_student_rfid_card_path(@student), title: 'Update Card Unique-ID', data: {modal: true}, class: "pull-right" do %>
                         <span class="id-card-link"><i class="fa fa-pencil-square-o"></i></span>
                       <% end %>
                     <% end %>

@@ -11,7 +11,7 @@ class Student < User
                         :middle_name, 
                         :last_name,
                         :id_number,
-                        :tag_uid,
+                        :rfid_uid,
                         :mobile
                       ],
                   :associated_against => 
@@ -24,8 +24,8 @@ class Student < User
                             ]
                         }
 
-  belongs_to :course
-  belongs_to :year_level
+  belongs_to :course, class_name: "Settings::Course"
+  belongs_to :year_level, class_name: "Settings::YearLevel"
 
   scope :by_course, -> (course_id) { where course_id: course_id }
   scope :by_year_level, -> (year_level_id) { where year_level_id: year_level_id }

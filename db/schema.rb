@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "configurations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.integer "display_time"
+    t.datetime "deployment_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "course_durations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.decimal "duration"
@@ -86,14 +94,6 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
-  create_table "system_configs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.integer "display_time"
-    t.datetime "deployment_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "id_number"
     t.uuid "course_id"
@@ -105,23 +105,23 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
     t.integer "gender"
     t.datetime "birthdate"
     t.string "mobile"
-    t.integer "tag_uid"
+    t.integer "rfid_uid"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.date "join_date"
     t.string "full_name"
     t.string "type"
     t.integer "role"
     t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_users_on_course_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["id_number"], name: "index_users_on_id_number", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["tag_uid"], name: "index_users_on_tag_uid", unique: true
+    t.index ["rfid_uid"], name: "index_users_on_rfid_uid", unique: true
     t.index ["type"], name: "index_users_on_type"
     t.index ["year_level_id"], name: "index_users_on_year_level_id"
   end

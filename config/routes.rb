@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 	get "monitoring/index"
+  get "help_desk/index"
 
 	resources :students do
     resources :guardians, module: 'students' do
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
     resources :mobiles, only: [:edit, :update], module: 'students'
     resources :emails, only: [:edit, :update], module: 'students'
     resources :id_numbers, only: [:edit, :update], module: 'students'
-    resources :id_cards, only: [:edit, :update], module: 'students'
+    resources :rfid_cards, only: [:edit, :update], module: 'students'
 		get :autocomplete_student_full_name, on: :collection
     match "/info" => "students#info", as: :info, via: [:get], on: :member
 	end
@@ -22,24 +23,27 @@ Rails.application.routes.draw do
     match "/render_pdf" => "reports#render_pdf", via: [:get], on: :collection
     match "/student_template" => "reports#student_template", via: [:get], on: :collection
     match "/render_excel" => "reports#render_excel", via: [:get], on: :collection
+    match "/export_student_records" => "reports#export_student_records", via: [:get], on: :collection
   end
 
-  resources :student_records, only: [:upload, :delete_all] do
-    match "/upload" => "student_records#upload", via: [:post], on: :collection
-    match "/delete_all" => "student_records#delete_all", via: [:get], on: :collection
-  end
+  namespace :migrations do
+    resources :student_records, only: [:upload, :delete_all] do
+      match "/upload" => "student_records#upload", via: [:post], on: :collection
+      match "/delete_all" => "student_records#delete_all", via: [:get], on: :collection
+    end
 
-  resources :student_photos, only: [:upload] do
-    match "/upload" => "student_photos#upload", via: [:post], on: :collection
+    resources :student_photos, only: [:upload] do
+      match "/upload" => "student_photos#upload", via: [:post], on: :collection
+    end
   end
 
   resources :employees do
     get :autocomplete_employee_full_name, on: :collection
   end
 
-  namespace :config do
+  namespace :system_settings do
     resources :courses, only: [:new, :create, :edit, :update]
-    resources :system_configs, only: [:edit, :update]
+    resources :configurations, only: [:edit, :update]
   end
 
   resources :settings, only: [:index]

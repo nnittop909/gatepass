@@ -10,8 +10,8 @@ class StudentsController < ApplicationController
   end
 
 	def index
-		@courses = Course.all
-		@year_levels = YearLevel.all
+		@courses = Settings::Course.all
+		@year_levels = Settings::YearLevel.all
 		@course = params[:course_id] if params[:course_id].present?
 		@year_level = params[:year_level_id] if params[:year_level_id].present?
     @status = params[:status] if params[:status].present?
@@ -68,7 +68,7 @@ class StudentsController < ApplicationController
     def create_params
       params.require(:student).permit(:id_number, :course_id, :year_level_id,
                 :first_name, :middle_name, :last_name, :role, :status,
-                :birthdate, :gender, :mobile, :tag_uid,
+                :birthdate, :gender, :mobile, :rfid_uid,
                 address_attributes: [:sitio, :barangay, :municipality, :province])
     end
 

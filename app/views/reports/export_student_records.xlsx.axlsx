@@ -1,0 +1,23 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+  header_style = style.add_style(:bg_color => "ded4d3", b: true, 
+    alignment: {horizontal: :center}, :border => { :style => :thin, :color =>"000000", :edges => [:left, :right, :top, :bottom] })
+  title_style = style.add_style(:bg_color => "ded4d3", :sz => 14, b: true, 
+    alignment: {horizontal: :center}, :border => { :style => :thin, :color =>"000000", :edges => [:left, :right, :top, :bottom] })
+  content_style = style.add_style(:sz => 12)
+
+	wb.add_worksheet(name: "Student Records") do |sheet|
+    title_row = sheet.add_row ["BASIC INFORMATION", nil, nil, nil, nil, nil, nil, nil, nil, nil, 
+      "ADDRESS DETAILS", nil, nil, nil], :height => 20, style: title_style
+    sheet.add_row ["ID NUMBER", "COURSE", "YEAR LEVEL", "LAST NAME", "FIRST NAME", "MIDDLE NAME", "GENDER", "BIRTHDATE", "MOBILE", "RFID UID", "SITIO", "BARANGAY", "MUNICIPALITY", "PROVINCE"], :style => header_style
+
+		@students.each do |student|
+    	sheet.add_row [student.id_number, student.course, student.year_level, 
+        student.last_name, student.first_name, student.middle_name,
+        student.try(:gender).try(:titleize), student.try(:birthdate).try(:strftime, "%B %e, %Y"), student.try(:mobile).to_s, student.rfid_uid, 
+        student.address.try(:sitio).try(:camelcase), student.address.try(:barangay).try(:camelcase), student.address.try(:municipality).try(:camelcase), student.address.try(:province).try(:camelcase)], style: content_style
+    end
+    sheet.merge_cells title_row.cells[(0..9)]
+    sheet.merge_cells title_row.cells[(10..14)]
+	end
+end

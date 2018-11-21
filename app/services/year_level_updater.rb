@@ -24,7 +24,7 @@ class YearLevelUpdater
 	  end
 
 	  def find_year_level(student)
-	  	YearLevel.find_by(level: year_level(student) + 1)
+	  	Settings::YearLevel.find_by(level: year_level(student) + 1)
 	  end
 
 	  def set_join_date(student)

@@ -9,10 +9,10 @@
     <%= f.error_notification %>
     <div class="row">
       <div class="col-md-6 col-xs-6">
-        <%= f.input :course_id, collection: Course.all.map {|c| [c.abbreviation, c.id]}, prompt: '-- Choose Course --' %>
+        <%= f.input :course_id, collection: Settings::Course.all.map {|c| [c.abbreviation, c.id]}, prompt: '-- Choose Course --' %>
       </div>
       <div class="col-md-6 col-xs-6">
-        <%= f.input :year_level_id, collection: YearLevel.all.map {|c| [c.name, c.id]}, prompt: '-- Choose Year Level --' %>
+        <%= f.input :year_level_id, collection: Settings::YearLevel.all.map {|c| [c.name, c.id]}, prompt: '-- Choose Year Level --' %>
       </div>
     </div>
   </div>

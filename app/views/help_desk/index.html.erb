@@ -1,0 +1,332 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">
+					<h4 class="title">
+						<span class="fa-stack">
+              <i class="fa fa-circle-thin fa-stack-2x"></i>
+              <i class="fa fa-question fa-stack-1x"></i>
+            </span>
+            Help Desk
+					</h4>
+				</div>
+			</div>
+			<div class="card-body">
+			  <div class="panel-group" id="accordion">
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#search_student">
+				          Search Student
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="search_student" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      	<p>
+				      		<span class="text-muted">
+				      			You can search students by:
+				      		</span>
+				      		<span>
+				      			First name, Last name, Middle name and ID Number
+				      		</span>
+				      	</p>
+				      	<p>
+				      		<span class="text-muted">
+				      			You can also use the search to query students using their address by:
+				      		</span>
+				      		<span>
+				      			Sitio, Barangay, Municipality and Province
+				      		</span>
+				      	</p>
+				      </div>
+				    </div>
+				  </div>
+
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#adding_and_editing_course">
+				          Adding and Editing Course
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="adding_and_editing_course" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      	<div class="row">
+				      		<div class="col-md-6">
+				      			<h5 class="margin-bottom-zero">Adding Course</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Settings page.</p>
+						      			<p>2. On the Courses panel, click on "New Course".</p>
+						      			<p>3. Fill up the form and click on save button.</p>
+						      		</div>
+						      	</div>
+				      		</div>
+				      		<div class="col-md-6">
+				      			<h5 class="margin-bottom-zero">Editing Course</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Settings page.</p>
+						      			<p>2. On the Courses panel, look for the course you wish to edit.</p>
+						      			<p>3. On the right side of the course, click on <cite title="Update Course"><i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      			<p>4. Form pops up and once you're done editing, click on update button</p>
+						      		</div>
+						      	</div>
+				      		</div>
+				      	</div>
+				      </div>
+				    </div>
+				  </div>
+
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#add_students">
+				          Uploading Student Records
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="add_students" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      	<h5 class="margin-bottom-zero">
+				      		You can upload student records using excel file. But before doing so please download the template to start fill in data.
+				      	</h5>
+				      	<div class="row">
+				      		<div class="col-md-6">
+				      			<h5 class="margin-bottom-zero">Downloading Template</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Settings page.</p>
+						      			<p>2. On the Upload Student Records panel, click on "Download Template".</p>
+						      			or
+						      			<%=link_to "Download Template", student_template_reports_path(format: :xlsx), class: 'btn btn-success text-center' %> right now.<br><br>
+						      			<h5>Rules when filling in data:</h5>
+						      			<p>
+						      				<span class="text-muted">&nbsp &nbsp
+						      					1. Use abbreviation when filling in course. 
+						      					<br>&nbsp &nbsp &nbsp &nbsp	e.g. "BSCpE"
+						      					<br>&nbsp &nbsp
+						      					2. Use roman numerals when filling in year level. 
+						      					<br>&nbsp &nbsp &nbsp &nbsp	e.g. "III"
+						      					<br>&nbsp &nbsp
+						      					3. Follow format when filling in birthdate: 
+						      					<br>&nbsp &nbsp &nbsp &nbsp	"2000-12-30" or "December 30, 2000"
+						      					<br>&nbsp &nbsp
+						      					4. Follow format when filling in gender: 
+						      					<br>&nbsp &nbsp &nbsp &nbsp	"Male" or "M" or "Female" or "F"
+						      					<br>&nbsp &nbsp
+						      					5. Fill in mobile number(MOBILE) w/ or w/o the first digit "0".
+						      					<br>&nbsp &nbsp &nbsp &nbsp	e.g. "09091234567" or "9091234567"
+						      					<br>&nbsp &nbsp
+						      					6. Use RFID Reader to scan RFID UID.
+						      				</span>
+						      			</p>
+						      			<h5 class="margin-bottom-zero text-muted">*Notes</h5>
+						      			<p class="text-muted">&nbsp &nbsp &nbsp
+						      				If a student has no mobile number, leave it blank.
+						      				<br>&nbsp &nbsp &nbsp
+						      				It is required to fill in the following:
+						      				<br>&nbsp &nbsp &nbsp &nbsp &nbsp
+						      				(ID NUMBER, COURSE, YEAR LEVEL, FIRST NAME,
+						      				<br>&nbsp &nbsp &nbsp &nbsp &nbsp
+						      				LAST NAME, MIDDLE NAME, GENDER, BIRTHDATE,
+						      				<br>&nbsp &nbsp &nbsp &nbsp &nbsp
+						      				RFID UID, MUNICIPALITY, PROVINCE)
+						      			</p>
+						      		</div>
+						      	</div>
+				      		</div>
+				      		<div class="col-md-6">
+				      			<h5 class="margin-bottom-zero">Uploading Steps</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Settings page.</p>
+						      			<p>2. On the Upload Student Records panel, click on "Choose File".</p>
+						      			<p>3. Navigate to the path where you have saved the template(filled with data) earlier.</p>
+						      			<p>4. Click on the file, click "Open" below or double-click on the file.</p>
+						      			<p>5. Click on "Import".</p>
+						      		</div>
+						      	</div>
+				      		</div>
+				      	</div>
+				      </div>
+				    </div>
+				  </div>
+
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#uploading_student_photos">
+				          Uploading Student Photos
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="uploading_student_photos" class="panel-collapse collapse">
+				      <div class="panel-body">
+				        <h5>
+				      		You can upload multiple student photos. But before doing so, please rename each photo to the corresponding student's ID Number.
+				      	</h5>
+				      	<p class="text-muted">
+				      		Tips: Select photos by course and put it in a folder named as their course. Organizing photos by course is a nice way to divide it into chunks. That way, it will optimize the uploading proccess.
+				      	</p>
+				      	<h5 class="margin-bottom-zero">Uploading Steps</h5>
+		      			<div class="row"><div class="col-md-1"></div>
+				      		<div class="col-md-11">
+				      			<p>1. Go to Settings page.</p>
+				      			<p>2. On the Upload Student Photos panel, click on "Choose File".</p>
+				      			<p>3. Navigate to the path where you have saved the photos.</p>
+				      			<p>4. Select all photos and click on open button.</p>
+				      			<p>5. Click on "Import".</p>
+				      		</div>
+				      	</div>
+				      	<h5 class="margin-bottom-zero text-muted">
+				      		Note: Make sure to upload jpg, jpeg, png and gif images only. Other image types not listed are not supported.
+				      	</h5>
+				      </div>
+				    </div>
+				  </div>
+
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#updating_student_record">
+				          Updating Student Record
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="updating_student_record" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      	<div class="row">
+				      		<div class="col-md-6">
+						      	<h5 class="margin-bottom-zero">Updating Photo</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Students page.</p>
+						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>3. On the list of search result, click on the student you wish to update.</p>
+						      			<p>4. Align cursor on the photo and click <cite title="Update Photo"> <i class="fa fa-photo fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      	<h5 class="margin-bottom-zero">Updating Status</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Students page.</p>
+						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>3. On the list of search result, click on the student you wish to update.</p>
+						      			<p>4. Align cursor on the photo and click <cite title="Update Status"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      	<h5 class="margin-bottom-zero">Updating Course and Year Level</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Students page.</p>
+						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>3. On the list of search result, click on the student you wish to update.</p>
+						      			<p>4. Below the full name. Align cursor on "Course" and click <cite title="Update Course"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      	<h5 class="margin-bottom-zero">Updating ID Number</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Students page.</p>
+						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>3. On the list of search result, click on the student you wish to update.</p>
+						      			<p>4. Below the full name. Align cursor on "ID Number" and click <cite title="Update Course"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      	<h5 class="margin-bottom-zero">Updating RFID UID</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Students page.</p>
+						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>3. On the list of search result, click on the student you wish to update.</p>
+						      			<p>4. Below the full name. Align cursor on "RFID UID" and click <cite title="Update Course"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      </div>
+						      <div class="col-md-6">
+						      	<h5 class="margin-bottom-zero">Updating Personal Details</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Students page.</p>
+						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>3. On the list of search result, click on the student you wish to update.</p>
+						      			<p>4. Align cursor on "Personal Details" and click <cite title="Update Personal Details"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      	<h5 class="margin-bottom-zero">Updating Contact Details (Mobile Number)</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Students page.</p>
+						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>3. On the list of search result, click on the student you wish to update.</p>
+						      			<p>4. Align cursor on "Contact Details" and click <cite title="Update Mobile Number"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      	<h5 class="margin-bottom-zero">Updating Address Details</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Students page.</p>
+						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>3. On the list of search result, click on the student you wish to update.</p>
+						      			<p>4. Align cursor on "Address Details" and click <cite title="Update Address Details"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      	<h5 class="margin-bottom-zero">Updating Guardian Details</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Students page.</p>
+						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>3. On the list of search result, click on the student you wish to update.</p>
+						      			<p>4. Align cursor on "Guardian Details" and click <cite title="Update Guardian Details"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      </div>
+						    </div>
+				      </div>
+				    </div>
+				  </div>
+
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#set_display_time">
+				          Set Display Time Duration in Monitor Mode
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="set_display_time" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      	<h5 class="margin-bottom-zero">Steps</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Settings page.</p>
+						      			<p>2. On the Display Time Duration panel, click on "Set".</p>
+						      			<p>3. Change the default duration(60 seconds) to whatever duration you want.</p>
+						      			<p>4. Click on Update.</p>
+						      		</div>
+						      	</div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<style type="text/css">
+	.panel-heading .accordion-toggle:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e114";
+    float: right;
+    color: grey;
+	}
+	.panel-heading .accordion-toggle.collapsed:after {
+	  content: "\e080";
+	}
+</style>

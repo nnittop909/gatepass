@@ -12,7 +12,7 @@ wb.styles do |style|
         course_title = sheet.add_row ["#{course.abbreviation} - #{year_level.name}", nil, nil, nil, nil, nil, nil], style: course_style
         sheet.add_row ["ID NUMBER", "NAME", "GENDER", "BIRTHDATE", "MOBILE", "CARD UID", "ADDRESS"], :style => header_style
     		Student.filter(by_course: course.id, by_year_level: year_level.id, by_status: @status).sort_by(&:reversed_name).each do |student|
-        	sheet.add_row [student.id_number, student.reversed_name, student.try(:gender).try(:titleize), student.try(:birthdate).try(:strftime, "%B %e, %Y"), student.try(:mobile), student.tag_uid, student.address_details || "N/A"], style: content_style
+        	sheet.add_row [student.id_number, student.reversed_name, student.try(:gender).try(:titleize), student.try(:birthdate).try(:strftime, "%B %e, %Y"), student.try(:mobile), student.rfid_uid, student.address_details || "N/A"], style: content_style
         end
         sheet.add_row [nil, nil, nil, nil, nil, nil, nil]
         sheet.merge_cells course_title.cells[(0..7)]

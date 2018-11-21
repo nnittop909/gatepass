@@ -26,15 +26,15 @@ class User < ApplicationRecord
   
   validates :first_name, :last_name, :role, presence: true
   validates :course_id, :year_level_id, :gender, :birthdate, presence: true, if: :user_is_a_student?
-  validates :id_number, :tag_uid, presence: true, if: :user_is_a_student?
+  validates :id_number, :rfid_uid, presence: true, if: :user_is_a_student?
   validates :id_number, uniqueness: true, if: :id_number_is_present?
-  validates :tag_uid, numericality: true, if: :tag_uid_is_present?
+  validates :rfid_uid, numericality: true, if: :rfid_uid_is_present?
   validates :mobile, format: { with: /\A[0-9]+\z/, message: "number is invalid" }, 
                       length: { is: 11, wrong_length: "number should be 11 characters." }, 
                       allow_blank: true, if: :user_is_a_student?
     
   
-  before_save :set_full_name, :set_tag_uid
+  before_save :set_full_name, :set_rfid_uid
   before_save :set_join_date, on: :create
   after_save :set_profile_photo, on: :create
   before_validation :set_role, :set_email_password, on: :create
@@ -50,8 +50,8 @@ class User < ApplicationRecord
     self.id_number.present?
   end
 
-  def tag_uid_is_present?
-    self.tag_uid.present?
+  def rfid_uid_is_present?
+    self.rfid_uid.present?
   end
 
   def self.whitelisted_roles
@@ -136,7 +136,7 @@ class User < ApplicationRecord
 
   def set_join_date
     if self.join_date.nil?
-      deployment_date = SystemConfig.first.deployment_date
+      deployment_date = Settings::Configuration.first.deployment_date
       self.join_date = deployment_date
     end
   end
@@ -148,8 +148,8 @@ class User < ApplicationRecord
     self.last_name = last_name.upcase
   end
 
-  def set_tag_uid
-    self.tag_uid = tag_uid.to_i if user_is_a_student?
+  def set_rfid_uid
+    self.rfid_uid = rfid_uid.to_i if user_is_a_student?
   end
 
   def set_profile_photo

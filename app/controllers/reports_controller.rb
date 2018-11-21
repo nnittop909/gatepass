@@ -1,6 +1,5 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
-  respond_to :html, :json
 
   def render_pdf
     @course = params[:course_id] if params[:course_id].present?
@@ -21,12 +20,20 @@ class ReportsController < ApplicationController
     @year_level = params[:year_level_id] if params[:year_level_id].present?
     @status = params[:status] if params[:status].present?
     @title = @status.present? ? "List of #{@status} students" : "List of students"
-    @filtered_courses = Course.order(:name).select {|c| c.students.filter(by_course: @course, by_status: @status).present?}
-    @filtered_year_levels = YearLevel.order(:name).select {|y| y.students.filter(by_year_level: @year_level, by_status: @status).present?}
+    @filtered_courses = Settings::Course.order(:name).select {|c| c.students.filter(by_course: @course, by_status: @status).present?}
+    @filtered_year_levels = Settings::YearLevel.order(:name).select {|y| y.students.filter(by_year_level: @year_level, by_status: @status).present?}
     @students = Student.filter(by_course: @course, by_year_level: @year_level, by_status: @status).sort_by(&:reversed_name)
     respond_to do |format|
       format.xlsx { render xlsx: "render_excel", disposition: 'inline', filename: @title }
     end
+  end
+
+  def export_student_records
+    @students = Student.all.sort_by(&:reversed_name)
+    respond_to do |format|
+      format.xlsx { render xlsx: "export_student_records", disposition: 'inline', filename: "Exported Student Records" }
+    end
+    authorize :report, :export_student_records?
   end
 
   def student_template

@@ -1,0 +1,11 @@
+<%=simple_form_for @course, remote: request.xhr?, html: { autocomplete: "off", data: { modal: true } }, url: @course.persisted? ? system_settings_course_path : system_settings_courses_path do |f| %>
+	<div class="modal-body">
+	  <%= f.error_notification %>
+	  <%= f.input :name %>
+	  <%= f.input :abbreviation %>
+	  <%= f.input :course_duration_id, collection: Settings::CourseDuration.all.map { |d| [d.name, d.id]} %>
+	</div>
+	<div class="modal-footer">
+	  <%=f.submit @course.persisted? ? "Update" : "Save", class: "btn btn-primary" %>
+	</div>
+<% end %>

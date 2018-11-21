@@ -1,0 +1,9 @@
+<%=simple_form_for @configuration, remote: request.xhr?, html: { autocomplete: "off", data: { modal: true } }, url: system_settings_configuration_path do |f| %>
+	<div class="modal-body">
+	  <%= f.error_notification %>
+	  <%= f.input :display_time, label: "Duration", placeholder: "Enter a value in seconds" %>
+	</div>
+	<div class="modal-footer">
+	  <%=f.submit "Update", class: "btn btn-primary" %>
+	</div>
+<% end %>

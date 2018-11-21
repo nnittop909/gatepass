@@ -1,10 +1,10 @@
 class MonitoringController < ApplicationController
 	layout 'monitoring'
 	def index
-		@config = SystemConfig.first
-		if params[:tag_uid].present?
-			@tag_uid = params[:tag_uid].to_i
-			@user = User.find_by(tag_uid: @tag_uid)
+		@config = Settings::Configuration.first
+		if params[:rfid_uid].present?
+			@rfid_uid = params[:rfid_uid].to_i
+			@user = User.find_by(rfid_uid: @rfid_uid)
 			LogCreator.new(@user).create_log if @user.present?
 		end
 	end

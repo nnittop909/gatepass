@@ -7,8 +7,8 @@ class FilteredStudentsPdf < Prawn::Document
     @students = students
     @course_id = course 
     @year_level_id = year_level
-    @course = Course.find(course) if course.present?
-    @year_level = YearLevel.find(year_level) if year_level.present?
+    @course = Settings::Course.find(course) if course.present?
+    @year_level = Settings::YearLevel.find(year_level) if year_level.present?
     @status = status if status.present?
     @view_context = view_context
     heading
@@ -19,11 +19,11 @@ class FilteredStudentsPdf < Prawn::Document
   end
 
   def filtered_by_courses
-    Course.order(:name).select {|c| c.students.filter(by_course: @course_id, by_status: @status).present?}
+    Settings::Course.order(:name).select {|c| c.students.filter(by_course: @course_id, by_status: @status).present?}
   end
 
   def filtered_by_year_levels
-    YearLevel.order(:name).select {|y| y.students.filter(by_year_level: @year_level_id, by_status: @status).present?}
+    Settings::YearLevel.order(:name).select {|y| y.students.filter(by_year_level: @year_level_id, by_status: @status).present?}
   end
 
   def year_level_title

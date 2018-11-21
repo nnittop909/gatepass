@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def permission_denied
-    redirect_to after_sign_in_path_for(current_user), alert: 'Sorry, you are not allowed to access this feature.'
+    redirect_to after_sign_in_path_for(current_user), alert: 'Sorry, you are not allowed to access this page/feature.'
   end
   
 end

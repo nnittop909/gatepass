@@ -1,11 +1,11 @@
 
-<% if @user.present? || @tag_uid.present? %>
+<% if @user.present? || @rfid_uid.present? %>
   <meta http-equiv="refresh" content="<%= @config.display_time %>;url=<%= monitoring_index_path %>" />
 <% end %>
 <div class="send-to-back">
 	<%=form_tag monitoring_index_path, autocomplete: 'off', method: :get do %>
 	  <div class="input-group stylish-input-group">
-	    <%= number_field_tag "tag_uid", params[:tag_uid], class: 'unseen form-control', autofocus: true, autocomplete: 'off' %>
+	    <%= number_field_tag "rfid_uid", params[:rfid_uid], class: 'unseen form-control', autofocus: true, autocomplete: 'off' %>
 	    <span class="input-group-btn">
 	      <%= button_tag(type: 'submit', name: nil, class: " unseen btn btn-flat") do %>
 	        <i class="fa fa-search"></i>
@@ -68,7 +68,7 @@
             </tr>
           </table>
         <% else %>
-          <% if @tag_uid.blank? %>
+          <% if @rfid_uid.blank? %>
             <h1 class="text-white">
               Monitor Mode
             </h1>
@@ -76,7 +76,7 @@
               Scan Student ID Card.
             </h4>
           <% end %>
-          <% if @user.blank? && @tag_uid.present? %>
+          <% if @user.blank? && @rfid_uid.present? %>
             <hr class="text-white">
             <h1 class="text-red">
               Student Identification Failed!
@@ -93,13 +93,13 @@
 <script type="text/javascript">
   $().ready(function() {
   	$(window).on("load", function() {
-	    $("#tag_uid").val("");
-      $("#tag_uid").focus();
+	    $("#rfid_uid").val("");
+      $("#rfid_uid").focus();
 	  });
 	});
 </script>
 <script type="text/javascript">
-  $("#tag_uid").on("blur", function (evt) {
-    $("#tag_uid").focus();
+  $("#rfid_uid").on("blur", function (evt) {
+    $("#rfid_uid").focus();
   });
 </script>

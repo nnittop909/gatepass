@@ -27,7 +27,7 @@
             </span>
           <% end %>
         </li>
-        <%# if current_user.admin? || current_user.developer? %>
+        <% if current_user.admin? || current_user.developer? %>
           <li>
             <%= link_to settings_path, title: 'Settings' do %>
               <span class="fa-stack">
@@ -35,33 +35,13 @@
               </span>
             <% end %>
           </li>
-        <%# end %>
+        <% end %>
         <li>
-          <% if @student_id.present? %>
-            <% if current_page? info_student_path(@student_id) %>
-              <a tabindex="0" id="details" data-toggle="popover" data-placement="bottom" data-html="true" data-trigger="focus" title="Student Information Update Tips" data-content='<%= render "/students/dropdowns/student_update_tips" %>'>
-                <span class="fa-stack">
-                  <i class="fa fa-circle-thin fa-stack-2x"></i>
-                  <i class="fa fa-info fa-stack-1x"></i>
-                </span>
-              </a>
-            <% end %>
-          <% end %>
-          <% if current_page? students_path %>
-            <a tabindex="0" id="details" role="button" data-toggle="popover" data-placement="bottom" data-html="true" data-trigger="focus" title="Tips" data-content='<%= render "/students/dropdowns/student_templates" %>'>
-              <span class="fa-stack">
-                <i class="fa fa-circle-thin fa-stack-2x"></i>
-                <i class="fa fa-info fa-stack-1x"></i>
-              </span>
-            </a>
-          <% end %>
-          <% if current_page? settings_path %>
-            <a tabindex="0" id="details" role="button" data-toggle="popover" data-placement="bottom" data-html="true" data-trigger="focus" title="Upload Tips" data-content='<%= render "/students/dropdowns/upload_tips" %>'>
-              <span class="fa-stack">
-                <i class="fa fa-circle-thin fa-stack-2x"></i>
-                <i class="fa fa-info fa-stack-1x"></i>
-              </span>
-            </a>
+          <%= link_to help_desk_index_path, title: 'Help', target: "_blank" do %>
+            <span class="fa-stack">
+              <i class="fa fa-circle-thin fa-stack-2x"></i>
+              <i class="fa fa-question fa-stack-1x"></i>
+            </span>
           <% end %>
         </li>
         <li class="dropdown" style="padding: 0;border-left: 1px solid #484848;">
