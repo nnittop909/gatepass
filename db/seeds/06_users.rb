@@ -10,7 +10,7 @@ User.create!(email: 'employee@ifsu.com',
 						first_name: 'Employee', 
 						last_name: 'User', 
 						role: 'employee')
-User.create!(email: 'developer@gitworx.com', 
+User.create!(email: 'developer@itworx.com', 
 						password: 'developer@itworx', 
 						password_confirmation: 'developer@itworx', 
 						first_name: 'Developer', 

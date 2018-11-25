@@ -11,7 +11,7 @@
       <h4><center>Account Sign in</center></h4>
       <br>
       <%= simple_form_for(resource, as: resource_name, :url => session_path(resource_name),
-             wrapper_mappings: {boolean: :vertical_boolean }) do |f| %>
+             wrapper_mappings: {boolean: :vertical_boolean }, html: {autocomplete: "off"}) do |f| %>
 
         <%=image_tag("default.png", height: 100, width: 100, class: 'img-circle img-responsive center-block') %>
         <br>

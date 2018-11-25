@@ -9,7 +9,7 @@
       </button>
       <%= link_to monitoring_index_path, class: 'navbar-brand' do %>
         <div class="icon"><span class="fa fa-desktop"></span></div>
-        <div class="title"> GatePass v.1.2.0</div>
+        <div class="title"> GatePass v.1.7.0</div>
       <% end %>
     </div>
     <div id="navbar" class="navbar-collapse collapse" aria-expanded="true">
@@ -17,11 +17,15 @@
         <li>
           <% if user_signed_in? %>
             <%= link_to students_path, class: 'pull-right', title: 'Home' do %>
-              <span><i class="fa fa-home fa-lg"></i> Home</span>
+              <span class="fa-stack">
+                <i class="fa fa-home fa-2x"></i>
+              </span>
             <% end %>
           <% else %>
-            <%= link_to new_user_session_path, class: 'pull-right', title: 'Administrator Sign-in' do %>
-              <span><i class="fa fa-sign-in fa-lg"></i> Sign-in</span>
+            <%= link_to new_user_session_path, class: 'pull-right', title: 'Sign-in' do %>
+              <span class="fa-stack">
+                <i class="fa fa-sign-in fa-2x"></i>
+              </span>
             <% end %>
           <% end %>
         </li>
