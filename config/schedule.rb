@@ -10,5 +10,5 @@ every :day, at: '9am' do
 end
 
 every :day, at: '9am' do
-  rake 'maintenance:start' if (deployment_date...DateTime.now).count.days >= 1.year
+  rake 'maintenance:start' if (deployment_date...Time.now).count.days >= 1.year
 end
