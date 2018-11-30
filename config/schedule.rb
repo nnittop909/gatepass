@@ -1,6 +1,6 @@
 require "./"+ File.dirname(__FILE__) + "/environment.rb"
 
-deployment_date = Settings::Configuration.first.deployment_date
+date = Settings::Configuration.first.deployment_date
 
 every :day, at: '9am' do
 	if !Student.nil?
@@ -10,5 +10,5 @@ every :day, at: '9am' do
 end
 
 every :day, at: '9am' do
-  rake 'maintenance:start' if (deployment_date...Time.now).count.days >= 1.year
+  rake 'maintenance:start' if date >= (date + 1.year)
 end
