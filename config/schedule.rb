@@ -11,6 +11,6 @@ end
 
 if (deployment_date...Time.now).count.days >= 1.year
 	every :day, at: '9am' do
-	  command 'maintenance:start'
+	  rake 'maintenance:start'
 	end
 end
