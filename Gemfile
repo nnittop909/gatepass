@@ -43,6 +43,7 @@ gem 'axlsx_rails'
 gem 'bootstrap-popover-rails'
 gem 'roo-xls'
 gem "responders"
+gem "turnout"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
