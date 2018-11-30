@@ -9,8 +9,6 @@ every :day, at: '9am' do
   rake 'expire_users'
 end
 
-if (deployment_date...DateTime.now).count.days >= 1.year
-	every :day, at: '9am' do
-	  rake 'maintenance:start'
-	end
+every :day, at: '9am' do
+  rake 'maintenance:start' if (deployment_date...DateTime.now).count.days >= 1.year
 end
