@@ -4,7 +4,7 @@ require 'mina/git'
 require 'mina/rbenv'
 require 'mina/deploy'
 
-set :domain, '192.168.254.106'
+set :domain, '192.168.254.111'
 set :deploy_to, '/var/www/gatepass'
 set :repository, "https://github.com/nnittop909/gatepass.git"
 set :branch, 'master'
