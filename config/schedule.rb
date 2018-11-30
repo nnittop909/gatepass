@@ -1,12 +1,16 @@
-deployment_date = ::Settings::Configuration.first.deployment_date
+require "./"+ File.dirname(__FILE__) + "/environment.rb"
+
+deployment_date = Settings::Configuration.first.deployment_date
 
 every :day, at: '9am' do
-  rake 'update_year_levels'
+	if !Student.nil?
+  	rake 'update_year_levels'
+  end
   rake 'expire_users'
 end
 
 if (deployment_date...Time.now).count.days >= 1.year
 	every :day, at: '9am' do
-	  rake 'maintenance:start'
+	  command 'maintenance:start'
 	end
 end
