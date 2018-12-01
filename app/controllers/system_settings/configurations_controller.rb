@@ -1,6 +1,6 @@
 module SystemSettings
 	class ConfigurationsController < ApplicationController
-		before_action :authenticate_user!
+		before_action :authenticate_user!, :check_subscription!
 		respond_to :html, :json
 
 		def edit

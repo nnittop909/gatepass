@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 	get "monitoring/index"
+  get "page_unavailable/index"
   get "help_desk/index"
 
 	resources :students do

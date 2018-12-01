@@ -1,6 +1,6 @@
 module Students
 	class ProfilePhotosController < ApplicationController
-		before_action :authenticate_user!
+		before_action :authenticate_user!, :check_subscription!
 
 		def create
 			@student = Student.find(params[:student_id])

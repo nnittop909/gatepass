@@ -21,5 +21,12 @@ class ApplicationController < ActionController::Base
   def permission_denied
     redirect_to after_sign_in_path_for(current_user), alert: 'Sorry, you are not allowed to access this page/feature.'
   end
+
+  def check_subscription!
+    subscription_date = Settings::Configuration.first.subscription_date
+    if subscription_date >= (subscription_date + 1.year)
+      redirect_to page_unavailable_index_url
+    end
+  end
   
 end

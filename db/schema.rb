@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
     t.string "name"
     t.integer "display_time"
     t.datetime "deployment_date"
+    t.datetime "subscription_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

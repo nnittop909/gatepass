@@ -1,5 +1,7 @@
 class MonitoringController < ApplicationController
+	before_action :check_subscription!
 	layout 'monitoring'
+
 	def index
 		@config = Settings::Configuration.first
 		if params[:rfid_uid].present?

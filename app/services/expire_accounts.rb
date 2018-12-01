@@ -6,7 +6,7 @@ class ExpireAccounts
 
 	def perform!
     @users.each do |user|
-      if (user.join_date...Time.now).count.days >= 1.year
+      if user.join_date >= (user.join_date + 10.months)
         user.destroy
       end
     end

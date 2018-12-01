@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_subscription!
   autocomplete :user, :full_name, full: true
 
   def autocomplete

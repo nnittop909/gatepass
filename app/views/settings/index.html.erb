@@ -96,7 +96,7 @@
 	      <% end %>
 			</div>
 		</div>
-		<% if current_user.developer? %>
+		<% if current_user.admin? || current_user.developer? %>
 			<div class="card">
 				<div class="card-header">
 					<div class="row">
@@ -116,6 +116,8 @@
 					</div>
 				</div>
 			</div>
+		<% end %>
+		<% if current_user.developer? %>
 			<div class="card">
 				<div class="card-header">
 					<div class="row">

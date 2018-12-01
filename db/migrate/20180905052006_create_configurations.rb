@@ -4,6 +4,7 @@ class CreateConfigurations < ActiveRecord::Migration[5.2]
     	t.string :name
       t.integer :display_time
       t.datetime :deployment_date
+      t.datetime :subscription_date
 
       t.timestamps
     end

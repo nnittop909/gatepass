@@ -1,6 +1,6 @@
 module Migrations
 	class StudentPhotosController < ApplicationController
-		before_action :authenticate_user!
+		before_action :authenticate_user!, :check_subscription!
 		
 		def upload
 			if params[:profile_photo].nil?

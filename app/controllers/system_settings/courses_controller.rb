@@ -1,6 +1,6 @@
 module SystemSettings
 	class CoursesController < ApplicationController
-		before_action :authenticate_user!
+		before_action :authenticate_user!, :check_subscription!
 		respond_to :html, :json
 
 		def new

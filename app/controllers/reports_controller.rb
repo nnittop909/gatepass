@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_subscription!
 
   def render_pdf
     @course = params[:course_id] if params[:course_id].present?

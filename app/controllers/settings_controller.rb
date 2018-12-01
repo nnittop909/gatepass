@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, :check_subscription!
 
 	def index
 		@courses = Settings::Course.all
