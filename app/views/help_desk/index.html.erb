@@ -14,36 +14,7 @@
 			</div>
 			<div class="card-body">
 			  <div class="panel-group" id="accordion">
-				  <div class="panel panel-default">
-				    <div class="panel-heading">
-				      <h4 class="panel-title">
-				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#search_student">
-				          Search Student
-				        </a>
-				      </h4>
-				    </div>
-				    <div id="search_student" class="panel-collapse collapse">
-				      <div class="panel-body">
-				      	<p>
-				      		<span class="text-muted">
-				      			You can search students by:
-				      		</span>
-				      		<span>
-				      			First name, Last name, Middle name and ID Number
-				      		</span>
-				      	</p>
-				      	<p>
-				      		<span class="text-muted">
-				      			You can also use the search to query students using their address by:
-				      		</span>
-				      		<span>
-				      			Sitio, Barangay, Municipality and Province
-				      		</span>
-				      	</p>
-				      </div>
-				    </div>
-				  </div>
-
+			  	<h4 class="card-title">SETTINGS & CONFIGURATIONS</h4>
 				  <div class="panel panel-default">
 				    <div class="panel-heading">
 				      <h4 class="panel-title">
@@ -84,6 +55,30 @@
 				  <div class="panel panel-default">
 				    <div class="panel-heading">
 				      <h4 class="panel-title">
+				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#set_display_time">
+				          Set Display Time Duration in Monitor Mode
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="set_display_time" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      	<h5 class="margin-bottom-zero">Steps</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Settings page.</p>
+						      			<p>2. On the Display Time Duration panel, click on "Set".</p>
+						      			<p>3. Change the default duration(60 seconds) to whatever duration you want.</p>
+						      			<p>4. Click on Update.</p>
+						      		</div>
+						      	</div>
+				      </div>
+				    </div>
+				  </div>
+				  <br>
+				  <h4 class="card-title">STUDENTS MANAGEMENT</h4>
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
 				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#add_students">
 				          Uploading Student Records
 				        </a>
@@ -100,7 +95,8 @@
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
 						      			<p>1. Go to Settings page.</p>
-						      			<p>2. On the Upload Student Records panel, click on "Download Template".</p>
+						      			<p>2. Click on Student Records Management tab.</p>
+						      			<p>3. On the Upload Student Records panel, click on "Download Template".</p>
 						      			or
 						      			<%=link_to "Download Template", student_template_reports_path(format: :xlsx), class: 'btn btn-success text-center' %> right now.<br><br>
 						      			<h5>Rules when filling in data:</h5>
@@ -144,10 +140,11 @@
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
 						      			<p>1. Go to Settings page.</p>
-						      			<p>2. On the Upload Student Records panel, click on "Choose File".</p>
-						      			<p>3. Navigate to the path where you have saved the template(filled with data) earlier.</p>
-						      			<p>4. Click on the file, click "Open" below or double-click on the file.</p>
-						      			<p>5. Click on "Import".</p>
+						      			<p>2. Click on Student Records Management tab.</p>
+						      			<p>3. On the Upload Student Records panel, click on "Choose File".</p>
+						      			<p>4. Navigate to the path where you have saved the template(filled with data) earlier.</p>
+						      			<p>5. Click on the file, click "Open" below or double-click on the file.</p>
+						      			<p>6. Click on "Import".</p>
 						      		</div>
 						      	</div>
 				      		</div>
@@ -170,16 +167,17 @@
 				      		You can upload multiple student photos. But before doing so, please rename each photo to the corresponding student's ID Number.
 				      	</h5>
 				      	<p class="text-muted">
-				      		Tips: Select photos by course and put it in a folder named as their course. Organizing photos by course is a nice way to divide it into chunks. That way, it will optimize the uploading proccess.
+				      		Tips: Select photos by course and put it in a folder named as their course. Organizing photos by course is a nice way to make the upload more faster and convinient.
 				      	</p>
 				      	<h5 class="margin-bottom-zero">Uploading Steps</h5>
 		      			<div class="row"><div class="col-md-1"></div>
 				      		<div class="col-md-11">
 				      			<p>1. Go to Settings page.</p>
-				      			<p>2. On the Upload Student Photos panel, click on "Choose File".</p>
-				      			<p>3. Navigate to the path where you have saved the photos.</p>
-				      			<p>4. Select all photos and click on open button.</p>
-				      			<p>5. Click on "Import".</p>
+				      			<p>2. Click on Student Records Management tab.</p>
+				      			<p>3. On the Upload Student Photos panel, click on "Choose File".</p>
+				      			<p>4. Navigate to the path where you have saved the photos.</p>
+				      			<p>5. Select all photos and click on open button.</p>
+				      			<p>6. Click on "Import".</p>
 				      		</div>
 				      	</div>
 				      	<h5 class="margin-bottom-zero text-muted">
@@ -205,7 +203,7 @@
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
 						      			<p>1. Go to Students page.</p>
-						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>2. Search student by ID Number(to be precise) or by First Name or Last Name.</p>
 						      			<p>3. On the list of search result, click on the student you wish to update.</p>
 						      			<p>4. Align cursor on the photo and click <cite title="Update Photo"> <i class="fa fa-photo fa-lg"></i></cite> icon.</p>
 						      		</div>
@@ -214,7 +212,7 @@
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
 						      			<p>1. Go to Students page.</p>
-						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>2. Search student by ID Number(to be precise) or by First Name or Last Name.</p>
 						      			<p>3. On the list of search result, click on the student you wish to update.</p>
 						      			<p>4. Align cursor on the photo and click <cite title="Update Status"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
 						      		</div>
@@ -223,7 +221,7 @@
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
 						      			<p>1. Go to Students page.</p>
-						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>2. Search student by ID Number(to be precise) or by First Name or Last Name.</p>
 						      			<p>3. On the list of search result, click on the student you wish to update.</p>
 						      			<p>4. Below the full name. Align cursor on "Course" and click <cite title="Update Course"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
 						      		</div>
@@ -232,7 +230,7 @@
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
 						      			<p>1. Go to Students page.</p>
-						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>2. Search student by ID Number(to be precise) or by First Name or Last Name.</p>
 						      			<p>3. On the list of search result, click on the student you wish to update.</p>
 						      			<p>4. Below the full name. Align cursor on "ID Number" and click <cite title="Update Course"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
 						      		</div>
@@ -241,7 +239,7 @@
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
 						      			<p>1. Go to Students page.</p>
-						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>2. Search student by ID Number(to be precise) or by First Name or Last Name.</p>
 						      			<p>3. On the list of search result, click on the student you wish to update.</p>
 						      			<p>4. Below the full name. Align cursor on "RFID UID" and click <cite title="Update Course"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
 						      		</div>
@@ -252,7 +250,7 @@
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
 						      			<p>1. Go to Students page.</p>
-						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>2. Search student by ID Number(to be precise) or by First Name or Last Name.</p>
 						      			<p>3. On the list of search result, click on the student you wish to update.</p>
 						      			<p>4. Align cursor on "Personal Details" and click <cite title="Update Personal Details"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
 						      		</div>
@@ -261,7 +259,7 @@
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
 						      			<p>1. Go to Students page.</p>
-						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>2. Search student by ID Number(to be precise) or by First Name or Last Name.</p>
 						      			<p>3. On the list of search result, click on the student you wish to update.</p>
 						      			<p>4. Align cursor on "Contact Details" and click <cite title="Update Mobile Number"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
 						      		</div>
@@ -270,7 +268,7 @@
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
 						      			<p>1. Go to Students page.</p>
-						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>2. Search student by ID Number(to be precise) or by First Name or Last Name.</p>
 						      			<p>3. On the list of search result, click on the student you wish to update.</p>
 						      			<p>4. Align cursor on "Address Details" and click <cite title="Update Address Details"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
 						      		</div>
@@ -279,7 +277,7 @@
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
 						      			<p>1. Go to Students page.</p>
-						      			<p>2. Search student by First name/Last name/ID Number(to be precise).</p>
+						      			<p>2. Search student by ID Number(to be precise) or by First Name or Last Name.</p>
 						      			<p>3. On the list of search result, click on the student you wish to update.</p>
 						      			<p>4. Align cursor on "Guardian Details" and click <cite title="Update Guardian Details"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
 						      		</div>
@@ -289,26 +287,183 @@
 				      </div>
 				    </div>
 				  </div>
+				  <br>
+				  <h4 class="card-title">EMPLOYEES MANAGEMENT</h4>
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#add_employees">
+				          Uploading Employee Records
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="add_employees" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      	<h5 class="margin-bottom-zero">
+				      		You can upload employee records using excel file. But before doing so please download the template to start fill in data.
+				      	</h5>
+				      	<div class="row">
+				      		<div class="col-md-6">
+				      			<h5 class="margin-bottom-zero">Downloading Template</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Settings page.</p>
+						      			<p>2. Click on Employee Records Management tab.</p>
+						      			<p>3. On the Upload Employee Records panel, click on "Download Template".</p>
+						      			or
+						      			<%=link_to "Download Template", employee_template_reports_path(format: :xlsx), class: 'btn btn-success text-center' %> right now.<br><br>
+						      			<h5>Rules when filling in data:</h5>
+						      			<p>
+						      				<span class="text-muted">&nbsp &nbsp
+						      					1. Follow format when filling in birthdate: 
+						      					<br>&nbsp &nbsp &nbsp &nbsp	"2000-12-30" or "December 30, 2000"
+						      					<br>&nbsp &nbsp
+						      					2. Follow format when filling in gender: 
+						      					<br>&nbsp &nbsp &nbsp &nbsp	"Male" or "M" or "Female" or "F"
+						      					<br>&nbsp &nbsp
+						      					3. Fill in mobile number(MOBILE) w/ or w/o the first digit "0".
+						      					<br>&nbsp &nbsp &nbsp &nbsp	e.g. "09091234567" or "9091234567"
+						      					<br>&nbsp &nbsp
+						      					4. Use RFID Reader to scan RFID UID.
+						      				</span>
+						      			</p>
+						      			<h5 class="margin-bottom-zero text-muted">*Notes</h5>
+						      			<p class="text-muted">&nbsp &nbsp &nbsp
+						      				If a student has no mobile number, leave it blank.
+						      				<br>&nbsp &nbsp &nbsp
+						      				It is required to fill in the following:
+						      				<br>&nbsp &nbsp &nbsp &nbsp &nbsp
+						      				(ID NUMBER, POSITION TITLE, FIRST NAME,
+						      				<br>&nbsp &nbsp &nbsp &nbsp &nbsp
+						      				LAST NAME, MIDDLE NAME, GENDER, BIRTHDATE,
+						      				<br>&nbsp &nbsp &nbsp &nbsp &nbsp
+						      				RFID UID, MUNICIPALITY, PROVINCE)
+						      			</p>
+						      		</div>
+						      	</div>
+				      		</div>
+				      		<div class="col-md-6">
+				      			<h5 class="margin-bottom-zero">Uploading Steps</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Settings page.</p>
+						      			<p>2. Click on Employee Records Management tab.</p>
+						      			<p>3. On the Upload Employee Records panel, click on "Choose File".</p>
+						      			<p>4. Navigate to the path where you have saved the template(filled with data) earlier.</p>
+						      			<p>5. Click on the file, click "Open" below or double-click on the file.</p>
+						      			<p>6. Click on "Import".</p>
+						      		</div>
+						      	</div>
+				      		</div>
+				      	</div>
+				      </div>
+				    </div>
+				  </div>
 
 				  <div class="panel panel-default">
 				    <div class="panel-heading">
 				      <h4 class="panel-title">
-				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#set_display_time">
-				          Set Display Time Duration in Monitor Mode
+				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#uploading_employee_photos">
+				          Uploading Employee Photos
 				        </a>
 				      </h4>
 				    </div>
-				    <div id="set_display_time" class="panel-collapse collapse">
+				    <div id="uploading_employee_photos" class="panel-collapse collapse">
 				      <div class="panel-body">
-				      	<h5 class="margin-bottom-zero">Steps</h5>
+				        <h5>
+				      		You can upload multiple employee photos. But before doing so, please rename each photo to the corresponding employee's ID Number.
+				      	</h5>
+				      	<p class="text-muted">
+				      		Tips: Select photos by course and put it in a folder named as their course. Organizing photos by course is a nice way to makes the upload more faster and convinient.
+				      	</p>
+				      	<h5 class="margin-bottom-zero">Uploading Steps</h5>
+		      			<div class="row"><div class="col-md-1"></div>
+				      		<div class="col-md-11">
+				      			<p>1. Go to Settings page.</p>
+				      			<p>2. Click on Employee Records Management tab.</p>
+				      			<p>3. On the Upload Employee Photos panel, click on "Choose File".</p>
+				      			<p>4. Navigate to the path where you have saved the photos.</p>
+				      			<p>5. Select all photos and click on open button.</p>
+				      			<p>6. Click on "Import".</p>
+				      		</div>
+				      	</div>
+				      	<h5 class="margin-bottom-zero text-muted">
+				      		Note: Make sure to upload jpg, jpeg, png and gif images only. Other image types not listed are not supported.
+				      	</h5>
+				      </div>
+				    </div>
+				  </div>
+
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#updating_employee_record">
+				          Updating Employee Record
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="updating_employee_record" class="panel-collapse collapse">
+				      <div class="panel-body">
+				      	<div class="row">
+				      		<div class="col-md-6">
+						      	<h5 class="margin-bottom-zero">Updating Photo</h5>
 				      			<div class="row"><div class="col-md-1"></div>
 						      		<div class="col-md-11">
-						      			<p>1. Go to Settings page.</p>
-						      			<p>2. On the Display Time Duration panel, click on "Set".</p>
-						      			<p>3. Change the default duration(60 seconds) to whatever duration you want.</p>
-						      			<p>4. Click on Update.</p>
+						      			<p>1. Go to Employees page.</p>
+						      			<p>2. Search employee by ID Number(to be precise) or by First Name or Last Name.</p>
+						      			<p>3. On the list of search result, click on the employee you wish to update.</p>
+						      			<p>4. Align cursor on the photo and click <cite title="Update Photo"> <i class="fa fa-photo fa-lg"></i></cite> icon.</p>
 						      		</div>
 						      	</div>
+						      	<h5 class="margin-bottom-zero">Updating ID Number</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Employees page.</p>
+						      			<p>2. Search employee by ID Number(to be precise) or by First Name or Last Name.</p>
+						      			<p>3. On the list of search result, click on the employee you wish to update.</p>
+						      			<p>4. Below the full name. Align cursor on "ID Number" and click <cite title="Update Course"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      	<h5 class="margin-bottom-zero">Updating RFID UID</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Employees page.</p>
+						      			<p>2. Search employee by ID Number(to be precise) or by First Name or Last Name.</p>
+						      			<p>3. On the list of search result, click on the employee you wish to update.</p>
+						      			<p>4. Below the full name. Align cursor on "RFID UID" and click <cite title="Update Course"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      </div>
+						      <div class="col-md-6">
+						      	<h5 class="margin-bottom-zero">Updating Personal Details</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Employees page.</p>
+						      			<p>2. Search employee by ID Number(to be precise) or by First Name or Last Name.</p>
+						      			<p>3. On the list of search result, click on the employee you wish to update.</p>
+						      			<p>4. Align cursor on "Personal Details" and click <cite title="Update Personal Details"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      	<h5 class="margin-bottom-zero">Updating Contact Details (Mobile Number)</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Employees page.</p>
+						      			<p>2. Search employee by ID Number(to be precise) or by First Name or Last Name.</p>
+						      			<p>3. On the list of search result, click on the employee you wish to update.</p>
+						      			<p>4. Align cursor on "Contact Details" and click <cite title="Update Mobile Number"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      	<h5 class="margin-bottom-zero">Updating Address Details</h5>
+				      			<div class="row"><div class="col-md-1"></div>
+						      		<div class="col-md-11">
+						      			<p>1. Go to Employees page.</p>
+						      			<p>2. Search employee by ID Number(to be precise) or by First Name or Last Name.</p>
+						      			<p>3. On the list of search result, click on the employee you wish to update.</p>
+						      			<p>4. Align cursor on "Address Details" and click <cite title="Update Address Details"> <i class="fa fa-pencil-square-o fa-lg"></i></cite> icon.</p>
+						      		</div>
+						      	</div>
+						      </div>
+						    </div>
 				      </div>
 				    </div>
 				  </div>

@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-12">
+    <h4 class="no-bottom-margin">Address Details </h4>
+    <hr class="no-top-margin">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-11">
+    <%=f.simple_fields_for :address do |a| %>
+      <%=a.input :sitio %>
+      <%=a.input :barangay %>
+      <%=a.input :municipality, input_html: { value: "Lagawe" } %>
+      <%=a.input :province, input_html: { value: "Ifugao" } %>
+    <% end %>
+    <br>
+  </div>
+</div>

@@ -6,6 +6,7 @@ class SettingsController < ApplicationController
 		@users = User.admin.all
 		@students = Student.all
 		@config = Settings::Configuration.first
+		@employees = Employee.all
 		authorize :setting, :index?
 	end
 end

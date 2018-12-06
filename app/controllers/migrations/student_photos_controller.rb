@@ -6,7 +6,7 @@ module Migrations
 			if params[:profile_photo].nil?
 				redirect_to settings_url, notice: 'No photos to upload.'
 			else
-				@photo_uploader = PhotoUploader.new(params[:profile_photo][:photo_arrays])
+				@photo_uploader = StudentPhotoUploader.new(params[:profile_photo][:photo_arrays])
 				if @photo_uploader.upload!
 					redirect_to settings_url, notice: 'Upload successfull.'
 				else

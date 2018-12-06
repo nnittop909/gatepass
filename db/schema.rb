@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_16_111612) do
+ActiveRecord::Schema.define(version: 2018_12_05_134801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
     t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
+  create_table "positions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_positions_on_user_id"
+  end
+
   create_table "profile_photos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.datetime "created_at", null: false
@@ -106,7 +114,7 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
     t.integer "gender"
     t.datetime "birthdate"
     t.string "mobile"
-    t.integer "rfid_uid"
+    t.bigint "rfid_uid"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -138,6 +146,7 @@ ActiveRecord::Schema.define(version: 2018_11_16_111612) do
   add_foreign_key "addresses", "users"
   add_foreign_key "courses", "course_durations"
   add_foreign_key "logs", "users"
+  add_foreign_key "positions", "users"
   add_foreign_key "profile_photos", "users"
   add_foreign_key "relationships", "guardians"
   add_foreign_key "relationships", "users"

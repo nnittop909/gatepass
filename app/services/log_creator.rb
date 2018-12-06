@@ -8,7 +8,7 @@ class LogCreator
 		if @user.log.nil?
 			sign_in
 		else
-			if student_signed_out?
+			if user_logged_out?
       	sign_in
       else
       	sign_out
@@ -26,11 +26,11 @@ class LogCreator
 		@user.create_log!(remark: "signed_out", log_time: Time.zone.now)
 	end
 
-	def student_signed_out?
+	def user_logged_out?
 		@user.log.signed_out? == true
 	end
 
-	def student_signed_in?
+	def user_logged_in?
 		@user.log.signed_out? == false
 	end
 end

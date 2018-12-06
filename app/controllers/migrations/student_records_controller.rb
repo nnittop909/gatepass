@@ -4,7 +4,7 @@ module Migrations
     
     def upload
       begin
-        RecordUploader.new(params[:file]).import!
+        StudentRecordUploader.new(params[:file]).import!
         redirect_to settings_url, notice: 'Students Imported'
       rescue
         redirect_to settings_url, alert: 'Invalid Excel File.'

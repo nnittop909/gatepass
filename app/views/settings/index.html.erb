@@ -1,150 +1,311 @@
-<div class="row">
-	<div class="col-md-6">
-		<div class="card">
-			<div class="card-header">
-				<div class="card-title">
-					<div class="row">
-						<div class="col-md-6 col-sm-6">
-							<h4>Courses</h4>
-						</div>
-						<div class="col-md-6 col-sm-6">
-							<%=link_to "Add Course", new_system_settings_course_path, class: 'btn btn-primary pull-right', title: 'New Course', data: {modal: true} %>
+<div class="card-body no-padding">
+	<div class="step card-no-padding">
+	  <ul class="nav nav-tabs nav-justified" role="tablist">
+      <li role="step" class="active">
+        <a href="#step1-2" id="step1-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+          <div class="icon fa fa-gear"></div>
+          <div class="step-title">
+            <div class="title">Settings and Configurations</div>
+          </div>
+        </a>
+      </li>
+      <li role="step" class="">
+        <a href="#step2-2" role="tab" id="step2-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">
+          <div class="icon fa fa-users"></div>
+          <div class="step-title">
+            <div class="title">Student Records Management</div>
+          </div>
+        </a>
+      </li>
+      <li role="step" class="">
+        <a href="#step3-2" role="tab" id="step3-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">
+          <div class="icon fa fa-users"></div>
+          <div class="step-title">
+            <div class="title">Employee Records Management</div>
+            <div class="description"></div>
+          </div>
+        </a>
+      </li>
+	  </ul>
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane fade active in no-padding-left-right" id="step1-2" aria-labelledby="home-tab">
+	      <div class="row">
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-header">
+								<div class="card-title">
+									<div class="row">
+										<div class="col-md-6 col-sm-6">
+											<h4>Courses</h4>
+										</div>
+										<div class="col-md-6 col-sm-6">
+											<%=link_to "Add Course", new_system_settings_course_path, class: 'btn btn-primary pull-right', title: 'New Course', data: {modal: true} %>
+										</div>
+									</div>
+					      </div>
+							</div>
+							<div class="card-body">
+								<table class="table">
+									<% @courses.each do |course| %>
+										<tr>
+											<td><%= course.abbreviation %> - <%= course.name %></td>
+											<td>
+												<%= link_to edit_system_settings_course_path(course), data: {modal: true} do %>
+													<span class="fa fa-pencil-square-o"></span>
+												<% end %>
+											</td>
+										</tr>
+									<% end %>
+								</table>
+							</div>
 						</div>
 					</div>
-	      </div>
-			</div>
-			<div class="card-body">
-				<table class="table">
-					<% @courses.each do |course| %>
-						<tr>
-							<td><%= course.abbreviation %> - <%= course.name %></td>
-							<td>
-								<%= link_to edit_system_settings_course_path(course), data: {modal: true} do %>
-									<span class="fa fa-pencil-square-o"></span>
-								<% end %>
-							</td>
-						</tr>
-					<% end %>
-				</table>
-			</div>
-		</div>
-		<div class="card">
-			<div class="card-header">
-				<div class="card-title">
-					<div class="title">Display Time Duration</div>
-					<div class="description">Configure the time duration to display Student Profile in Monitor Mode.</div>
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-header">
+								<div class="card-title">
+									<div class="title">Display Time Duration</div>
+									<div class="description">Configure the time duration to display Student Profile in Monitor Mode.</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-8 col-sm-8">
+										<h4 class="card-title no-top-margin"><%= @config.display_time.to_s + " Seconds" if @config.present? %></h4>
+									</div>
+									<div class="col-md-4 col-sm-4">
+										<%=link_to "Set", edit_system_settings_configuration_path(@config), class: 'btn btn-primary pull-right', title: 'Set Display Time', data: {modal: true} %>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="card-body">
+      <div role="tabpanel" class="tab-pane fade no-padding-left-right" id="step2-2" aria-labelledby="profile-tab">
+      	<div class="row">
+         	<div class="col-md-6">
+						<div class="card">
+							<div class="card-header">
+								<div class="row">
+									<div class="col-md-8">
+										<div class="card-title">
+											<div class="title">Upload Student Records</div>
+											<div class="description">Migrate student records from Excel File (xlsx).</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="pull-right card-action">
+											<%=link_to "Download Template", student_template_reports_path(format: :xlsx), class: 'btn btn-success' %>	
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<%= form_tag upload_migrations_student_records_path, multipart: true do %>
+									<div class="input-group stylish-input-group">
+				          	<%= file_field_tag :file, label: false, class: 'form-control', id: 'students-file' %>
+				          	<span class="input-group-btn">
+					            <%= button_tag 'Import', id: 'import-students', class: 'form-control btn btn-primary' %>
+					          </span>
+					        </div>
+				        <% end %>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-header">
+								<div class="card-title">
+									<div class="title">Upload Profile Photos</div>
+									<div class="description">Student profile photo can be updated using ID Number as filename. Accepts multiple uploads.</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<% if @students.present? %>
+									<%= form_for ProfilePhoto.new, url: :upload_migrations_student_photos, html: { multipart: true } do |f| %>
+					          <div class="input-group stylish-input-group">
+					            <%= f.file_field :photo_arrays, multiple: true, class: 'form-control', id: 'student-photo-arrays' %>
+					            <span class="input-group-btn">
+					              <%= f.submit 'Import', id: 'import-student-photos', class: 'form-control btn btn-primary' %>
+					            </span>
+					          </div>
+					        <% end %>
+					      <% end %>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="row">
-					<div class="col-md-8 col-sm-8">
-						<h4 class="card-title no-top-margin"><%= @config.display_time.to_s + " Seconds" if @config.present? %></h4>
+					<div class="col-md-6">
+						<% if current_user.admin? || current_user.developer? %>
+							<div class="card">
+								<div class="card-header">
+									<div class="row">
+										<div class="col-md-8 col-sm-8">
+											<div class="card-title">
+												<div class="title">Clear Student Records</div>
+												<div class="description">Delete all student records.</div>
+											</div>
+										</div>
+										<div class="col-md-4 col-sm-4">
+											<div class="pull-right card-action">
+												<% if @students.present? %>
+													<%= link_to "Perform", delete_all_migrations_student_records_path, class: "btn btn-danger", data: {confirm: "These action cannot be undone! Are you sure to delete all student records?"} %>
+									      <% end %>
+									    </div>
+									  </div>
+									</div>
+								</div>
+							</div>
+						<% end %>
 					</div>
-					<div class="col-md-4 col-sm-4">
-						<%=link_to "Set", edit_system_settings_configuration_path(@config), class: 'btn btn-primary pull-right', title: 'Set Display Time', data: {modal: true} %>
+					<div class="col-md-6">
+						<% if current_user.developer? %>
+							<div class="card">
+								<div class="card-header">
+									<div class="row">
+										<div class="col-md-8 col-sm-8">
+											<div class="card-title">
+												<div class="title">Export Student Records</div>
+												<div class="description">Export all student records to Excel.</div>
+											</div>
+										</div>
+										<div class="col-md-4 col-sm-4">
+											<div class="pull-right card-action">
+												<% if @students.present? %>
+													<%= link_to "Export(Excel)", export_student_records_reports_path(format: :xlsx), class: "btn btn-danger" %>
+									      <% end %>
+									    </div>
+									  </div>
+									</div>
+								</div>
+							</div>
+						<% end %>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+      </div>
+      <div role="tabpanel" class="tab-pane fade no-padding-left-right" id="step3-2" aria-labelledby="dropdown1-tab">
+        <div class="row">
+         	<div class="col-md-6">
+						<div class="card">
+							<div class="card-header">
+								<div class="row">
+									<div class="col-md-8">
+										<div class="card-title">
+											<div class="title">Upload Employee Records</div>
+											<div class="description">Migrate employee records from Excel File (xlsx).</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="pull-right card-action">
+											<%=link_to "Download Template", employee_template_reports_path(format: :xlsx), class: 'btn btn-success' %>	
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<%= form_tag upload_migrations_employee_records_path, multipart: true do %>
+									<div class="input-group stylish-input-group">
+				          	<%= file_field_tag :file, label: false, class: 'form-control', id: 'employees-file' %>
+				          	<span class="input-group-btn">
+					            <%= button_tag 'Import', id: 'import-employee', class: 'form-control btn btn-primary' %>
+					          </span>
+					        </div>
+				        <% end %>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-header">
+								<div class="card-title">
+									<div class="title">Upload Profile Photos</div>
+									<div class="description">Employee profile photo can be updated using ID Number as filename. Accepts multiple uploads.</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<% if @employees.present? %>
+									<%= form_for ProfilePhoto.new, url: :upload_migrations_employee_photos, html: { multipart: true } do |f| %>
+					          <div class="input-group stylish-input-group">
+					            <%= f.file_field :photo_arrays, multiple: true, id: "employee-photo-arrays", class: 'form-control' %>
+					            <span class="input-group-btn">
+					              <%= f.submit 'Import', id: 'import-employee-photos', class: 'form-control btn btn-primary' %>
+					            </span>
+					          </div>
+					        <% end %>
+					      <% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<% if current_user.admin? || current_user.developer? %>
+							<div class="card">
+								<div class="card-header">
+									<div class="row">
+										<div class="col-md-8 col-sm-8">
+											<div class="card-title">
+												<div class="title">Clear Employee Records</div>
+												<div class="description">Delete all employee records.</div>
+											</div>
+										</div>
+										<div class="col-md-4 col-sm-4">
+											<div class="pull-right card-action">
+												<% if @employees.present? %>
+													<%= link_to "Perform", delete_all_migrations_employee_records_path, class: "btn btn-danger", data: {confirm: "These action cannot be undone! Are you sure to delete all employee records?"} %>
+									      <% end %>
+									    </div>
+									  </div>
+									</div>
+								</div>
+							</div>
+						<% end %>
+					</div>
+					<div class="col-md-6">
+						<% if current_user.developer? %>
+							<div class="card">
+								<div class="card-header">
+									<div class="row">
+										<div class="col-md-8 col-sm-8">
+											<div class="card-title">
+												<div class="title">Export Employee Records</div>
+												<div class="description">Export all employee records to Excel.</div>
+											</div>
+										</div>
+										<div class="col-md-4 col-sm-4">
+											<div class="pull-right card-action">
+												<% if @employees.present? %>
+													<%= link_to "Export(Excel)", export_employee_records_reports_path(format: :xlsx), class: "btn btn-danger" %>
+									      <% end %>
+									    </div>
+									  </div>
+									</div>
+								</div>
+							</div>
+						<% end %>
+					</div>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-	<div class="col-md-6">
-		<div class="card">
-			<div class="card-header">
-				<div class="row">
-					<div class="col-md-8">
-						<div class="card-title">
-							<div class="title">Upload Student Records</div>
-							<div class="description">Migrate student records from Excel File (xlsx).</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="pull-right card-action">
-							<%=link_to "Download Template", student_template_reports_path(format: :xlsx), class: 'btn btn-success' %>	
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card-body">
-				<%= form_tag upload_migrations_student_records_path, multipart: true do %>
-					<div class="input-group stylish-input-group">
-          	<%= file_field_tag :file, label: false, class: 'form-control' %>
-          	<span class="input-group-btn">
-	            <%= button_tag 'Import', id: 'import-students', class: 'form-control btn btn-primary' %>
-	          </span>
-	        </div>
-        <% end %>
-			</div>
-		</div>
-		<div class="card">
-			<div class="card-header">
-				<div class="card-title">
-					<div class="title">Upload Profile Photos</div>
-					<div class="description">Student profile photo can be updated using ID Number as filename. Accepts multiple uploads.</div>
-				</div>
-			</div>
-			<div class="card-body">
-				<% if @students.present? %>
-					<%= form_for ProfilePhoto.new, url: :upload_migrations_student_photos, html: { multipart: true } do |f| %>
-	          <div class="input-group stylish-input-group">
-	            <%= f.file_field :photo_arrays, multiple: true, id: "photo-arrays", class: 'form-control' %>
-	            <span class="input-group-btn">
-	              <%= f.submit 'Import', id: 'import-photos', class: 'form-control btn btn-primary' %>
-	            </span>
-	          </div>
-	        <% end %>
-	      <% end %>
-			</div>
-		</div>
-		<% if current_user.admin? || current_user.developer? %>
-			<div class="card">
-				<div class="card-header">
-					<div class="row">
-						<div class="col-md-8 col-sm-8">
-							<div class="card-title">
-								<div class="title">Clear Student Records</div>
-								<div class="description">Delete all student records.</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-4">
-							<div class="pull-right card-action">
-								<% if @students.present? %>
-									<%= link_to "Perform", delete_all_migrations_student_records_path, class: "btn btn-danger", data: {confirm: "These action cannot be undone! Are you sure to delete all student records?"} %>
-					      <% end %>
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div>
-		<% end %>
-		<% if current_user.developer? %>
-			<div class="card">
-				<div class="card-header">
-					<div class="row">
-						<div class="col-md-8 col-sm-8">
-							<div class="card-title">
-								<div class="title">Export Student Records</div>
-								<div class="description">Export all student records to Excel.</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-4">
-							<div class="pull-right card-action">
-								<% if @students.present? %>
-									<%= link_to "Export(Excel)", export_student_records_reports_path(format: :xlsx), class: "btn btn-danger" %>
-					      <% end %>
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div>
-		<% end %>
-	</div>
-</div>	
 <script type="text/javascript">
 	$(document).ready(function(){
-    $('#import-photos').prop('disabled',true);
-    $('#photo-arrays').change(function(){
-      $('#import-photos').prop('disabled', this.value == "" ? true : false);     
+    $('#import-student-photos').prop('disabled',true);
+    $('#student-photo-arrays').change(function(){
+      $('#import-student-photos').prop('disabled', this.value == "" ? true : false);     
+    })
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+    $('#import-employee-photos').prop('disabled',true);
+    $('#employee-photo-arrays').change(function(){
+      $('#import-employee-photos').prop('disabled', this.value == "" ? true : false);     
     })
 	});
 </script>
@@ -152,8 +313,17 @@
 <script type="text/javascript">
 	$(document).ready(function(){
     $('#import-students').prop('disabled',true);
-    $('#file').change(function(){
+    $('#students-file').change(function(){
       $('#import-students').prop('disabled', this.value == "" ? true : false);     
+    })
+	});
+</script>	
+
+<script type="text/javascript">
+	$(document).ready(function(){
+    $('#import-employees').prop('disabled',true);
+    $('#employees-file').change(function(){
+      $('#import-employees').prop('disabled', this.value == "" ? true : false);     
     })
 	});
 </script>	 

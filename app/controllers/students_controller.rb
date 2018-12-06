@@ -75,6 +75,6 @@ class StudentsController < ApplicationController
     def update_params
       params.require(:student).permit(:id_number, :course_id, :year_level_id,
                 :first_name, :middle_name, :last_name,
-                :birthdate, :gender, :mobile, :tag_uid)
+                :birthdate, :gender, :mobile, :rfid_uid)
     end
 end

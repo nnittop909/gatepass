@@ -15,7 +15,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.integer :gender
       t.datetime :birthdate
       t.string :mobile
-      t.integer :rfid_uid, unique: true
+      t.integer :rfid_uid, unique: true, limit: 8
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable

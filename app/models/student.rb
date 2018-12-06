@@ -38,13 +38,5 @@ class Student < User
       "#{course}"
     end
   end
-
-  def age
-    if self.birthdate.present?
-      ((Date.today - self.birthdate.to_date) / 365).floor
-    else
-      "N/A"
-    end
-  end
   
 end

@@ -1,0 +1,32 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <h4>Employee Information Form</h4>
+      </div>
+    </div>
+    <div class="card-body">
+      <%=simple_form_for @employee, html: { autocomplete: 'off' } do |f| %>
+        <%=f.error_notification %>
+        <%= f.input :role, input_html: { value: User.roles.keys.to_a.second }, as: :hidden %>
+        <%= f.input :status, input_html: { value: User.statuses.keys.to_a.first }, as: :hidden %>
+        <div class="row">
+          <div class="col-md-7">
+            <%= render "employees/shared/personal_details_inputs", f: f %>
+            <%= render "employees/shared/address_details_inputs", f: f %>
+            <%= render "employees/shared/rfid_card_inputs", f: f %>
+            <div class="row">
+              <div class="col-md-12">
+                <hr>
+                <%= link_to "Cancel", @employee.new_record? ? employees_path : info_employee_path(@employee), class: 'btn btn-default' %>
+                <%=f.submit 'Save', class: "btn btn-primary pull-right" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

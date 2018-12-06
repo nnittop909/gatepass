@@ -27,6 +27,13 @@
             </span>
           <% end %>
         </li>
+        <li>
+          <%= link_to employees_path, title: 'Employees' do %>
+            <span class="fa-stack">
+              <i class="fa fa-user fa-lg"></i>
+            </span>
+          <% end %>
+        </li>
         <% if current_user.admin? || current_user.developer? %>
           <li>
             <%= link_to settings_path, title: 'Settings' do %>

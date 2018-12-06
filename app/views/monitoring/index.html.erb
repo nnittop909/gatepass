@@ -59,8 +59,13 @@
               <td><h3 class="card-title text-white"><b><%= @user.full_name || "N/A" %></b></h3></td>
             </tr>
             <tr>
-              <td style="width:180px"><h3 class="card-title text-white">Course/Yr.:</h3></td>
-              <td><h3 class="card-title text-white"><b><%= @user.course_and_year || "N/A" %></b></h3></td>
+              <% if @user.student? %>
+                <td style="width:180px"><h3 class="card-title text-white">Course/Yr.:</h3></td>
+                <td><h3 class="card-title text-white"><b><%= @user.course_and_year || "N/A" %></b></h3></td>
+              <% elsif @user.employee? %>
+                <td style="width:180px"><h3 class="card-title text-white">Position Title:</h3></td>
+                <td><h3 class="card-title text-white"><b><%= @user.position_title || "N/A" %></b></h3></td>
+              <% end %>
             </tr>
             <tr>
               <td style="width:180px"><h3 class="card-title text-white">Address:</h3></td>
@@ -73,16 +78,16 @@
               Monitor Mode
             </h1>
             <h4 class="text-white">
-              Scan Student ID Card.
+              Scan ID Card.
             </h4>
           <% end %>
           <% if @user.blank? && @rfid_uid.present? %>
             <hr class="text-white">
             <h1 class="text-red">
-              Student Identification Failed!
+              Identification Failed!
             </h1>
             <h4 class="text-white">
-              Student Card UID is not yet registered.
+              Card UID is not yet registered.
             </h4>
           <% end %>
         <% end %>

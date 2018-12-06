@@ -20,11 +20,24 @@ Rails.application.routes.draw do
     match "/info" => "students#info", as: :info, via: [:get], on: :member
 	end
 
+  resources :employees do
+    resources :profile_photos, module: 'employees'
+    resources :addresses, only: [:new, :create, :edit, :update], module: 'employees'
+    resources :positions, only: [:new, :create, :edit, :update], module: 'employees'
+    resources :statuses, only: [:edit, :update], module: 'employees'
+    resources :mobiles, only: [:edit, :update], module: 'employees'
+    resources :id_numbers, only: [:edit, :update], module: 'employees'
+    resources :rfid_cards, only: [:edit, :update], module: 'employees'
+    match "/info" => "employees#info", as: :info, via: [:get], on: :member
+  end
+
   resources :reports do
     match "/render_pdf" => "reports#render_pdf", via: [:get], on: :collection
     match "/student_template" => "reports#student_template", via: [:get], on: :collection
     match "/render_excel" => "reports#render_excel", via: [:get], on: :collection
     match "/export_student_records" => "reports#export_student_records", via: [:get], on: :collection
+    match "/employee_template" => "reports#employee_template", via: [:get], on: :collection
+    match "/export_employee_records" => "reports#export_employee_records", via: [:get], on: :collection
   end
 
   namespace :migrations do
@@ -36,10 +49,15 @@ Rails.application.routes.draw do
     resources :student_photos, only: [:upload] do
       match "/upload" => "student_photos#upload", via: [:post], on: :collection
     end
-  end
 
-  resources :employees do
-    get :autocomplete_employee_full_name, on: :collection
+    resources :employee_records, only: [:upload, :delete_all] do
+      match "/upload" => "employee_records#upload", via: [:post], on: :collection
+      match "/delete_all" => "employee_records#delete_all", via: [:get], on: :collection
+    end
+
+    resources :employee_photos, only: [:upload] do
+      match "/upload" => "employee_photos#upload", via: [:post], on: :collection
+    end
   end
 
   namespace :system_settings do

@@ -11,10 +11,12 @@ class User < ApplicationRecord
   has_one :relationship, dependent: :destroy
   has_one :guardian, through: :relationship
   has_one :profile_photo, dependent: :destroy
+  has_one :position, dependent: :destroy
   has_one :log, dependent: :destroy
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :profile_photo
+  accepts_nested_attributes_for :position
   
   enum role:[:student, :employee, :admin, :developer]
   enum status:[:clear, :suspended, :dropped]
@@ -44,6 +46,10 @@ class User < ApplicationRecord
 
   def user_is_a_student?
     self.class.name == "Student"
+  end
+
+  def user_is_an_employee?
+    self.class.name == "Employee"
   end
 
   def id_number_is_present?
@@ -104,6 +110,22 @@ class User < ApplicationRecord
     end
   end
 
+  def age
+    if self.birthdate.present?
+      ((Date.today - self.birthdate.to_date) / 365).floor
+    else
+      "N/A"
+    end
+  end
+
+  def position_title
+    if self.position.present?
+      self.position.title
+    else
+      "N/A"
+    end
+  end
+
   def log_status
     "You are #{log_remark.titleize.downcase} this #{log_time.strftime('%I:%M %p')}!" if log.present?
   end
@@ -124,7 +146,7 @@ class User < ApplicationRecord
         self.role = "admin"
       elsif self.class.name == "Student"
         self.role = "student"
-      elsif self.role == "Employee"
+      elsif self.class.name == "Employee"
         self.role = "employee"
       end
     end
@@ -149,7 +171,7 @@ class User < ApplicationRecord
   end
 
   def set_rfid_uid
-    self.rfid_uid = rfid_uid.to_i if user_is_a_student?
+    self.rfid_uid = rfid_uid.to_i if user_is_a_student? || user_is_an_employee?
   end
 
   def set_profile_photo

@@ -36,9 +36,23 @@ class ReportsController < ApplicationController
     authorize :report, :export_student_records?
   end
 
+  def export_student_records
+    @students = Employee.all.sort_by(&:reversed_name)
+    respond_to do |format|
+      format.xlsx { render xlsx: "export_employee_records", disposition: 'inline', filename: "Exported Employee Records" }
+    end
+    authorize :report, :export_employee_records?
+  end
+
   def student_template
     respond_to do |format|
       format.xlsx { render xlsx: "student_template", disposition: 'inline', filename: "Student Template" }
+    end
+  end
+
+  def employee_template
+    respond_to do |format|
+      format.xlsx { render xlsx: "employee_template", disposition: 'inline', filename: "Employee Template" }
     end
   end
 

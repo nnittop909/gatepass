@@ -4,4 +4,8 @@ class ReportPolicy < ApplicationPolicy
   	user.developer?
   end
 
+  def export_employee_records?
+  	user.developer?
+  end
+
 end

@@ -5,7 +5,7 @@ class AccountGenerator
 	end
 
 	def generate!
-		if @user.student?
+		if @user.student? || @user.employee?
       generated_password = Devise.friendly_token.first(8)
       if @user.email.blank? and @user.password.blank?
         if @user.last_name.present? and @user.first_name.present?

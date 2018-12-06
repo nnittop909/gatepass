@@ -1,0 +1,78 @@
+
+  <div class="row">
+    <div class="col-md-5">
+      <h4 class="personal-details">
+        Personal Details
+        <% if !current_user.employee? %>
+          <%= link_to edit_employee_path(@employee), title: 'Update Personal Details', data: {modal: true} do %>
+            <span class="pull-right personal-link"><i class="fa fa-pencil-square-o"></i></span>
+          <% end %>
+        <% end %>
+      </h4>
+      <table class="table table-striped">
+        <tr>
+          <td style="width:120px">First Name: </td>
+          <td><b><%=@employee.first_name.titleize %></b></td>
+        </tr>
+        <tr>
+          <td style="width:120px">Last Name: </td>
+          <td><b><%=@employee.last_name.titleize %></b></td>
+        </tr>
+        <tr>
+          <td style="width:120px">Middle Name: </td>
+          <td><b><%=@employee.try(:middle_name).try(:titleize) || "N/A" %></b></td>
+        </tr>
+        <tr>
+          <td style="width:120px">Gender: </td>
+          <td><b><%=@employee.try(:gender).try(:capitalize) || "N/A" %></b></td>
+        </tr>
+        <tr>
+          <td style="width:120px">Age: </td>
+          <td><b><%=@employee.age || "N/A" %></b></td>
+        </tr>
+        <tr>
+          <td style="width:120px">Birthdate: </td>
+          <td><b><%=@employee.try(:birthdate).try(:strftime, "%B %e, %Y") || "N/A" %></b></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-5">
+      <h4 class="mobile-details">
+        Contact Details
+        <% if !current_user.employee? %>
+          <%= link_to edit_employee_mobile_path(@employee), title: 'Update Mobile Number', data: {modal: true} do %>
+            <span class="pull-right mobile-link"><i class="fa fa-pencil-square-o"></i></span>
+          <% end %>
+        <% end %>
+      </h4>
+      <table class="table table-striped">
+        <tr>
+          <td style="width:120px"></td>
+          <td><b><%=@employee.mobile || "N/A"%></b></td>
+        </tr>
+      </table>
+      <br>
+      <h4 class="address-details">
+        Address Details
+        <% if !current_user.employee? %>
+          <% if @employee.address.present? %>
+            <%= link_to edit_employee_address_path(employee_id: @employee, id: @employee.address.id), title: 'Update Address Details', data: {modal: true} do %>
+              <span class="pull-right address-link"><i class="fa fa-pencil-square-o"></i></span>
+            <% end %>
+          <% else %>
+            <%= link_to new_employee_address_path(@employee), title: 'Update Address Details', data: {modal: true} do %>
+              <span class="pull-right address-link"><i class="fa fa-pencil-square-o"></i></span>
+            <% end %>
+          <% end %>
+        <% end %>
+      </h4>
+      <table class="table table-striped">
+        <tr>
+          <td width="120"></td>
+          <td><b><%=@employee.address_details || "N/A"%></b></td>
+        </tr>
+      </table>
+    </div>
+  </div>

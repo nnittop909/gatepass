@@ -1,0 +1,93 @@
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6 col-sm-4">
+                <div class="profile-wrapper">
+                  <% if @employee.profile_photo.blank? %>
+                      <%=image_tag("default.png", height: 160, width: 160, :class=>"img-square -img-rounded center-block image") %>
+                  <% else %>
+                      <%= image_tag @employee.profile_photo.avatar.url, height: 160, width: 160, class: 'img-square img-rounded center-block image'%>
+                  <% end %>
+                  <% if !current_user.employee? %>
+                    <%= simple_form_for ProfilePhoto.new, url: employee_profile_photos_path(@employee) do |f| %>
+                      <%= f.input :user_id, input_html: {value: @employee.id}, as: :hidden %>
+                      <%= f.input :avatar, as: :file, label: false, input_html: { class: 'choose-btn center-block' } %>
+                      <div class="overlay option-overlay">
+                        <div class="col-xs-6 text-center">
+                          <a href="" title="Update Photo"><span id="browse-employee" class="text-white fa fa-photo fa-lg"></span></a>
+                        </div>
+                        <div class="col-xs-6 text-center">
+                          <%= link_to edit_employee_status_path(@employee), title: 'Update Status', data: {modal: true} do %>
+                            <span class="text-white fa fa-pencil-square-o fa-lg"></span>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-8">
+                <div class="name-wrapper">
+                  <h4><%=@employee.fullname.try(:upcase) %>
+                    <span>
+                      
+                    </span>
+                  </h4>
+                  <h5 class="course-details">
+                    Position: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp<%= @employee.position_title %>
+                    <% if !current_user.employee? %>
+                      <%= link_to @employee.position.blank? ? new_employee_position_path(@employee) : edit_employee_position_path(employee_id: @employee.id, id: @employee.position.id), title: 'Update Position', data: {modal: true}, class: "pull-right" do %>
+                        <span class="course-link"><i class="fa fa-pencil-square-o"></i></span>
+                      <% end %>
+                    <% end %>
+                  </h5>
+                  <h5 class="id-number-details">
+                    ID Number: &nbsp&nbsp&nbsp&nbsp<%= @employee.id_number %>
+                    <% if !current_user.employee? %>
+                      <%= link_to edit_employee_id_number_path(@employee), title: 'Update ID Number', data: {modal: true}, class: "pull-right" do %>
+                        <span class="id-number-link"><i class="fa fa-pencil-square-o"></i></span>
+                      <% end %>
+                    <% end %>
+                  </h5>
+                  <h5 class="id-card-details">
+                    Card UID: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%= @employee.rfid_uid %>
+                    <% if !current_user.employee? %>
+                      <%= link_to edit_employee_rfid_card_path(@employee), title: 'Update Card Unique-ID', data: {modal: true}, class: "pull-right" do %>
+                        <span class="id-card-link"><i class="fa fa-pencil-square-o"></i></span>
+                      <% end %>
+                    <% end %>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <%= render '/employees/partials/info' if current_page? info_employee_path %>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript">
+  $('#browse-employee').click(function(e) {
+    $('#profile_photo_avatar').click();
+    e.preventDefault();
+    e.stopPropagation();
+    $('#profile_photo_avatar').change(function() {
+      var val = $('#profile_photo_avatar').val();
+      if (val != ''){
+        $('#new_profile_photo').submit();
+      }
+    });
+  });
+</script>

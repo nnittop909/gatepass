@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h4 class="modal-title" id="mainModalLabel">
+    Update ID Number
+  </h4>
+</div>
+<%=simple_form_for @employee, html: { autocomplete: "off", data: { modal: true } }, remote: request.xhr?, url: employee_id_number_path(@employee) do |f| %>
+  <div class="modal-body">
+    <%= f.error_notification %>
+    <%= f.input :id_number, label: "ID Number" %>
+  </div>
+  <div class="modal-footer">
+    <%=f.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

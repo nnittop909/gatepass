@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h4 class="modal-title" id="mainModalLabel">
+    Employee Information - Update Form
+  </h4>
+</div>
+<%=simple_form_for @employee, html: { autocomplete: "off", data: { modal: true } }, remote: request.xhr? do |f| %>
+  <div class="modal-body">
+    <%=f.error_notification %>
+    <%= render "employees/shared/personal_details_inputs", f: f %>
+    <%= render "employees/shared/rfid_card_inputs", f: f %>
+  </div>
+  <div class="modal-footer">
+    <%=f.submit 'Save', class: "btn btn-primary pull-right" %>
+  </div>
+<% end %>

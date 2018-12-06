@@ -146,6 +146,11 @@
   padding-bottom: 0 !important;
 }
 
+.no-padding-left-right {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 input[type="checkbox"] {
   margin: 4px 10px 0;
   -ms-transform: scale(1.5); /* IE 9 */
