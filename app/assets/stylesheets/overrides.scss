@@ -407,3 +407,12 @@ body.abstract {
 .navbar-collapse.in {
   overflow-y: visible;
 }
+
+.ifsu-logo {
+  background: asset_url("abstract-bg.jpg") no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  opacity: 0.8;
+}
