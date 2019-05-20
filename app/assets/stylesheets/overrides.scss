@@ -45,6 +45,7 @@
 }
 .card-glass .card-body {
   padding: 25px;
+  min-height: 533px;
 }
 .card .card-body .sub-title {
   font-size: 1.2em;
@@ -409,10 +410,8 @@ body.abstract {
 }
 
 .school-logo {
-  background: asset_url("ifsu_logo.png") no-repeat fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  opacity: 0.8;
+  background: asset_url("ifsu_logo.png") no-repeat;
+  background-size: 530px;
+  background-position: center;
+  opacity: 0.75;
 }
