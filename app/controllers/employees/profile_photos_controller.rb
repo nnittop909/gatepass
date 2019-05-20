@@ -1,15 +1,15 @@
-module Students
+module Employees
 	class ProfilePhotosController < ApplicationController
 		before_action :authenticate_user!, :check_subscription!
 
 		def create
-			@student = Student.find(params[:student_id])
-			authorize @student, policy_class: Students::ProfilePhotoPolicy
-			if @student.profile_photo.update(profile_photo_params)
-				redirect_to info_student_path(@student), 
+			@employee = Employee.find(params[:employee_id])
+			authorize @employee, policy_class: Employees::ProfilePhotoPolicy
+			if @employee.profile_photo.update(profile_photo_params)
+				redirect_to info_employee_path(@employee), 
 				notice: 'Profile photo updated.'
 			else
-				redirect_to info_student_path(@student), 
+				redirect_to info_employee_path(@employee), 
 				alert: "Invalid photo. Make sure to only upload jpg, png, and gif images."
 			end
 		end

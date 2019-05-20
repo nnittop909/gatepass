@@ -25,7 +25,7 @@ gem 'pg_search'
 gem 'devise'
 gem "paperclip", "~> 5.2.0"
 gem 'bootstrap-datepicker-rails'
-gem 'momentjs-rails', '>= 2.9.0'
+gem 'momentjs-rails', '=> 2.9.0'
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 gem 'pundit'
 gem "select2-rails"
