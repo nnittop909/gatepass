@@ -29,7 +29,7 @@
     <% end %>
   </div>
   <div class="col-md-7">
-    <br>
+    <div class="school-logo">
     <div class="card-glass">
       <% if @user.present? %>
         <div class="card-body">
@@ -75,7 +75,7 @@
         <% else %>
           <% if @rfid_uid.blank? %>
             <h1 class="text-white">
-              Monitor Mode
+              Standby Mode
             </h1>
             <h4 class="text-white">
               Scan ID Card.
