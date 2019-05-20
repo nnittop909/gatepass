@@ -4,7 +4,7 @@ require 'mina/git'
 require 'mina/rbenv'
 require 'mina/deploy'
 
-set :domain, '192.168.8.122'
+set :domain, '192.168.8.126'
 set :deploy_to, '/var/www/gatepass'
 set :repository, "https://github.com/nnittop909/gatepass.git"
 set :branch, 'master'
@@ -83,7 +83,7 @@ task :deploy => :remote_environment do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
-    # invoke :'rails:assets_precompile'
+    invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     on :launch do
